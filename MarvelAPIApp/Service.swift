@@ -91,7 +91,6 @@ class NetworkService {
                            let path = thumbnail["path"] as? String,
                             let ext = thumbnail["extension"] as? String {
                             imageURI = path + "." + ext
-                            print(imageURI)
                         } else {
                             print("deu erro")
                         }

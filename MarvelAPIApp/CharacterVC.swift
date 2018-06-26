@@ -46,7 +46,6 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
 
         let remanderBy4 = indexPath.row % 4
         cell.nameView.backgroundColor = remanderBy4 == 1 || remanderBy4 == 2 ? .comicPink : .comicBlue
-        print("remanderBy4", remanderBy4)
         
         if let uri = characterModel.imageURI {
             let url = URL(string: uri)
@@ -60,11 +59,15 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             
         case UICollectionElementKindSectionHeader:
             
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "characterHeader", for: indexPath) as! CharacterHeader
-            headerView.rectangleView.backgroundColor = .comicYellow
-            headerView.rectangleView.layer.borderWidth = 1
-            headerView.rectangleView.layer.borderColor = UIColor.black.cgColor
-            return headerView
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "characterHeader", for: indexPath) as! CharacterHeader
+            header.rectangleView.backgroundColor = .comicYellow
+            header.rectangleView.layer.borderWidth = 1
+            header.rectangleView.layer.borderColor = UIColor.black.cgColor
+            return header
+            
+        case UICollectionElementKindSectionFooter:
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "characterFooter", for: indexPath)
+            return footer
             
         default:
             assert(false, "Unexpected element kind")
@@ -76,15 +79,21 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView,
                                  layout collectionViewLayout: UICollectionViewLayout,
                                  referenceSizeForHeaderInSection section: Int) -> CGSize {
-        print("ref size")
-        let w = (UIScreen.main.bounds.width - (34.0 * 2.0))
+        let w = 200 // UIScreen.main.bounds.width - (24.0 * 2.0) - 40.0
         return CGSize(width: w, height: 32)
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForFooterInSection section: Int) -> CGSize {
+        let w = 200 // UIScreen.main.bounds.width - (24.0 * 2.0) - 40.0
+        return CGSize(width: w, height: 10)
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let w = (UIScreen.main.bounds.width - (34.0 * 2.0) - 10.0) / 2.0
+        let w = (UIScreen.main.bounds.width - (24.0 * 2.0) - 30.0) / 2.0
         return CGSize(width: w, height: w)
     }
     
@@ -101,7 +110,7 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0)
+        return UIEdgeInsets(top: 10.0, left: 10.0, bottom: 0.0, right: 10.0)
     }
     
 }
