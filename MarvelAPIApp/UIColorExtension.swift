@@ -18,10 +18,14 @@ extension UIColor {
     }
     
     class var comicPink: UIColor {
-        return UIColor.initInt(red: 237, green: 176, blue: 176 )
+        return UIColor.initInt(red: 237, green: 176, blue: 176 ) // EDB0B0
     }
-
-//    EDB0B0
-//    237 176
-
+    
+    class var comicYellow: UIColor {
+        return UIColor.initInt(red: 237, green: 227, blue: 176 ) // EDE3B0
+    }
+    
+    class var comicBlue: UIColor {
+        return UIColor.initInt(red: 176, green: 219, blue: 237 ) // B0DBED
+    }
 }
