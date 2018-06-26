@@ -41,5 +41,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Comic Book Bold.otf</string>
+		<string>Comic Book.otf</string>
+	</array>
 </dict>
 </plist>
