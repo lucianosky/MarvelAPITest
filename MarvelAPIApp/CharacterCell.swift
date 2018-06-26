@@ -13,5 +13,6 @@ class CharacterCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var squareView: UIView!
     @IBOutlet weak var nameView: UIView!
+    @IBOutlet weak var characterImageView: UIImageView!
     
 }

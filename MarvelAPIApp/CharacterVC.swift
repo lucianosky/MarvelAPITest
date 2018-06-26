@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -30,19 +31,37 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return NetworkService.shared.names.count
+        return NetworkService.shared.characterList.count
 //        return 20
+    }
+    
+    func fromString(string: String, lineHeightMultiple: CGFloat) -> NSAttributedString {
+        // https://medium.com/@deepdeviant/simple-way-to-change-uilabel-line-height-swift-4d0a0177beb
+        // https://stackoverflow.com/questions/30845705/uitextview-lineheightmultiple-clips-top-first-line-of-text
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = lineHeightMultiple
+        let attributedString = NSMutableAttributedString(string: string)
+        attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle, NSAttributedStringKey.baselineOffset: -1], range: NSMakeRange(0, attributedString.length))
+        return attributedString
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as! CharacterCell
 //        cell.nameLabel.text = "Spider Man spinoff from 2012 movie"
-        cell.nameLabel.text = NetworkService.shared.names[indexPath.row]
+        let characterModel = NetworkService.shared.characterList[indexPath.row]
+        
+        //cell.nameLabel.text = characterModel.name
+        cell.nameLabel.attributedText = fromString(string: characterModel.name, lineHeightMultiple: 0.7)
+        
         cell.squareView.layer.borderWidth = 1
         cell.squareView.layer.borderColor = UIColor.black.cgColor
         cell.nameView.layer.borderWidth = 1
         cell.nameView.layer.borderColor = UIColor.black.cgColor
         cell.nameView.backgroundColor = .comicPink
+        if let uri = characterModel.imageURI {
+            let url = URL(string: uri)
+            cell.characterImageView.kf.setImage(with: url)
+        }
         return cell
     }
     

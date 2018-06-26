@@ -14,6 +14,11 @@ enum Result<T> {
     case Error(String, Int?)
 }
 
+struct CharacterModel {
+    let name: String
+    let imageURI: String?
+}
+
 class NetworkService {
     
     static let shared = NetworkService()
@@ -27,7 +32,7 @@ class NetworkService {
         }
     }
     
-    var names = [String]()
+    var characterList = [CharacterModel]()
     
     private func treatError(url: String, response: DataResponse<String>) -> String{
         verbosePrint("error=\(response.description)")
@@ -66,7 +71,7 @@ class NetworkService {
     }
     
     func characters(
-        complete: @escaping ( Result<[String]?> ) -> Void )  {
+        complete: @escaping ( Result<[CharacterModel]?> ) -> Void )  {
             let url = "https://gateway.marvel.com/v1/public/characters?apikey=cdb9b66985f6523d88b3b820037f895f&ts=1529959176&hash=fc9bc3330d53b8b9d28c88aa707473b7&nameStartsWith=spi"
             basicCall(
                 url: url
@@ -79,17 +84,20 @@ class NetworkService {
                         let msg = "characters data null"
                         return complete(.Error(msg, statusCode))
                     }
-                    //self.gestor = Gestor(representation: representation)
-//                    let names = results.mapValues({ (character: [String: Any]) -> String in
-//                        return character["name"] as? String ?? "Erro"
-//                    })
-                    self.names = results.map({ (character) -> String in
-                        return character["name"] as? String ?? "Erro"
+                    self.characterList = results.map({ (character) -> CharacterModel in
+                        let name = (character["name"] as? String ?? "Erro").lowercased()
+                        var imageURI: String?
+                        if let thumbnail = character["thumbnail"] as? [String: Any],
+                           let path = thumbnail["path"] as? String,
+                            let ext = thumbnail["extension"] as? String {
+                            imageURI = path + "." + ext
+                            print(imageURI)
+                        } else {
+                            print("deu erro")
+                        }
+                        return CharacterModel(name: name, imageURI: imageURI)
                     })
-//                    let names = results.mapValues({ (name) -> String in
-//                        return name as? String ?? "Erro"
-//                    })
-                    return complete(.Success(self.names, statusCode))
+                    return complete(.Success(self.characterList, statusCode))
                 case .Error(let message, let statusCode):
                     return complete(.Error(message, statusCode))
                 }

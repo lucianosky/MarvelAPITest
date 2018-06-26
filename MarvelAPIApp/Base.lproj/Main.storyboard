@@ -50,28 +50,31 @@
                                         <rect key="frame" x="0.0" y="70" width="307" height="577"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fGv-qt-Zas">
-                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="itemSize" width="150" height="150"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="characterCell" id="O8P-Of-loF" customClass="CharacterCell" customModule="MarvelAPIApp" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <rect key="frame" x="78.5" y="0.0" width="150" height="150"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QG1-fh-jDu">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                             <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ceh-1e-BwW">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="119"/>
+                                                                </imageView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ENG-im-jtt">
-                                                                    <rect key="frame" x="0.0" y="19" width="50" height="31"/>
+                                                                    <rect key="frame" x="0.0" y="119" width="150" height="31"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRd-uW-lAw">
-                                                                            <rect key="frame" x="5" y="0.0" width="40" height="31"/>
-                                                                            <fontDescription key="fontDescription" name="ComicBook" family="Comic Book" pointSize="14"/>
+                                                                        <label opaque="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRd-uW-lAw">
+                                                                            <rect key="frame" x="5" y="0.0" width="140" height="31"/>
+                                                                            <fontDescription key="fontDescription" name="ComicBook" family="Comic Book" pointSize="13"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
@@ -88,7 +91,11 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
+                                                                <constraint firstItem="ENG-im-jtt" firstAttribute="top" secondItem="ceh-1e-BwW" secondAttribute="bottom" id="ESO-8n-CTQ"/>
                                                                 <constraint firstAttribute="trailing" secondItem="ENG-im-jtt" secondAttribute="trailing" id="Non-om-Np9"/>
+                                                                <constraint firstItem="ceh-1e-BwW" firstAttribute="top" secondItem="QG1-fh-jDu" secondAttribute="top" id="cyH-fn-H5a"/>
+                                                                <constraint firstItem="ceh-1e-BwW" firstAttribute="leading" secondItem="QG1-fh-jDu" secondAttribute="leading" id="dfS-ow-Qoi"/>
+                                                                <constraint firstAttribute="trailing" secondItem="ceh-1e-BwW" secondAttribute="trailing" id="mLI-aJ-cNT"/>
                                                                 <constraint firstAttribute="bottom" secondItem="ENG-im-jtt" secondAttribute="bottom" id="oLB-Za-0f8"/>
                                                                 <constraint firstItem="ENG-im-jtt" firstAttribute="leading" secondItem="QG1-fh-jDu" secondAttribute="leading" id="qHZ-zY-il3"/>
                                                             </constraints>
@@ -103,6 +110,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="QG1-fh-jDu" secondAttribute="trailing" id="oRZ-8S-BIn"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="characterImageView" destination="ceh-1e-BwW" id="4Xr-QE-uFE"/>
                                                     <outlet property="nameLabel" destination="bRd-uW-lAw" id="2wX-AM-o4l"/>
                                                     <outlet property="nameView" destination="ENG-im-jtt" id="1rg-zb-GPT"/>
                                                     <outlet property="squareView" destination="QG1-fh-jDu" id="aRE-9k-B4h"/>
