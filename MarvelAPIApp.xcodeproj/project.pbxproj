@@ -13,10 +13,10 @@
 		4E21877520E1924A00A05621 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E21877320E1924A00A05621 /* LaunchScreen.storyboard */; };
 		4E21878020E1924A00A05621 /* MarvelAPIAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21877F20E1924A00A05621 /* MarvelAPIAppTests.swift */; };
 		4E21878B20E1924A00A05621 /* MarvelAPIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21878A20E1924A00A05621 /* MarvelAPIAppUITests.swift */; };
-		4E21879920E192EA00A05621 /* CharacterListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21879820E192EA00A05621 /* CharacterListTVC.swift */; };
 		4E21879B20E1973800A05621 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21879A20E1973800A05621 /* UITableViewExtension.swift */; };
 		4E21879D20E19A2900A05621 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21879C20E19A2900A05621 /* Service.swift */; };
 		4E21879F20E19DF600A05621 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 4E21879E20E19DF600A05621 /* Podfile */; };
+		4ED343ED20E28BB2004F62A8 /* CharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED343EC20E28BB2004F62A8 /* CharacterVC.swift */; };
 		69760C3D3A6F1EAE508ECC02 /* libPods-MarvelAPIApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD3910809B34857F8AF6A6FB /* libPods-MarvelAPIApp.a */; };
 /* End PBXBuildFile section */
 
@@ -50,10 +50,10 @@
 		4E21878620E1924A00A05621 /* MarvelAPIAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelAPIAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E21878A20E1924A00A05621 /* MarvelAPIAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelAPIAppUITests.swift; sourceTree = "<group>"; };
 		4E21878C20E1924A00A05621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4E21879820E192EA00A05621 /* CharacterListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListTVC.swift; sourceTree = "<group>"; };
 		4E21879A20E1973800A05621 /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		4E21879C20E19A2900A05621 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		4E21879E20E19DF600A05621 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		4ED343EC20E28BB2004F62A8 /* CharacterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterVC.swift; sourceTree = "<group>"; };
 		55BBB8DCD8830C09BAC6F1DA /* Pods-MarvelAPIApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarvelAPIApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MarvelAPIApp/Pods-MarvelAPIApp.release.xcconfig"; sourceTree = "<group>"; };
 		56712978EF9E0344CC4D3BF8 /* Pods-MarvelAPIApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarvelAPIApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MarvelAPIApp/Pods-MarvelAPIApp.debug.xcconfig"; sourceTree = "<group>"; };
 		FD3910809B34857F8AF6A6FB /* libPods-MarvelAPIApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MarvelAPIApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,7 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				4E21876A20E1924700A05621 /* AppDelegate.swift */,
-				4E21879820E192EA00A05621 /* CharacterListTVC.swift */,
+				4ED343EC20E28BB2004F62A8 /* CharacterVC.swift */,
 				4E21879C20E19A2900A05621 /* Service.swift */,
 				4E21879A20E1973800A05621 /* UITableViewExtension.swift */,
 				4E21876E20E1924700A05621 /* Main.storyboard */,
@@ -315,7 +315,7 @@
 				4E21879B20E1973800A05621 /* UITableViewExtension.swift in Sources */,
 				4E21879D20E19A2900A05621 /* Service.swift in Sources */,
 				4E21876B20E1924700A05621 /* AppDelegate.swift in Sources */,
-				4E21879920E192EA00A05621 /* CharacterListTVC.swift in Sources */,
+				4ED343ED20E28BB2004F62A8 /* CharacterVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
