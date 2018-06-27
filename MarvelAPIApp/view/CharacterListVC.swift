@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageView: UIView!
@@ -85,7 +85,7 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             if (indexPath.row >= CharacterVM.shared.characterList.count - preloadCount) && !loadingData {
                 loadNextPage()
             }
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as! CharacterCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterListCell", for: indexPath) as! CharacterListCell
             let characterModel = CharacterVM.shared.characterList[indexPath.row]
             cell.nameLabel.attributedText = NSAttributedString.fromString(string: characterModel.name, lineHeightMultiple: 0.7)
             cell.squareView.setBlackBorder()
@@ -106,19 +106,45 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             
         case UICollectionElementKindSectionHeader:
             
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "characterHeader", for: indexPath) as! CharacterHeader
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "characterListHeader", for: indexPath) as! CharacterListHeader
             header.rectangleView.backgroundColor = .comicYellow
             header.rectangleView.setBlackBorder()
             return header
             
         case UICollectionElementKindSectionFooter:
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "characterFooter", for: indexPath)
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "characterListFooter", for: indexPath)
             return footer
             
         default:
             assert(false, "Unexpected element kind")
         }
     }
+    
+    // MARK: UICollectionViewDelegate
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("didSelectItemAt")
+//        if let cell = collectionView.cellForItem(at: indexPath),
+//            let imageView = cell.viewWithTag(1) as? UIImageView,
+//            let productKind = MediatorStack.shared.tmpCustomerItem?.productKinds?[indexPath.row]
+//        {
+//            imageView.image = productKind.imageSelected
+//            btnForward.isEnabled = true
+//            btnForward.backgroundColor = UIColor.tealBlue
+//            currentRawValue = productKind.rawValue
+//        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("didDeselectItemAt")
+//        if let cell = collectionView.cellForItem(at: indexPath),
+//            let imageView = cell.viewWithTag(1) as? UIImageView,
+//            let productKind = MediatorStack.shared.tmpCustomerItem?.productKinds?[indexPath.row]
+//        {
+//            imageView.image = productKind.image
+//        }
+    }
+
     
     // MARK: UICollectionViewDelegateFlowLayout
     

@@ -7,6 +7,6 @@
 
 import UIKit
 
-class CharacterHeader: UICollectionViewCell {
+class CharacterListHeader: UICollectionViewCell {
     @IBOutlet weak var rectangleView: UIView!
 }
