@@ -2,8 +2,7 @@
 //  CharacterVC.swift
 //  MarvelAPIApp
 //
-//  Created by SoftDesign on 26/06/2018.
-//  Copyright © 2018 SoftDesign. All rights reserved.
+//  Created by Luciano Sclovsky on 26/06/2018.
 //
 
 import UIKit
@@ -14,23 +13,60 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageView: UIView!
     
-    var isLoading = true
+    var isFirstLoading = true
     var isPullingUp = false
+    var loadingData = false
+    var noFurtherData = false
     var page = -1
+    let preloadCount = 10
+    var screenWidth: CGFloat = 0
+    var characterCellSize: CGFloat = 0
+    var loadingCellSize: CGFloat = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         pageView.layer.borderWidth = 1
         pageView.layer.borderColor = UIColor.black.cgColor
+        computeSizes()
         loadNextPage()
     }
     
+    private func computeSizes() {
+        screenWidth = UIScreen.main.bounds.width
+        
+        // 2 * 10.0 = 20.0 --> external border
+        // 2 * 10.0 = 20.0 --> internal border
+        //     10.0 = 10.0 --> border between 2 cells
+        // sum      = 50.0
+        // divide by 2.0, since there are 2 columns
+        characterCellSize = (screenWidth - 50.0) / 2.0
+        
+        // 2 * 10.0 = 20.0 --> external border
+        // 2 * 10.0 = 20.0 --> internal border
+        // sum      = 40.0
+        loadingCellSize = screenWidth - 40.0
+    }
+    
     func loadNextPage() {
+        if loadingData || noFurtherData {
+            return
+        }
         page += 1
-        CharacterVM.shared.getCharacters(page: page) { [weak self] (list) in
-            self?.isLoading = false
+        loadingData = true
+        CharacterVM.shared.getCharacters(page: page) { [weak self] (result) in
+            self?.isFirstLoading = false
             self?.isPullingUp = false
-            self?.collectionView.reloadData()
+            self?.loadingData = false
+            switch result {
+            case .Success(_, let count):
+                self?.collectionView.reloadData()
+                if count == 0 {
+                    self?.noFurtherData = true
+                }
+            case .Error(let message, let statusCode):
+                print("Error \(message) \(statusCode ?? 0)")
+            }
+
         }
     }
 
@@ -41,13 +77,16 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return isLoading ? 1 : CharacterVM.shared.characterList.count
+        return isFirstLoading ? 1 : CharacterVM.shared.characterList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if isLoading {
+        if isFirstLoading {
             return collectionView.dequeueReusableCell(withReuseIdentifier: "loadingCell", for: indexPath)
         } else {
+            if (indexPath.row >= CharacterVM.shared.characterList.count - preloadCount) && !loadingData {
+                loadNextPage()
+            }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as! CharacterCell
             let characterModel = CharacterVM.shared.characterList[indexPath.row]
             cell.nameLabel.attributedText = NSAttributedString.fromString(string: characterModel.name, lineHeightMultiple: 0.7)
@@ -90,27 +129,22 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var size: CGFloat = UIScreen.main.bounds.width
-        if isLoading {
-            size = (size - 40.0)
-        } else {
-            size = (size - 50.0) / 2.0
-        }
+        let size = isFirstLoading ? loadingCellSize : characterCellSize
         return CGSize(width: size, height: size)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                                  layout collectionViewLayout: UICollectionViewLayout,
                                  referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let w = 200 // UIScreen.main.bounds.width - (24.0 * 2.0) - 40.0
-        return CGSize(width: w, height: 32)
+        //let w = 200 // UIScreen.main.bounds.width - (24.0 * 2.0) - 40.0
+        return CGSize(width: loadingCellSize, height: 32)
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForFooterInSection section: Int) -> CGSize {
-        let w = 200 // UIScreen.main.bounds.width - (24.0 * 2.0) - 40.0
-        return CGSize(width: w, height: 10)
+        //let w = 200 // UIScreen.main.bounds.width - (24.0 * 2.0) - 40.0
+        return CGSize(width: loadingCellSize, height: 10)
     }
 
     func collectionView(_ collectionView: UICollectionView,

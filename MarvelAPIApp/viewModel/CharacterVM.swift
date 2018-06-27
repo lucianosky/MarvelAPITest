@@ -2,8 +2,7 @@
 //  CharacterVM.swift
 //  MarvelAPIApp
 //
-//  Created by SoftDesign on 27/06/2018.
-//  Copyright © 2018 SoftDesign. All rights reserved.
+//  Created by Luciano Sclovsky on 27/06/2018.
 //
 
 import Foundation
@@ -26,14 +25,14 @@ class CharacterVM {
         page: Int,
         complete: @escaping ( Result<[CharacterModel]?> ) -> Void )  {
         let offset = page * pageSize
-        let url = "\(NetworkService.shared.baseUrl)characters?\(NetworkService.shared.apiKeyTsHash)&offset=\(offset)"
+        let url = "\(NetworkService.shared.baseUrl)characters?\(NetworkService.shared.apiKeyTsHash)&offset=\(offset)&nameStartsWith=Spi"
         NetworkService.shared.request(
             url: url
         ) { [weak self] (result) in
             switch result {
-            case .Success(let resultsDict, let statusCode):
+            case .Success(let resultsDict, _):
+                var list = [CharacterModel]()
                 if let results = resultsDict {
-                    var list = [CharacterModel]()
                     results.forEach({ (character) in
                         if let name = character["name"] as? String,
                             let thumbnail = character["thumbnail"] as? [String: Any],
@@ -48,7 +47,7 @@ class CharacterVM {
                     })
                     self?.privCharacterList.append(contentsOf: list)
                 }
-                return complete(.Success(self?.characterList, statusCode))
+                return complete(.Success(self?.characterList, list.count))
             case .Error(let message, let statusCode):
                 return complete(.Error(message, statusCode))
             }

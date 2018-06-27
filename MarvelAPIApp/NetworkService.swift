@@ -2,8 +2,7 @@
 //  Service.swift
 //  MarvelAPIApp
 //
-//  Created by SoftDesign on 25/06/2018.
-//  Copyright © 2018 SoftDesign. All rights reserved.
+//  Created by Luciano Sclovsky on 25/06/2018.
 //
 
 import Foundation
