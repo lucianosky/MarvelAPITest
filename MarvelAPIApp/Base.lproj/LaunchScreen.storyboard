@@ -18,17 +18,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marvel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gd4-qw-LMt">
-                                <rect key="frame" x="130" y="319.5" width="115" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEK-ch-VOb">
+                                <rect key="frame" x="10" y="321.5" width="355" height="44"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecb-8E-fyM">
+                                        <rect key="frame" x="1" y="1" width="353" height="42"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MARVEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gd4-qw-LMt">
+                                                <rect key="frame" x="112.5" y="6" width="128.5" height="30.5"/>
+                                                <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="30"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.94117647058823528" green="0.074509803921568626" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="gd4-qw-LMt" firstAttribute="centerX" secondItem="ecb-8E-fyM" secondAttribute="centerX" id="Qv9-cU-6mh"/>
+                                            <constraint firstItem="gd4-qw-LMt" firstAttribute="centerY" secondItem="ecb-8E-fyM" secondAttribute="centerY" id="SVh-D8-kuP"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="ecb-8E-fyM" secondAttribute="bottom" constant="1" id="8XM-IX-jb8"/>
+                                    <constraint firstItem="ecb-8E-fyM" firstAttribute="leading" secondItem="yEK-ch-VOb" secondAttribute="leading" constant="1" id="En1-dx-HFR"/>
+                                    <constraint firstAttribute="trailing" secondItem="ecb-8E-fyM" secondAttribute="trailing" constant="1" id="Nb9-aV-RVb"/>
+                                    <constraint firstAttribute="height" constant="44" id="TB0-tW-unz"/>
+                                    <constraint firstItem="ecb-8E-fyM" firstAttribute="top" secondItem="yEK-ch-VOb" secondAttribute="top" constant="1" id="aPW-w7-bXp"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="gd4-qw-LMt" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="rOp-JR-uNt"/>
-                            <constraint firstItem="gd4-qw-LMt" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="wAJ-CJ-gB0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yEK-ch-VOb" secondAttribute="trailing" constant="10" id="Boc-M5-bOt"/>
+                            <constraint firstItem="yEK-ch-VOb" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="WM4-Nh-zDD"/>
+                            <constraint firstItem="yEK-ch-VOb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="ncD-aZ-qNn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

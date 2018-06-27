@@ -26,14 +26,30 @@ class NetworkService {
 
     private let verbose = true
 
+    var characterList = [CharacterModel]()
+    
     private func verbosePrint(_ msg: String) {
         if verbose {
             print("Service: \(msg)")
         }
     }
     
-    var characterList = [CharacterModel]()
-    
+    private var manager: Alamofire.SessionManager = {
+        // Create the server trust policies
+        let serverTrustPolicies: [String: ServerTrustPolicy] = [
+            "gateway.marvel.com": .disableEvaluation
+        ]
+        // Create custom manager
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
+        let manager = Alamofire.SessionManager(
+            configuration: URLSessionConfiguration.default,
+            serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
+        )
+        
+        return manager
+    }()
+
     private func treatError(url: String, response: DataResponse<String>) -> String{
         verbosePrint("error=\(response.description)")
         if let localizedDescription = response.result.error?.localizedDescription {
@@ -50,7 +66,7 @@ class NetworkService {
         parameters: Parameters? = nil,
         complete: @escaping ( Result<[String: Any]?> ) -> Void )
     {
-        let request = Alamofire.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default)
+        let request = manager.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default)
         request.responseJSON { response in
             self.verbosePrint("url=\(response.request?.url?.description ?? "")")
             let statusCode = response.response?.statusCode ?? -1

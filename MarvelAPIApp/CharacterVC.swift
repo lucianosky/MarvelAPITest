@@ -12,11 +12,16 @@ import Kingfisher
 class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var pageView: UIView!
+    
+    var isLoading = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.collectionView.register(CharacterVC.self, forCellWithReuseIdentifier: "CharacterHeader")
+        pageView.layer.borderWidth = 1
+        pageView.layer.borderColor = UIColor.black.cgColor
         NetworkService.shared.characters { (list) in
+            self.isLoading = false
             self.collectionView.reloadData()
         }
     }
@@ -27,31 +32,29 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         return 1
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return NetworkService.shared.characterList.count
-//        return 20
+        return isLoading ? 1 : NetworkService.shared.characterList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as! CharacterCell
-        let characterModel = NetworkService.shared.characterList[indexPath.row]
-        // "Spider Man spinoff from 2012 movie"
-        cell.nameLabel.attributedText = NSAttributedString.fromString(string: characterModel.name, lineHeightMultiple: 0.7)
-        cell.squareView.layer.borderWidth = 1
-        cell.squareView.layer.borderColor = UIColor.black.cgColor
-        cell.nameView.layer.borderWidth = 1
-        cell.nameView.layer.borderColor = UIColor.black.cgColor
-        
-
-        let remanderBy4 = indexPath.row % 4
-        cell.nameView.backgroundColor = remanderBy4 == 1 || remanderBy4 == 2 ? .comicPink : .comicBlue
-        
-        if let uri = characterModel.imageURI {
-            let url = URL(string: uri)
-            cell.characterImageView.kf.setImage(with: url)
+        if isLoading {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "loadingCell", for: indexPath)
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as! CharacterCell
+            let characterModel = NetworkService.shared.characterList[indexPath.row]
+            cell.nameLabel.attributedText = NSAttributedString.fromString(string: characterModel.name, lineHeightMultiple: 0.7)
+            cell.squareView.layer.borderWidth = 1
+            cell.squareView.layer.borderColor = UIColor.black.cgColor
+            cell.nameView.layer.borderWidth = 1
+            cell.nameView.layer.borderColor = UIColor.black.cgColor
+            let remanderBy4 = indexPath.row % 4
+            cell.nameView.backgroundColor = remanderBy4 == 1 || remanderBy4 == 2 ? .comicPink : .comicBlue
+            if let uri = characterModel.imageURI {
+                let url = URL(string: uri)
+                cell.characterImageView.kf.setImage(with: url)
+            }
+            return cell
         }
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -77,6 +80,18 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var size: CGFloat = UIScreen.main.bounds.width
+        if isLoading {
+            size = (size - 40.0)
+        } else {
+            size = (size - 50.0) / 2.0
+        }
+        return CGSize(width: size, height: size)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
                                  layout collectionViewLayout: UICollectionViewLayout,
                                  referenceSizeForHeaderInSection section: Int) -> CGSize {
         let w = 200 // UIScreen.main.bounds.width - (24.0 * 2.0) - 40.0
@@ -90,13 +105,6 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         return CGSize(width: w, height: 10)
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let w = (UIScreen.main.bounds.width - (24.0 * 2.0) - 30.0) / 2.0
-        return CGSize(width: w, height: w)
-    }
-    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

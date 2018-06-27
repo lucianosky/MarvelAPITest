@@ -22,6 +22,7 @@
 		4ED343F620E2A4C3004F62A8 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED343F520E2A4C3004F62A8 /* UIColorExtension.swift */; };
 		4ED343F820E2BBE7004F62A8 /* NSAttributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED343F720E2BBE7004F62A8 /* NSAttributedStringExtension.swift */; };
 		4ED343FA20E2C122004F62A8 /* CharacterHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED343F920E2C122004F62A8 /* CharacterHeader.swift */; };
+		4ED343FC20E3CCDE004F62A8 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED343FB20E3CCDE004F62A8 /* LoadingCell.swift */; };
 		69760C3D3A6F1EAE508ECC02 /* libPods-MarvelAPIApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD3910809B34857F8AF6A6FB /* libPods-MarvelAPIApp.a */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		4ED343F520E2A4C3004F62A8 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		4ED343F720E2BBE7004F62A8 /* NSAttributedStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtension.swift; sourceTree = "<group>"; };
 		4ED343F920E2C122004F62A8 /* CharacterHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterHeader.swift; sourceTree = "<group>"; };
+		4ED343FB20E3CCDE004F62A8 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		55BBB8DCD8830C09BAC6F1DA /* Pods-MarvelAPIApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarvelAPIApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MarvelAPIApp/Pods-MarvelAPIApp.release.xcconfig"; sourceTree = "<group>"; };
 		56712978EF9E0344CC4D3BF8 /* Pods-MarvelAPIApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarvelAPIApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MarvelAPIApp/Pods-MarvelAPIApp.debug.xcconfig"; sourceTree = "<group>"; };
 		FD3910809B34857F8AF6A6FB /* libPods-MarvelAPIApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MarvelAPIApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +128,7 @@
 				4ED343EC20E28BB2004F62A8 /* CharacterVC.swift */,
 				4ED343F920E2C122004F62A8 /* CharacterHeader.swift */,
 				4ED343F320E2A257004F62A8 /* CharacterCell.swift */,
+				4ED343FB20E3CCDE004F62A8 /* LoadingCell.swift */,
 				4E21879C20E19A2900A05621 /* Service.swift */,
 				4ED343F720E2BBE7004F62A8 /* NSAttributedStringExtension.swift */,
 				4ED343F520E2A4C3004F62A8 /* UIColorExtension.swift */,
@@ -339,6 +342,7 @@
 			files = (
 				4ED343F420E2A257004F62A8 /* CharacterCell.swift in Sources */,
 				4ED343FA20E2C122004F62A8 /* CharacterHeader.swift in Sources */,
+				4ED343FC20E3CCDE004F62A8 /* LoadingCell.swift in Sources */,
 				4E21879D20E19A2900A05621 /* Service.swift in Sources */,
 				4ED343F620E2A4C3004F62A8 /* UIColorExtension.swift in Sources */,
 				4ED343F820E2BBE7004F62A8 /* NSAttributedStringExtension.swift in Sources */,
@@ -520,6 +524,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SM8N4SFLYT;
 				INFOPLIST_FILE = MarvelAPIApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -527,7 +532,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.lucianosky.MarvelAPIApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -539,6 +544,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SM8N4SFLYT;
 				INFOPLIST_FILE = MarvelAPIApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -546,7 +552,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.lucianosky.MarvelAPIApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
