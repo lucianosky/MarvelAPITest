@@ -25,8 +25,7 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageView.layer.borderWidth = 1
-        pageView.layer.borderColor = UIColor.black.cgColor
+        pageView.setBlackBorder()
         computeSizes()
         loadNextPage()
     }
@@ -89,10 +88,8 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as! CharacterCell
             let characterModel = CharacterVM.shared.characterList[indexPath.row]
             cell.nameLabel.attributedText = NSAttributedString.fromString(string: characterModel.name, lineHeightMultiple: 0.7)
-            cell.squareView.layer.borderWidth = 1
-            cell.squareView.layer.borderColor = UIColor.black.cgColor
-            cell.nameView.layer.borderWidth = 1
-            cell.nameView.layer.borderColor = UIColor.black.cgColor
+            cell.squareView.setBlackBorder()
+            cell.nameView.setBlackBorder()
             // this will create a diagonal grid with pink/blue background colors for character names
             let remanderBy4 = indexPath.row % 4
             cell.nameView.backgroundColor = remanderBy4 == 1 || remanderBy4 == 2 ? .comicPink : .comicBlue
@@ -111,8 +108,7 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "characterHeader", for: indexPath) as! CharacterHeader
             header.rectangleView.backgroundColor = .comicYellow
-            header.rectangleView.layer.borderWidth = 1
-            header.rectangleView.layer.borderColor = UIColor.black.cgColor
+            header.rectangleView.setBlackBorder()
             return header
             
         case UICollectionElementKindSectionFooter:

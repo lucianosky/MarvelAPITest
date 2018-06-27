@@ -15,6 +15,7 @@
 		4E21878B20E1924A00A05621 /* MarvelAPIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21878A20E1924A00A05621 /* MarvelAPIAppUITests.swift */; };
 		4E21879D20E19A2900A05621 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21879C20E19A2900A05621 /* NetworkService.swift */; };
 		4E21879F20E19DF600A05621 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 4E21879E20E19DF600A05621 /* Podfile */; };
+		4E9AF98720E447640053AF91 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AF98620E447640053AF91 /* UIViewExtension.swift */; };
 		4ED343ED20E28BB2004F62A8 /* CharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED343EC20E28BB2004F62A8 /* CharacterVC.swift */; };
 		4ED343F020E293BF004F62A8 /* Comic Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4ED343EE20E293BE004F62A8 /* Comic Book.otf */; };
 		4ED343F120E293BF004F62A8 /* Comic Book Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4ED343EF20E293BF004F62A8 /* Comic Book Bold.otf */; };
@@ -59,6 +60,7 @@
 		4E21878C20E1924A00A05621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E21879C20E19A2900A05621 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		4E21879E20E19DF600A05621 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		4E9AF98620E447640053AF91 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		4ED343EC20E28BB2004F62A8 /* CharacterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterVC.swift; sourceTree = "<group>"; };
 		4ED343EE20E293BE004F62A8 /* Comic Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Book.otf"; sourceTree = "<group>"; };
 		4ED343EF20E293BF004F62A8 /* Comic Book Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Book Bold.otf"; sourceTree = "<group>"; };
@@ -126,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				4ED3440320E3F65B004F62A8 /* view */,
-				4ED3440420E3F66B004F62A8 /* viewController */,
 				4ED3440520E3F6C7004F62A8 /* viewModel */,
 				4ED3440620E3F6DF004F62A8 /* model */,
 				4ED3440020E3EF37004F62A8 /* extensions */,
@@ -179,6 +180,7 @@
 			children = (
 				4ED343F720E2BBE7004F62A8 /* NSAttributedStringExtension.swift */,
 				4ED343F520E2A4C3004F62A8 /* UIColorExtension.swift */,
+				4E9AF98620E447640053AF91 /* UIViewExtension.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -188,18 +190,11 @@
 			children = (
 				4E21877320E1924A00A05621 /* LaunchScreen.storyboard */,
 				4E21876E20E1924700A05621 /* Main.storyboard */,
-			);
-			path = view;
-			sourceTree = "<group>";
-		};
-		4ED3440420E3F66B004F62A8 /* viewController */ = {
-			isa = PBXGroup;
-			children = (
 				4ED343EC20E28BB2004F62A8 /* CharacterVC.swift */,
 				4ED343F920E2C122004F62A8 /* CharacterHeader.swift */,
 				4ED343F320E2A257004F62A8 /* CharacterCell.swift */,
 			);
-			path = viewController;
+			path = view;
 			sourceTree = "<group>";
 		};
 		4ED3440520E3F6C7004F62A8 /* viewModel */ = {
@@ -391,6 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E9AF98720E447640053AF91 /* UIViewExtension.swift in Sources */,
 				4ED343F420E2A257004F62A8 /* CharacterCell.swift in Sources */,
 				4ED3440220E3F5A9004F62A8 /* CharacterModel.swift in Sources */,
 				4ED343FA20E2C122004F62A8 /* CharacterHeader.swift in Sources */,
