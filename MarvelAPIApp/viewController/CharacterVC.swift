@@ -66,7 +66,6 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             case .Error(let message, let statusCode):
                 print("Error \(message) \(statusCode ?? 0)")
             }
-
         }
     }
 
@@ -94,6 +93,7 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             cell.squareView.layer.borderColor = UIColor.black.cgColor
             cell.nameView.layer.borderWidth = 1
             cell.nameView.layer.borderColor = UIColor.black.cgColor
+            // this will create a diagonal grid with pink/blue background colors for character names
             let remanderBy4 = indexPath.row % 4
             cell.nameView.backgroundColor = remanderBy4 == 1 || remanderBy4 == 2 ? .comicPink : .comicBlue
             if let uri = characterModel.imageURI {
@@ -134,16 +134,14 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView,
-                                 layout collectionViewLayout: UICollectionViewLayout,
-                                 referenceSizeForHeaderInSection section: Int) -> CGSize {
-        //let w = 200 // UIScreen.main.bounds.width - (24.0 * 2.0) - 40.0
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: loadingCellSize, height: 32)
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForFooterInSection section: Int) -> CGSize {
-        //let w = 200 // UIScreen.main.bounds.width - (24.0 * 2.0) - 40.0
         return CGSize(width: loadingCellSize, height: 10)
     }
 
