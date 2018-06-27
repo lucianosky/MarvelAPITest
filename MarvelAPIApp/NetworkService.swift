@@ -23,7 +23,7 @@ class NetworkService {
 
     private func verbosePrint(_ msg: String) {
         if verbose {
-            print("Service: \(msg)")
+            print(msg)
         }
     }
     
@@ -39,45 +39,9 @@ class NetworkService {
             configuration: URLSessionConfiguration.default,
             serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
         )
-        
         return manager
     }()
 
-    private func treatError(url: String, response: DataResponse<String>) -> String{
-        verbosePrint("error=\(response.description)")
-        if let localizedDescription = response.result.error?.localizedDescription {
-            return localizedDescription
-        } else if response.result.debugDescription.count > 0 {
-            return response.result.debugDescription
-        }
-        return  "error: \(response.response?.statusCode ?? 0)"
-    }
-    
-    func request(
-        url: String,
-        method: HTTPMethod = .get,
-        parameters: Parameters? = nil,
-        complete: @escaping ( Result<[String: Any]?> ) -> Void )
-    {
-        let request = manager.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default)
-        request.responseJSON { [weak self] response in
-            self?.verbosePrint("url=\(response.request?.url?.description ?? "")")
-            let statusCode = response.response?.statusCode ?? -1
-            self?.verbosePrint("status code=\(statusCode)")
-            if response.result.isSuccess {
-                if let array = response.result.value as? [String: Any] {
-                    return complete(.Success(array, statusCode))
-                } else {
-                    return complete(.Success(nil, statusCode))
-                }
-            } else {
-                request.responseString(completionHandler: { (strResponse) in
-                    return complete(.Error(self?.treatError(url: url, response: strResponse) ?? "", response.response?.statusCode))
-                })
-            }
-        }
-    }
-    
     var apiKeyTsHash: String {
         get {
             let apikey = "cdb9b66985f6523d88b3b820037f895f"
@@ -90,6 +54,44 @@ class NetworkService {
     var baseUrl: String {
         get {
             return "https://gateway.marvel.com/v1/public/"
+        }
+    }
+    
+    private func treatError(url: String, response: DataResponse<String>) -> String{
+        verbosePrint("error=\(response.description)")
+        if let localizedDescription = response.result.error?.localizedDescription {
+            return localizedDescription
+        } else if response.result.debugDescription.count > 0 {
+            return response.result.debugDescription
+        }
+        return "error: \(response.response?.statusCode ?? 0)"
+    }
+    
+    func request(
+        url: String,
+        method: HTTPMethod = .get,
+        parameters: Parameters? = nil,
+        complete: @escaping ( Result<[[String: Any]]?> ) -> Void )
+    {
+        let request = manager.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default)
+        request.responseJSON { [weak self] response in
+            self?.verbosePrint("url=\(response.request?.url?.description ?? "")")
+            let statusCode = response.response?.statusCode ?? -1
+            self?.verbosePrint("status code=\(statusCode)")
+            if response.result.isSuccess {
+                if let fullDict = response.result.value as? [String: Any],
+                   let dataDict = fullDict["data"] as? [String: Any],
+                   let resultsDict = dataDict["results"] as? [[String: Any]]
+                {
+                    return complete(.Success(resultsDict, statusCode))
+                } else {
+                    return complete(.Success(nil, statusCode))
+                }
+            } else {
+                request.responseString(completionHandler: { (strResponse) in
+                    return complete(.Error(self?.treatError(url: url, response: strResponse) ?? "", response.response?.statusCode))
+                })
+            }
         }
     }
     

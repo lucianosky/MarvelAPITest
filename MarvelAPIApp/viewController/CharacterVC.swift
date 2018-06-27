@@ -15,13 +15,21 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     @IBOutlet weak var pageView: UIView!
     
     var isLoading = true
-    
+    var isPullingUp = false
+    var page = -1
+
     override func viewDidLoad() {
         super.viewDidLoad()
         pageView.layer.borderWidth = 1
         pageView.layer.borderColor = UIColor.black.cgColor
-        CharacterVM.shared.getCharacters { [weak self] (list) in
+        loadNextPage()
+    }
+    
+    func loadNextPage() {
+        page += 1
+        CharacterVM.shared.getCharacters(page: page) { [weak self] (list) in
             self?.isLoading = false
+            self?.isPullingUp = false
             self?.collectionView.reloadData()
         }
     }
@@ -119,6 +127,20 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10.0, left: 10.0, bottom: 0.0, right: 10.0)
+    }
+    
+    // MARK: - scrollView protocols
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if isPullingUp {
+            return
+        }
+        let scrollThreshold:CGFloat = 30
+        let scrollDelta = (scrollView.contentOffset.y + scrollView.frame.size.height) - scrollView.contentSize.height
+        if  scrollDelta > scrollThreshold {
+            isPullingUp = true
+            loadNextPage()
+        }
     }
     
 }

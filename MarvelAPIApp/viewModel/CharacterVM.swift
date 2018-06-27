@@ -13,35 +13,41 @@ class CharacterVM {
     static let shared = CharacterVM()
     private init() {} // singleton
 
-    var characterList = [CharacterModel]()
-    
+    let pageSize = 20
+    private var privCharacterList = [CharacterModel]()
+
+    var characterList: [CharacterModel] {
+        get {
+            return privCharacterList
+        }
+    }
+
     func getCharacters(
+        page: Int,
         complete: @escaping ( Result<[CharacterModel]?> ) -> Void )  {
-        let url = "\(NetworkService.shared.baseUrl)characters?\(NetworkService.shared.apiKeyTsHash)&nameStartsWith=spi"
-        print(url)
+        let offset = page * pageSize
+        let url = "\(NetworkService.shared.baseUrl)characters?\(NetworkService.shared.apiKeyTsHash)&offset=\(offset)"
         NetworkService.shared.request(
             url: url
         ) { [weak self] (result) in
             switch result {
-            case .Success(let xyz, let statusCode):
-                guard let adata = xyz?["data"] as? [String: Any],
-                    let results = adata["results"] as? [[String: Any]]
-                    else {
-                        let msg = "characters data null"
-                        return complete(.Error(msg, statusCode))
+            case .Success(let resultsDict, let statusCode):
+                if let results = resultsDict {
+                    var list = [CharacterModel]()
+                    results.forEach({ (character) in
+                        if let name = character["name"] as? String,
+                            let thumbnail = character["thumbnail"] as? [String: Any],
+                            let path = thumbnail["path"] as? String,
+                            let ext = thumbnail["extension"] as? String
+                        {
+                            let imageURI = path + "." + ext
+                            list.append(CharacterModel(name: name, imageURI: imageURI))
+                        } else {
+                            print("error reading character")
+                        }
+                    })
+                    self?.privCharacterList.append(contentsOf: list)
                 }
-                self?.characterList = results.map({ (character) -> CharacterModel in
-                    let name = (character["name"] as? String ?? "Erro").lowercased()
-                    var imageURI: String?
-                    if let thumbnail = character["thumbnail"] as? [String: Any],
-                        let path = thumbnail["path"] as? String,
-                        let ext = thumbnail["extension"] as? String {
-                        imageURI = path + "." + ext
-                    } else {
-                        print("deu erro")
-                    }
-                    return CharacterModel(name: name, imageURI: imageURI)
-                })
                 return complete(.Success(self?.characterList, statusCode))
             case .Error(let message, let statusCode):
                 return complete(.Error(message, statusCode))
