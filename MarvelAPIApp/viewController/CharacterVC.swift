@@ -20,9 +20,9 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         super.viewDidLoad()
         pageView.layer.borderWidth = 1
         pageView.layer.borderColor = UIColor.black.cgColor
-        NetworkService.shared.characters { (list) in
-            self.isLoading = false
-            self.collectionView.reloadData()
+        CharacterVM.shared.getCharacters { [weak self] (list) in
+            self?.isLoading = false
+            self?.collectionView.reloadData()
         }
     }
 
@@ -33,7 +33,7 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return isLoading ? 1 : NetworkService.shared.characterList.count
+        return isLoading ? 1 : CharacterVM.shared.characterList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -41,7 +41,7 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             return collectionView.dequeueReusableCell(withReuseIdentifier: "loadingCell", for: indexPath)
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as! CharacterCell
-            let characterModel = NetworkService.shared.characterList[indexPath.row]
+            let characterModel = CharacterVM.shared.characterList[indexPath.row]
             cell.nameLabel.attributedText = NSAttributedString.fromString(string: characterModel.name, lineHeightMultiple: 0.7)
             cell.squareView.layer.borderWidth = 1
             cell.squareView.layer.borderColor = UIColor.black.cgColor
