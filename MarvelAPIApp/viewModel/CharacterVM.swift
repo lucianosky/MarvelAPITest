@@ -39,11 +39,14 @@ class CharacterVM {
         page: Int,
         complete: @escaping ( Result<[CharacterModel]?> ) -> Void )  {
         let offset = page * pageSize
-        let url = "\(NetworkService.shared.baseUrl)characters?\(NetworkService.shared.apiKeyTsHash)&offset=\(offset)&nameStartsWith=Spi"
+        let url = "\(NetworkService.shared.baseUrl)characters?\(NetworkService.shared.apiKeyTsHash)&offset=\(offset)"
         // TODO: filter: &nameStartsWith=Spi
         NetworkService.shared.request(
             url: url
         ) { [weak self] (result) in
+            if page == 0 {
+                self?.privCharacterList.removeAll()
+            }
             switch result {
             case .Success(let resultsDict, _):
                 var list = [CharacterModel]()
