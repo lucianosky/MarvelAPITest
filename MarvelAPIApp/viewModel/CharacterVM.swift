@@ -13,7 +13,7 @@ class CharacterVM {
     
     private var privCurrentCharacter: CharacterModel
     private init() { // singleton
-        privCurrentCharacter = CharacterModel(name: "", imageURI: nil)
+        privCurrentCharacter = CharacterModel(name: "", imageURI: nil, description: "")
     }
     
     let pageSize = 20
@@ -52,10 +52,11 @@ class CharacterVM {
                         if let name = character["name"] as? String,
                             let thumbnail = character["thumbnail"] as? [String: Any],
                             let path = thumbnail["path"] as? String,
-                            let ext = thumbnail["extension"] as? String
+                            let ext = thumbnail["extension"] as? String,
+                            let description = character["name"] as? String
                         {
                             let imageURI = path + "." + ext
-                            list.append(CharacterModel(name: name, imageURI: imageURI))
+                            list.append(CharacterModel(name: name, imageURI: imageURI, description: description))
                         } else {
                             print("error reading character")
                         }
