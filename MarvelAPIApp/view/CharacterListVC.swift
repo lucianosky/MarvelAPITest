@@ -123,28 +123,11 @@ class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionV
     // MARK: UICollectionViewDelegate
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("didSelectItemAt")
-//        if let cell = collectionView.cellForItem(at: indexPath),
-//            let imageView = cell.viewWithTag(1) as? UIImageView,
-//            let productKind = MediatorStack.shared.tmpCustomerItem?.productKinds?[indexPath.row]
-//        {
-//            imageView.image = productKind.imageSelected
-//            btnForward.isEnabled = true
-//            btnForward.backgroundColor = UIColor.tealBlue
-//            currentRawValue = productKind.rawValue
-//        }
+        if !isFirstLoading{
+            CharacterVM.shared.currentCharacter = CharacterVM.shared.characterList[indexPath.row]
+            self.performSegue(withIdentifier: "segueToCharacter", sender: self)
+        }
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        print("didDeselectItemAt")
-//        if let cell = collectionView.cellForItem(at: indexPath),
-//            let imageView = cell.viewWithTag(1) as? UIImageView,
-//            let productKind = MediatorStack.shared.tmpCustomerItem?.productKinds?[indexPath.row]
-//        {
-//            imageView.image = productKind.image
-//        }
-    }
-
     
     // MARK: UICollectionViewDelegateFlowLayout
     

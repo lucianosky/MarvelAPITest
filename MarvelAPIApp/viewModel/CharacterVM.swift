@@ -10,14 +10,28 @@ import Foundation
 class CharacterVM {
     
     static let shared = CharacterVM()
-    private init() {} // singleton
-
+    
+    private var privCurrentCharacter: CharacterModel
+    private init() { // singleton
+        privCurrentCharacter = CharacterModel(name: "", imageURI: nil)
+    }
+    
     let pageSize = 20
     private var privCharacterList = [CharacterModel]()
-
+    
+    
     var characterList: [CharacterModel] {
         get {
             return privCharacterList
+        }
+    }
+    
+    var currentCharacter: CharacterModel {
+        get {
+            return privCurrentCharacter
+        }
+        set {
+            privCurrentCharacter = newValue
         }
     }
 
