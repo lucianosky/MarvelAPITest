@@ -39,7 +39,7 @@ class CharacterVM {
         page: Int,
         complete: @escaping ( Result<[CharacterModel]?> ) -> Void )  {
         let offset = page * pageSize
-        let url = "\(NetworkService.shared.baseUrl)characters?\(NetworkService.shared.apiKeyTsHash)&offset=\(offset)"
+        let url = "\(NetworkService.shared.baseUrl)characters?\(NetworkService.shared.apiKeyTsHash)&offset=\(offset)&nameStartsWith=Spi"
         // TODO: filter: &nameStartsWith=Spi
         NetworkService.shared.request(
             url: url
@@ -53,7 +53,7 @@ class CharacterVM {
                             let thumbnail = character["thumbnail"] as? [String: Any],
                             let path = thumbnail["path"] as? String,
                             let ext = thumbnail["extension"] as? String,
-                            let description = character["name"] as? String
+                            let description = character["description"] as? String
                         {
                             let imageURI = path + "." + ext
                             list.append(CharacterModel(name: name, imageURI: imageURI, description: description))

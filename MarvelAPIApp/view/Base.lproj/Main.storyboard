@@ -307,6 +307,46 @@
                                                     <outlet property="squareView" destination="Quj-ul-tgs" id="wPe-vT-3cg"/>
                                                 </connections>
                                             </collectionViewCell>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="descriptionCell" id="ZZz-y9-Kuc" customClass="DescriptionCell" customModule="MarvelAPIApp" customModuleProvider="target">
+                                                <rect key="frame" x="205" y="0.0" width="150" height="150"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCC-Pd-otm">
+                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                            <subviews>
+                                                                <label opaque="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1a-uf-mgc">
+                                                                    <rect key="frame" x="10" y="10" width="130" height="130"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <fontDescription key="fontDescription" name="ComicBook" family="Comic Book" pointSize="13"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="q1a-uf-mgc" secondAttribute="trailing" constant="10" id="HbC-0s-dRd"/>
+                                                                <constraint firstItem="q1a-uf-mgc" firstAttribute="leading" secondItem="aCC-Pd-otm" secondAttribute="leading" constant="10" id="ZeV-dZ-ZoX"/>
+                                                                <constraint firstAttribute="bottom" secondItem="q1a-uf-mgc" secondAttribute="bottom" constant="10" id="jol-2x-Nf3"/>
+                                                                <constraint firstItem="q1a-uf-mgc" firstAttribute="top" secondItem="aCC-Pd-otm" secondAttribute="top" constant="10" id="sEn-YW-0MA"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                </view>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="aCC-Pd-otm" secondAttribute="trailing" id="K1M-LR-eow"/>
+                                                    <constraint firstAttribute="bottom" secondItem="aCC-Pd-otm" secondAttribute="bottom" id="WZn-RD-vcY"/>
+                                                    <constraint firstItem="aCC-Pd-otm" firstAttribute="leading" secondItem="ZZz-y9-Kuc" secondAttribute="leading" id="w27-Gg-cCM"/>
+                                                    <constraint firstItem="aCC-Pd-otm" firstAttribute="top" secondItem="ZZz-y9-Kuc" secondAttribute="top" id="z2H-1w-eNX"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="descriptionLabel" destination="q1a-uf-mgc" id="FWB-A7-iB3"/>
+                                                    <outlet property="squareView" destination="aCC-Pd-otm" id="6iM-Ub-9uN"/>
+                                                </connections>
+                                            </collectionViewCell>
                                         </cells>
                                         <connections>
                                             <outlet property="dataSource" destination="432-Tp-XDm" id="mJn-SC-m1N"/>

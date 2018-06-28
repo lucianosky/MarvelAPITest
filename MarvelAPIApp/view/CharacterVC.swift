@@ -40,13 +40,13 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let characterModel = CharacterVM.shared.currentCharacter
         switch indexPath.row {
         case 0:
-            let characterModel = CharacterVM.shared.currentCharacter
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as! CharacterCell
             cell.nameLabel.attributedText = NSAttributedString.fromString(string: characterModel.name, lineHeightMultiple: 0.7)
             cell.squareView.setBlackBorder()
@@ -58,7 +58,11 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             }
             return cell
         default:
-            return collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as! CharacterCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "descriptionCell", for: indexPath) as! DescriptionCell
+            cell.squareView.setBlackBorder()
+            cell.squareView.backgroundColor = .comicYellow
+            cell.descriptionLabel.attributedText = NSAttributedString.fromString(string: characterModel.description, lineHeightMultiple: 0.7)
+            return cell
         }
     }
     
@@ -68,7 +72,8 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = characterCellSize
-        return CGSize(width: size, height: size)
+        let height = indexPath.row == 0 ? size : 100
+        return CGSize(width: size, height: height)
     }
 
     func collectionView(_ collectionView: UICollectionView,
