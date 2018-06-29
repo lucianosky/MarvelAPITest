@@ -2,8 +2,7 @@
 //  CharacterModelTest.swift
 //  MarvelAPIAppTests
 //
-//  Created by SoftDesign on 28/06/2018.
-//  Copyright © 2018 SoftDesign. All rights reserved.
+//  Created by Luciano Sclovsky on 28/06/2018.
 //
 
 import XCTest
@@ -23,6 +22,5 @@ class CharacterModelTests: XCTestCase {
         let peterParker = CharacterModel(name: name, imageURI: imageURI, description: description)
         XCTAssertEqual(peterParker.imageURI, imageURI)
     }
-    
     
 }

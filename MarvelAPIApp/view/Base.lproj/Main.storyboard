@@ -265,7 +265,7 @@
                                                                         <label opaque="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTV-vr-rsL">
                                                                             <rect key="frame" x="5" y="0.0" width="140" height="31"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                            <fontDescription key="fontDescription" name="ComicBook" family="Comic Book" pointSize="13"/>
+                                                                            <fontDescription key="fontDescription" name="ComicBook-Bold" family="Comic Book" pointSize="18"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
@@ -345,6 +345,46 @@
                                                 <connections>
                                                     <outlet property="descriptionLabel" destination="q1a-uf-mgc" id="FWB-A7-iB3"/>
                                                     <outlet property="squareView" destination="aCC-Pd-otm" id="6iM-Ub-9uN"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="comicsTitleCell" id="ox7-pR-jsy" customClass="ComicsTitleCell" customModule="MarvelAPIApp" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="160" width="150" height="150"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yv0-Ga-5hj">
+                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                            <subviews>
+                                                                <label opaque="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="comics" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMR-2X-zIF">
+                                                                    <rect key="frame" x="10" y="10" width="130" height="130"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <fontDescription key="fontDescription" name="ComicBook-Bold" family="Comic Book" pointSize="18"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.92941176470588238" green="0.8901960784313725" blue="0.69019607843137254" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="jMR-2X-zIF" secondAttribute="trailing" constant="10" id="NYg-BA-VZu"/>
+                                                                <constraint firstItem="jMR-2X-zIF" firstAttribute="top" secondItem="yv0-Ga-5hj" secondAttribute="top" constant="10" id="PIp-xo-1d0"/>
+                                                                <constraint firstItem="jMR-2X-zIF" firstAttribute="leading" secondItem="yv0-Ga-5hj" secondAttribute="leading" constant="10" id="WDb-pK-sAc"/>
+                                                                <constraint firstAttribute="bottom" secondItem="jMR-2X-zIF" secondAttribute="bottom" constant="10" id="dvu-88-vZE"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                </view>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="yv0-Ga-5hj" secondAttribute="trailing" id="2uz-pU-7Gn"/>
+                                                    <constraint firstItem="yv0-Ga-5hj" firstAttribute="top" secondItem="ox7-pR-jsy" secondAttribute="top" id="HfM-8e-afW"/>
+                                                    <constraint firstAttribute="bottom" secondItem="yv0-Ga-5hj" secondAttribute="bottom" id="ViQ-a1-RN6"/>
+                                                    <constraint firstItem="yv0-Ga-5hj" firstAttribute="leading" secondItem="ox7-pR-jsy" secondAttribute="leading" id="yVs-Bi-9Zt"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="comicsLabel" destination="jMR-2X-zIF" id="acf-oc-dfD"/>
+                                                    <outlet property="squareView" destination="yv0-Ga-5hj" id="8Fl-Vg-gM0"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>

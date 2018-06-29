@@ -20,6 +20,10 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         super.viewDidLoad()
         pageView.setBlackBorder()
         computeSizes()
+        
+//        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+//            flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
+//        }
     }
     
     @IBAction func backButtonTouched(_ sender: Any) {
@@ -40,7 +44,7 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -57,11 +61,17 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
                 cell.characterImageView.kf.setImage(with: url)
             }
             return cell
-        default:
+        case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "descriptionCell", for: indexPath) as! DescriptionCell
             cell.squareView.setBlackBorder()
             cell.squareView.backgroundColor = .comicYellow
             cell.descriptionLabel.attributedText = NSAttributedString.fromString(string: characterModel.description, lineHeightMultiple: 0.7)
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "comicsTitleCell", for: indexPath) as! ComicsTitleCell
+            cell.comicsLabel.attributedText = NSAttributedString.fromString(string: "comics", lineHeightMultiple: 0.7)
+            cell.squareView.setBlackBorder()
+            cell.squareView.backgroundColor = .comicYellow
             return cell
         }
     }
@@ -72,7 +82,15 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = characterCellSize
-        let height = indexPath.row == 0 ? size : 100
+        let height: CGFloat
+        switch indexPath.row {
+        case 0:
+            height = size
+        case 1:
+            height = 100
+        default:
+            height = 33
+        }
         return CGSize(width: size, height: height)
     }
 
