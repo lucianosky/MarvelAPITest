@@ -38,7 +38,7 @@ class CharacterVCTests: XCTestCase {
     
     func testExample() {
         //characterVC.collectionView.reloadData()
-        XCTAssertEqual(characterVC.collectionView.numberOfItems(inSection: 0), 2)
+        XCTAssertEqual(characterVC.collectionView.numberOfItems(inSection: 0), 3)
     }
     
     

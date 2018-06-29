@@ -164,8 +164,8 @@
 				4ED3440620E3F6DF004F62A8 /* model */,
 				4ED3440020E3EF37004F62A8 /* extensions */,
 				4ED343FD20E3E1C7004F62A8 /* resources */,
-				4E21876A20E1924700A05621 /* AppDelegate.swift */,
 				4E21879C20E19A2900A05621 /* NetworkService.swift */,
+				4E21876A20E1924700A05621 /* AppDelegate.swift */,
 			);
 			path = MarvelAPIApp;
 			sourceTree = "<group>";
@@ -192,6 +192,27 @@
 				4E21878C20E1924A00A05621 /* Info.plist */,
 			);
 			path = MarvelAPIAppUITests;
+			sourceTree = "<group>";
+		};
+		4E6BD83920E6E67F00D43EF3 /* characterList */ = {
+			isa = PBXGroup;
+			children = (
+				4ED343EC20E28BB2004F62A8 /* CharacterListVC.swift */,
+				4ED343F920E2C122004F62A8 /* CharacterListHeader.swift */,
+				4ED343F320E2A257004F62A8 /* CharacterListCell.swift */,
+			);
+			path = characterList;
+			sourceTree = "<group>";
+		};
+		4E6BD83A20E6E6B800D43EF3 /* character */ = {
+			isa = PBXGroup;
+			children = (
+				4E9AF98820E44E210053AF91 /* CharacterVC.swift */,
+				4E6BD82520E455F700D43EF3 /* CharacterCell.swift */,
+				4E6BD83320E6A33F00D43EF3 /* ComicsTitleCell.swift */,
+				4E6BD82720E4622F00D43EF3 /* DescriptionCell.swift */,
+			);
+			path = character;
 			sourceTree = "<group>";
 		};
 		4ED343F220E293EA004F62A8 /* fonts */ = {
@@ -228,13 +249,8 @@
 			children = (
 				4E21877320E1924A00A05621 /* LaunchScreen.storyboard */,
 				4E21876E20E1924700A05621 /* Main.storyboard */,
-				4ED343EC20E28BB2004F62A8 /* CharacterListVC.swift */,
-				4ED343F920E2C122004F62A8 /* CharacterListHeader.swift */,
-				4ED343F320E2A257004F62A8 /* CharacterListCell.swift */,
-				4E9AF98820E44E210053AF91 /* CharacterVC.swift */,
-				4E6BD82520E455F700D43EF3 /* CharacterCell.swift */,
-				4E6BD83320E6A33F00D43EF3 /* ComicsTitleCell.swift */,
-				4E6BD82720E4622F00D43EF3 /* DescriptionCell.swift */,
+				4E6BD83920E6E67F00D43EF3 /* characterList */,
+				4E6BD83A20E6E6B800D43EF3 /* character */,
 			);
 			path = view;
 			sourceTree = "<group>";

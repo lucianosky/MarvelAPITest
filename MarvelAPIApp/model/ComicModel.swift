@@ -8,10 +8,12 @@
 import Foundation
 
 class ComicModel {
+    let id: Int
     let title: String
     let imageURI: String?
     
-    init(title: String, imageURI: String?) {
+    init(id: Int, title: String, imageURI: String?) {
+        self.id = id
         self.title = title
         self.imageURI = imageURI
     }
@@ -19,6 +21,8 @@ class ComicModel {
 
 extension ComicModel: Equatable {
     static func == (lhs: ComicModel, rhs: ComicModel) -> Bool {
-        return lhs.title == rhs.title && lhs.imageURI == rhs.imageURI
+        return lhs.id == rhs.id &&
+               lhs.title == rhs.title &&
+               lhs.imageURI == rhs.imageURI
     }
 }

@@ -11,16 +11,6 @@ import XCTest
 
 class CharacterVMTests: XCTestCase {
     
-    func testCurrentCharacter() {
-        let name = "Spider Man"
-        let description = "Peter Parker's secret id"
-        let spiderMan = CharacterModel(name: name, imageURI: nil, description: description)
-        CharacterVM.shared.currentCharacter = spiderMan
-        let peterParker = CharacterVM.shared.currentCharacter
-        XCTAssertEqual(spiderMan, peterParker)
-        XCTAssert(spiderMan === peterParker)
-    }
-    
     func testGetCharacters() {
         let promise = expectation(description: "...")
         CharacterVM.shared.getCharacters(page: 0) { (result) in
@@ -37,5 +27,23 @@ class CharacterVMTests: XCTestCase {
         }
         waitForExpectations(timeout: 10, handler: nil)
     }
-    
+
+    func testGetCharacterComics() {
+        let promise = expectation(description: "...")
+        let spiderManId = 1009610
+        CharacterVM.shared.getCharacterComics(page: 0, character: spiderManId) { (result) in
+            switch result {
+            case .Success(let comicList, let count):
+                XCTAssertEqual(count, 20)
+                XCTAssertEqual(count, CharacterVM.shared.comicList.count)
+                let firstComic = comicList![0]
+                XCTAssertEqual(firstComic.title, "Peter Parker: Spider-Man (1999) #79")
+                promise.fulfill()
+            case .Error(let message, let statusCode):
+                XCTFail("Error: statusCode=\(statusCode ?? -1) \(message)")
+            }
+        }
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+
 }

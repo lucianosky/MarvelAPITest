@@ -221,12 +221,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dv-wi-81o">
-                                <rect key="frame" x="10" y="20" width="107" height="15"/>
+                                <rect key="frame" x="10" y="20" width="120" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="VPc-FW-VnY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ComicBook" family="Comic Book" pointSize="17"/>
-                                <state key="normal" title="&lt; characters">
+                                <state key="normal" title="&lt; characters...">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>

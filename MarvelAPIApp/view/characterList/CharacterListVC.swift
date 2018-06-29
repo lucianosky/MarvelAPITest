@@ -8,7 +8,11 @@
 import UIKit
 import Kingfisher
 
-class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+protocol CharacterListProtocol {
+    func getCurrentCharacter() -> CharacterModel?
+}
+
+class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CharacterListProtocol {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageView: UIView!
@@ -22,6 +26,7 @@ class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionV
     var screenWidth: CGFloat = 0
     var characterCellSize: CGFloat = 0
     var loadingCellSize: CGFloat = 0
+    var currentCharacter: CharacterModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,8 +129,16 @@ class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !isFirstLoading{
-            CharacterVM.shared.currentCharacter = CharacterVM.shared.characterList[indexPath.row]
+            currentCharacter = CharacterVM.shared.characterList[indexPath.row]
             self.performSegue(withIdentifier: "segueToCharacter", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToCharacter" {
+            if let characterVC = segue.destination as? CharacterVC {
+                characterVC.delegate = self
+            }
         }
     }
     
@@ -180,4 +193,10 @@ class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionV
         }
     }
     
+    // MARK: CharacterListProtocol
+    
+    func getCurrentCharacter() -> CharacterModel? {
+        return currentCharacter
+    }
+
 }
