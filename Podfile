@@ -12,3 +12,7 @@ end
 target 'MarvelAPIAppTests' do
     common_pods
 end
+
+target 'MarvelAPIAppUITests' do
+    common_pods
+end
