@@ -17,14 +17,7 @@ Unit test coverage at this point: %%
 ## UX/UI
 It is my belief that all iOS (or native mobile developers) should understand and practice some UX and UI. In this project the UX concept was mine, with the intent to create an app with the look and feel of a Comic Book. The UI was created by Flavia Ampessan.
 
-### Screenshots of implementation:
+### Screenshots:
 
-1
-https://github.com/lucianosky/MarvelAPITest/blob/develop/Screenshots/CharactersList.png
-
-2
-![alt text](https://github.com/lucianosky/MarvelAPITest/blob/develop/Screenshots/CharactersList.png "Logo Title Text 1")
-
-3
-![Character List](/Screenshots/CharactersList.png)
-
+####Character List
+![Character List](https://github.com/lucianosky/MarvelAPITest/blob/develop/Screenshots/CharactersList.png "Character List")
