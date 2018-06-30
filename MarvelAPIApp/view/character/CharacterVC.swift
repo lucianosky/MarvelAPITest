@@ -106,6 +106,9 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             default: return comicsTitleCell(withString: "comics", at: indexPath)
             }
         } else {
+            if (indexPath.row >= CharacterVM.shared.comicList.count - preloadCount) && !loadingData {
+                loadNextPage()
+            }
             let comicModel = CharacterVM.shared.comicList[indexPath.row]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "comicCell", for: indexPath) as! ComicCell
             //cell.titleLabel.attributedText = NSAttributedString.fromString(string: comicModel.title, lineHeightMultiple: 0.7)
@@ -186,6 +189,30 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10.0, left: 10.0, bottom: 0.0, right: 10.0)
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForFooterInSection section: Int) -> CGSize {
+        if section == 0 {
+            return CGSize(width: 0, height: 0)
+        } else {
+            return CGSize(width: characterCellSize, height: 10)
+        }
+    }
+    
+    // MARK: - scrollView protocols
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if isPullingUp {
+            return
+        }
+        let scrollThreshold:CGFloat = 30
+        let scrollDelta = (scrollView.contentOffset.y + scrollView.frame.size.height) - scrollView.contentSize.height
+        if  scrollDelta > scrollThreshold {
+            isPullingUp = true
+            loadNextPage()
+        }
     }
 
 }
