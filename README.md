@@ -22,3 +22,19 @@ It is my belief that all iOS (or native mobile developers) should understand and
 #### Character List
 
 ![Character List](https://github.com/lucianosky/MarvelAPITest/blob/develop/Screenshots/CharactersList.png "Character List")
+
+#### Character Details Section
+
+![Character Details Section](https://github.com/lucianosky/MarvelAPITest/blob/develop/Screenshots/CharacterDetailsSection.png "Character Details Section")
+
+#### Character Comics Section
+
+![Character Comics Section](https://github.com/lucianosky/MarvelAPITest/blob/develop/Screenshots/CharacterComicsSection.png "Character Comics Section")
+
+#### Loading
+
+![Loading](https://github.com/lucianosky/MarvelAPITest/blob/develop/Screenshots/Loading.png "Loading")
+
+#### LaunchScreen
+
+![Launch Screen](https://github.com/lucianosky/MarvelAPITest/blob/develop/Screenshots/LaunchScreen.png "Launch Screen")
