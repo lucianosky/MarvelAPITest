@@ -20,4 +20,5 @@ It is my belief that all iOS (or native mobile developers) should understand and
 ### Screenshots:
 
 ####Character List
+
 ![Character List](https://github.com/lucianosky/MarvelAPITest/blob/develop/Screenshots/CharactersList.png "Character List")
