@@ -25,6 +25,7 @@
 		4E6BD83420E6A33F00D43EF3 /* ComicsTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6BD83320E6A33F00D43EF3 /* ComicsTitleCell.swift */; };
 		4E6BD83620E6D53C00D43EF3 /* ComicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6BD83520E6D53C00D43EF3 /* ComicModel.swift */; };
 		4E6BD83820E6D64B00D43EF3 /* ComicModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6BD83720E6D64B00D43EF3 /* ComicModelTests.swift */; };
+		4E6BD83C20E6FAB000D43EF3 /* ComicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6BD83B20E6FAB000D43EF3 /* ComicCell.swift */; };
 		4E9AF98720E447640053AF91 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AF98620E447640053AF91 /* UIViewExtension.swift */; };
 		4E9AF98920E44E210053AF91 /* CharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AF98820E44E210053AF91 /* CharacterVC.swift */; };
 		4ED343ED20E28BB2004F62A8 /* CharacterListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED343EC20E28BB2004F62A8 /* CharacterListVC.swift */; };
@@ -83,6 +84,7 @@
 		4E6BD83320E6A33F00D43EF3 /* ComicsTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicsTitleCell.swift; sourceTree = "<group>"; };
 		4E6BD83520E6D53C00D43EF3 /* ComicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicModel.swift; sourceTree = "<group>"; };
 		4E6BD83720E6D64B00D43EF3 /* ComicModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicModelTests.swift; sourceTree = "<group>"; };
+		4E6BD83B20E6FAB000D43EF3 /* ComicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicCell.swift; sourceTree = "<group>"; };
 		4E9AF98620E447640053AF91 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		4E9AF98820E44E210053AF91 /* CharacterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterVC.swift; sourceTree = "<group>"; };
 		4ED343EC20E28BB2004F62A8 /* CharacterListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListVC.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				4E6BD82520E455F700D43EF3 /* CharacterCell.swift */,
 				4E6BD83320E6A33F00D43EF3 /* ComicsTitleCell.swift */,
 				4E6BD82720E4622F00D43EF3 /* DescriptionCell.swift */,
+				4E6BD83B20E6FAB000D43EF3 /* ComicCell.swift */,
 			);
 			path = character;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				4ED343F420E2A257004F62A8 /* CharacterListCell.swift in Sources */,
 				4ED3440220E3F5A9004F62A8 /* CharacterModel.swift in Sources */,
 				4E6BD82620E455F700D43EF3 /* CharacterCell.swift in Sources */,
+				4E6BD83C20E6FAB000D43EF3 /* ComicCell.swift in Sources */,
 				4ED343FA20E2C122004F62A8 /* CharacterListHeader.swift in Sources */,
 				4E21879D20E19A2900A05621 /* NetworkService.swift in Sources */,
 				4ED343F620E2A4C3004F62A8 /* UIColorExtension.swift in Sources */,

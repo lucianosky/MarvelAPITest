@@ -387,6 +387,68 @@
                                                     <outlet property="squareView" destination="yv0-Ga-5hj" id="8Fl-Vg-gM0"/>
                                                 </connections>
                                             </collectionViewCell>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="comicCell" id="Cwc-NA-Kwx" customClass="ComicCell" customModule="MarvelAPIApp" customModuleProvider="target">
+                                                <rect key="frame" x="205" y="160" width="150" height="150"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D1v-sd-Twd">
+                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ywI-4K-1gh">
+                                                                    <rect key="frame" x="0.0" y="104" width="150" height="46"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFY-8p-xOq">
+                                                                            <rect key="frame" x="5" y="0.0" width="140" height="46"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="bottom" secondItem="mFY-8p-xOq" secondAttribute="bottom" id="GlG-f1-mtd"/>
+                                                                        <constraint firstAttribute="height" constant="46" id="ZrC-F9-vFP"/>
+                                                                        <constraint firstItem="mFY-8p-xOq" firstAttribute="leading" secondItem="ywI-4K-1gh" secondAttribute="leading" constant="5" id="pvH-qp-Z9G"/>
+                                                                        <constraint firstItem="mFY-8p-xOq" firstAttribute="top" secondItem="ywI-4K-1gh" secondAttribute="top" id="yAt-W2-ikQ"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="mFY-8p-xOq" secondAttribute="trailing" constant="5" id="yDS-Qa-zS7"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eMu-TT-xia">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="104"/>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstItem="ywI-4K-1gh" firstAttribute="leading" secondItem="D1v-sd-Twd" secondAttribute="leading" id="2uo-m8-CFE"/>
+                                                                <constraint firstAttribute="bottom" secondItem="ywI-4K-1gh" secondAttribute="bottom" id="3fl-c3-xI9"/>
+                                                                <constraint firstItem="eMu-TT-xia" firstAttribute="top" secondItem="D1v-sd-Twd" secondAttribute="top" id="MdE-iL-qok"/>
+                                                                <constraint firstItem="eMu-TT-xia" firstAttribute="leading" secondItem="D1v-sd-Twd" secondAttribute="leading" id="OGf-Jj-EGk"/>
+                                                                <constraint firstItem="ywI-4K-1gh" firstAttribute="top" secondItem="eMu-TT-xia" secondAttribute="bottom" id="wBF-LM-ROZ"/>
+                                                                <constraint firstAttribute="trailing" secondItem="eMu-TT-xia" secondAttribute="trailing" id="xaG-rn-gbS"/>
+                                                                <constraint firstAttribute="trailing" secondItem="ywI-4K-1gh" secondAttribute="trailing" id="zQi-AH-YTx"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                </view>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="D1v-sd-Twd" firstAttribute="leading" secondItem="Cwc-NA-Kwx" secondAttribute="leading" id="AVz-VV-bw8"/>
+                                                    <constraint firstAttribute="bottom" secondItem="D1v-sd-Twd" secondAttribute="bottom" id="CWx-KF-bMK"/>
+                                                    <constraint firstItem="D1v-sd-Twd" firstAttribute="top" secondItem="Cwc-NA-Kwx" secondAttribute="top" id="abH-Tr-lFP"/>
+                                                    <constraint firstAttribute="trailing" secondItem="D1v-sd-Twd" secondAttribute="trailing" id="moB-2F-IzG"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="w19-r4-9fj"/>
+                                                <connections>
+                                                    <outlet property="coverImageView" destination="eMu-TT-xia" id="pob-kZ-WvT"/>
+                                                    <outlet property="squareView" destination="D1v-sd-Twd" id="YBh-jq-nle"/>
+                                                    <outlet property="titleLabel" destination="mFY-8p-xOq" id="vG3-5y-3U7"/>
+                                                    <outlet property="titleView" destination="ywI-4K-1gh" id="MF6-6w-EP7"/>
+                                                </connections>
+                                            </collectionViewCell>
                                         </cells>
                                         <connections>
                                             <outlet property="dataSource" destination="432-Tp-XDm" id="mJn-SC-m1N"/>
