@@ -19,3 +19,12 @@ It is my belief that all iOS (or native mobile developers) should understand and
 
 ### Screenshots of implementation:
 
+1
+https://github.com/lucianosky/MarvelAPITest/blob/develop/Screenshots/CharactersList.png
+
+2
+![alt text](https://github.com/lucianosky/MarvelAPITest/blob/develop/Screenshots/CharactersList.png "Logo Title Text 1")
+
+3
+![Character List](/Screenshots/CharactersList.png)
+
