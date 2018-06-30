@@ -36,9 +36,18 @@ class CharacterVCTests: XCTestCase {
         self.rootWindow = nil
     }
     
+    // TODO extend testing
     func testExample() {
-        //characterVC.collectionView.reloadData()
+        XCTAssert(characterVC.isFirstLoading)
         XCTAssertEqual(characterVC.collectionView.numberOfItems(inSection: 0), 3)
+        XCTAssertEqual(characterVC.collectionView.numberOfItems(inSection: 1), 0)
+        // TODO: we need the delegate here
+//        let promise = expectation(description: "loading data")
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 10) { [weak self] in
+//            XCTAssertEqual(self?.characterVC.collectionView.numberOfItems(inSection: 1), 20)
+//            promise.fulfill()
+//        }
+//        waitForExpectations(timeout: 12)
     }
     
     

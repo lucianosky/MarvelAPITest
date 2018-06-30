@@ -38,7 +38,7 @@ class CharacterListVCTests: XCTestCase {
     func testLoadData() {
         XCTAssert(characterListVC.isFirstLoading)
         XCTAssertEqual(characterListVC.collectionView.numberOfItems(inSection: 0), 1)
-        let promise = expectation(description: "...")
+        let promise = expectation(description: "loading data")
         DispatchQueue.main.asyncAfter(deadline: .now() + 10) { [weak self] in
             XCTAssertEqual(self?.characterListVC.collectionView.numberOfItems(inSection: 0), 20)
             promise.fulfill()

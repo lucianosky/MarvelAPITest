@@ -111,7 +111,6 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             }
             let comicModel = CharacterVM.shared.comicList[indexPath.row]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "comicCell", for: indexPath) as! ComicCell
-            //cell.titleLabel.attributedText = NSAttributedString.fromString(string: comicModel.title, lineHeightMultiple: 0.7)
             cell.titleLabel.text = comicModel.title
             cell.squareView.setBlackBorder()
             cell.titleView.setBlackBorder()

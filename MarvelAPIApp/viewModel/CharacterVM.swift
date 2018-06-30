@@ -34,7 +34,7 @@ class CharacterVM {
         let offset = page * pageSize
         let baseUrl = NetworkService.shared.baseUrl
         let hash = NetworkService.shared.apiKeyTsHash
-        let url = "\(baseUrl)characters?\(hash)&offset=\(offset)&nameStartsWith=Spi"
+        let url = "\(baseUrl)characters?\(hash)&offset=\(offset)"
         // TODO: filter: &nameStartsWith=Spi
         NetworkService.shared.request(
             url: url
