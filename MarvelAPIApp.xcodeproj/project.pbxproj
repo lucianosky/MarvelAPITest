@@ -743,6 +743,7 @@
 			baseConfigurationReference = AED4C47A38D4CEF6A1EA0603 /* Pods-MarvelAPIAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SM8N4SFLYT;
 				INFOPLIST_FILE = MarvelAPIAppTests/Info.plist;
@@ -764,6 +765,7 @@
 			baseConfigurationReference = 8762DB7C0AC07BAF35992CE4 /* Pods-MarvelAPIAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SM8N4SFLYT;
 				INFOPLIST_FILE = MarvelAPIAppTests/Info.plist;
@@ -784,6 +786,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7E7733B0A8221AB2EFBA36E2 /* Pods-MarvelAPIAppUITests.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SM8N4SFLYT;
 				INFOPLIST_FILE = MarvelAPIAppUITests/Info.plist;
@@ -804,6 +807,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E1001AE8C46944479B49D1D4 /* Pods-MarvelAPIAppUITests.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SM8N4SFLYT;
 				INFOPLIST_FILE = MarvelAPIAppUITests/Info.plist;

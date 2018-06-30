@@ -12,7 +12,7 @@ Dependency manager used was Cocoapods. Instructions for usage is available in th
 * Kingfisher
 
 ## Unit test
-Unit test coverage at this point: %%
+Unit test coverage at this point: 90%
 
 ## UX/UI
 It is my belief that all iOS (or native mobile developers) should understand and practice some UX and UI. In this project the UX concept was mine, with the intent to create an app with the look and feel of a Comic Book. The UI was created by Flavia Ampessan.
