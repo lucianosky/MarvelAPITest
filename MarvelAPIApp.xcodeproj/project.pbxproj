@@ -83,6 +83,12 @@
 		4E6BD83520E6D53C00D43EF3 /* ComicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicModel.swift; sourceTree = "<group>"; };
 		4E6BD83720E6D64B00D43EF3 /* ComicModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicModelTests.swift; sourceTree = "<group>"; };
 		4E6BD83B20E6FAB000D43EF3 /* ComicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicCell.swift; sourceTree = "<group>"; };
+		4E6BD83D20E7B3FC00D43EF3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4E6BD84420E7BDB200D43EF3 /* CharactersList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CharactersList.png; sourceTree = "<group>"; };
+		4E6BD84520E7BDB200D43EF3 /* LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreen.png; sourceTree = "<group>"; };
+		4E6BD84620E7BDB200D43EF3 /* CharacterComicsSection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CharacterComicsSection.png; sourceTree = "<group>"; };
+		4E6BD84720E7BDB200D43EF3 /* CharacterDetailsSection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CharacterDetailsSection.png; sourceTree = "<group>"; };
+		4E6BD84820E7BDB200D43EF3 /* Loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Loading.png; sourceTree = "<group>"; };
 		4E9AF98620E447640053AF91 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		4E9AF98820E44E210053AF91 /* CharacterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterVC.swift; sourceTree = "<group>"; };
 		4ED343EC20E28BB2004F62A8 /* CharacterListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListVC.swift; sourceTree = "<group>"; };
@@ -136,6 +142,7 @@
 		4E21875E20E1924700A05621 = {
 			isa = PBXGroup;
 			children = (
+				4E6BD83D20E7B3FC00D43EF3 /* README.md */,
 				4E21879E20E19DF600A05621 /* Podfile */,
 				4E21876920E1924700A05621 /* MarvelAPIApp */,
 				4E21877E20E1924A00A05621 /* MarvelAPIAppTests */,
@@ -143,6 +150,7 @@
 				4E21876820E1924700A05621 /* Products */,
 				C82D8C0CF85D303FF6EF9426 /* Pods */,
 				D60D73B22900F86DD9E40D60 /* Frameworks */,
+				4E6BD83E20E7BC2A00D43EF3 /* Screenshots */,
 			);
 			sourceTree = "<group>";
 		};
@@ -213,6 +221,18 @@
 				4E6BD83B20E6FAB000D43EF3 /* ComicCell.swift */,
 			);
 			path = character;
+			sourceTree = "<group>";
+		};
+		4E6BD83E20E7BC2A00D43EF3 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				4E6BD84620E7BDB200D43EF3 /* CharacterComicsSection.png */,
+				4E6BD84720E7BDB200D43EF3 /* CharacterDetailsSection.png */,
+				4E6BD84420E7BDB200D43EF3 /* CharactersList.png */,
+				4E6BD84520E7BDB200D43EF3 /* LaunchScreen.png */,
+				4E6BD84820E7BDB200D43EF3 /* Loading.png */,
+			);
+			path = Screenshots;
 			sourceTree = "<group>";
 		};
 		4ED343F220E293EA004F62A8 /* fonts */ = {
