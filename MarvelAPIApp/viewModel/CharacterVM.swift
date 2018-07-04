@@ -7,20 +7,23 @@
 
 import Foundation
 
-class CharacterVM {
+
+
+class CharacterVM: CharacterVMProtocol {
     
-    static let shared = CharacterVM()
+    //static let shared = CharacterVM()
     
-    private var privCurrentCharacter: CharacterModel
-    private init() { // singleton
+    var privCurrentCharacter: CharacterModel
+    //private init() { // singleton
+    init() { // singleton
         privCurrentCharacter = CharacterModel(id: 0, name: "", imageURI: nil, description: "")
     }
     
     let pageSize = 20
 
-    private var privCharacterList = [CharacterModel]()
-    var characterList: [CharacterModel] {
-        get { return privCharacterList }
+    var privCharacterList = [CharacterModel]()
+    func getCharacterList() -> [CharacterModel] {
+        return privCharacterList
     }
 
     private var privComicList = [ComicModel]()
@@ -34,7 +37,7 @@ class CharacterVM {
         let offset = page * pageSize
         let baseUrl = NetworkService.shared.baseUrl
         let hash = NetworkService.shared.apiKeyTsHash
-        let url = "\(baseUrl)characters?\(hash)&offset=\(offset)"
+        let url = "\(baseUrl)characters?\(hash)&offset=\(offset)&nameStartsWith=Spi"
         // TODO: filter: &nameStartsWith=Spi
         NetworkService.shared.request(
             url: url
@@ -43,7 +46,7 @@ class CharacterVM {
                 self?.privCharacterList.removeAll()
             }
             switch result {
-            case .Success(let resultsDict, _):
+            case .Success(let resultsDict, let statusCode):
                 var list = [CharacterModel]()
                 if let results = resultsDict {
                     results.forEach({ (character) in
@@ -62,7 +65,7 @@ class CharacterVM {
                     })
                     self?.privCharacterList.append(contentsOf: list)
                 }
-                return complete(.Success(self?.privCharacterList, list.count))
+                return complete(.Success(self?.privCharacterList, statusCode))
             case .Error(let message, let statusCode):
                 return complete(.Error(message, statusCode))
             }
@@ -84,7 +87,7 @@ class CharacterVM {
                 self?.privComicList.removeAll()
             }
             switch result {
-            case .Success(let resultsDict, _):
+            case .Success(let resultsDict, let statusCode):
                 var list = [ComicModel]()
                 if let results = resultsDict {
                     results.forEach({ (character) in
@@ -102,7 +105,7 @@ class CharacterVM {
                     })
                     self?.privComicList.append(contentsOf: list)
                 }
-                return complete(.Success(self?.privComicList, list.count))
+                return complete(.Success(self?.privComicList, statusCode))
             case .Error(let message, let statusCode):
                 return complete(.Error(message, statusCode))
             }
@@ -110,3 +113,4 @@ class CharacterVM {
     }
     
 }
+

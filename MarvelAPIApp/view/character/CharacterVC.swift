@@ -13,6 +13,8 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     @IBOutlet weak var pageView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var characterVM = CharacterVM()
+
     var isFirstLoading = true
     var isPullingUp = false
     var loadingData = false
@@ -40,14 +42,16 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         loadingData = true
         // TODO: create error treatment below (should never happen)
         let id = delegate?.getCurrentCharacter()?.id ?? 0
-        CharacterVM.shared.getCharacterComics(page: page, character: id){ [weak self] (result) in
+        let previousCount = characterVM.comicList.count
+        characterVM.getCharacterComics(page: page, character: id){ [weak self] (result) in
             self?.isFirstLoading = false
             self?.isPullingUp = false
             self?.loadingData = false
             switch result {
-            case .Success(_, let count):
+            case .Success(_, _):
                 self?.collectionView.reloadData()
-                if count == 0 {
+                let count = self?.characterVM.comicList.count ?? 0
+                if count == previousCount {
                     self?.noFurtherData = true
                 }
             case .Error(let message, let statusCode):
@@ -89,7 +93,7 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         if section == 0 {
             return 3
         } else {
-            return isFirstLoading ? 0 : CharacterVM.shared.comicList.count
+            return isFirstLoading ? 0 : characterVM.comicList.count
         }
     }
     
@@ -106,10 +110,10 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             default: return comicsTitleCell(withString: "comics", at: indexPath)
             }
         } else {
-            if (indexPath.row >= CharacterVM.shared.comicList.count - preloadCount) && !loadingData {
+            if (indexPath.row >= characterVM.comicList.count - preloadCount) && !loadingData {
                 loadNextPage()
             }
-            let comicModel = CharacterVM.shared.comicList[indexPath.row]
+            let comicModel = characterVM.comicList[indexPath.row]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "comicCell", for: indexPath) as! ComicCell
             cell.titleLabel.text = comicModel.title
             cell.squareView.setBlackBorder()
