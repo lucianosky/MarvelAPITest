@@ -12,7 +12,7 @@ import Foundation
 class CharacterVM: CharacterVMProtocol {
     
     init() {
-        privCurrentCharacter = CharacterModel(id: 0, name: "", imageURI: nil, description: "")
+        privCurrentCharacter = CharacterModel(id: 0, name: "", imageURI: ThumbnailModel(path: "", ext: ""), description: "")
     }
     
     let pageSize = 20
@@ -48,32 +48,26 @@ class CharacterVM: CharacterVMProtocol {
                 self?.privCharacterList.removeAll()
             }
             switch result {
-            case .Success(let resultsDict, let statusCode):
-                var list = [CharacterModel]()
-                if let results = resultsDict {
-                    results.forEach({ (character) in
-                        if  let id = character["id"] as? Int,
-                            let name = character["name"] as? String,
-                            let thumbnail = character["thumbnail"] as? [String: Any],
-                            let path = thumbnail["path"] as? String,
-                            let ext = thumbnail["extension"] as? String,
-                            let description = character["description"] as? String
-                        {
-                            let imageURI = path + "." + ext
-                            list.append(CharacterModel(id: id, name: name, imageURI: imageURI, description: description))
-                        } else {
-                            print("error reading character")
-                        }
-                    })
-                    self?.privCharacterList.append(contentsOf: list)
+            case .Success(let json, let statusCode):
+                do {
+                    if let data = json?.data(using: .utf8) {
+                        let decoder = JSONDecoder()
+                        let characterResponse = try decoder.decode(CharacterResponse.self, from: data)
+                        self?.privCharacterList.append(contentsOf: characterResponse.data.results)
+                        return complete(.Success(self?.privCharacterList, statusCode))
+                    } else {
+                        return complete(.Error("Error parsing JSON", statusCode))
+                    }
+                } catch {
+                    print("error:\(error)")
+                    return complete(.Error(error.localizedDescription, statusCode))
                 }
-                return complete(.Success(self?.privCharacterList, statusCode))
             case .Error(let message, let statusCode):
                 return complete(.Error(message, statusCode))
             }
         }
     }
-
+    
     func getCharacterComics(
         page: Int,
         character: Int,
@@ -89,25 +83,20 @@ class CharacterVM: CharacterVMProtocol {
                 self?.privComicList.removeAll()
             }
             switch result {
-            case .Success(let resultsDict, let statusCode):
-                var list = [ComicModel]()
-                if let results = resultsDict {
-                    results.forEach({ (character) in
-                        if  let id = character["id"] as? Int,
-                            let title = character["title"] as? String,
-                            let thumbnail = character["thumbnail"] as? [String: Any],
-                            let path = thumbnail["path"] as? String,
-                            let ext = thumbnail["extension"] as? String
-                        {
-                            let imageURI = path + "." + ext
-                            list.append(ComicModel(id: id, title: title, imageURI: imageURI))
-                        } else {
-                            print("error reading comic")
-                        }
-                    })
-                    self?.privComicList.append(contentsOf: list)
+            case .Success(let json, let statusCode):
+                do {
+                    if let data = json?.data(using: .utf8) {
+                        let decoder = JSONDecoder()
+                        let comicResponse = try decoder.decode(ComicResponse.self, from: data)
+                        self?.privComicList.append(contentsOf: comicResponse.data.results)
+                        return complete(.Success(self?.privComicList, statusCode))
+                    } else {
+                        return complete(.Error("Error parsing JSON", statusCode))
+                    }
+                } catch {
+                    print("error:\(error)")
+                    return complete(.Error(error.localizedDescription, statusCode))
                 }
-                return complete(.Success(self?.privComicList, statusCode))
             case .Error(let message, let statusCode):
                 return complete(.Error(message, statusCode))
             }

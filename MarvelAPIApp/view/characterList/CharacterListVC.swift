@@ -98,10 +98,8 @@ class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionV
             // this will create a diagonal grid with pink/blue background colors for character names
             let remanderBy4 = indexPath.row % 4
             cell.nameView.backgroundColor = remanderBy4 == 1 || remanderBy4 == 2 ? .comicPink : .comicBlue
-            if let uri = characterModel.imageURI {
-                let url = URL(string: uri)
-                cell.characterImageView.kf.setImage(with: url)
-            }
+            let url = URL(string: characterModel.thumbnail.fullName)
+            cell.characterImageView.kf.setImage(with: url)
             return cell
         }
     }

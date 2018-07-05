@@ -119,7 +119,7 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             cell.squareView.setBlackBorder()
             cell.titleView.setBlackBorder()
             cell.titleView.backgroundColor = .white
-            if let uri = comicModel?.imageURI {
+            if let uri = comicModel?.thumbnail.fullName{
                 let url = URL(string: uri)
                 cell.coverImageView.kf.setImage(with: url)
             }
@@ -133,10 +133,8 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         cell.squareView.setBlackBorder()
         cell.nameView.setBlackBorder()
         cell.nameView.backgroundColor = .comicYellow
-        if let uri = characterModel.imageURI {
-            let url = URL(string: uri)
-            cell.characterImageView.kf.setImage(with: url)
-        }
+        let url = URL(string: characterModel.thumbnail.fullName)
+        cell.characterImageView.kf.setImage(with: url)
         return cell
     }
 

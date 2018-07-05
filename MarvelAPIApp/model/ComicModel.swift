@@ -7,15 +7,15 @@
 
 import Foundation
 
-class ComicModel {
+class ComicModel: Decodable {
     let id: Int
     let title: String
-    let imageURI: String?
+    let thumbnail: ThumbnailModel
     
-    init(id: Int, title: String, imageURI: String?) {
+    init(id: Int, title: String, thumbnail: ThumbnailModel) {
         self.id = id
         self.title = title
-        self.imageURI = imageURI
+        self.thumbnail = thumbnail
     }
 }
 
@@ -23,6 +23,22 @@ extension ComicModel: Equatable {
     static func == (lhs: ComicModel, rhs: ComicModel) -> Bool {
         return lhs.id == rhs.id &&
                lhs.title == rhs.title &&
-               lhs.imageURI == rhs.imageURI
+               lhs.thumbnail == rhs.thumbnail
+    }
+}
+
+class ComicData: Decodable {
+    let results: [ComicModel]
+    
+    init(results: [ComicModel]) {
+        self.results = results
+    }
+}
+
+class ComicResponse: Decodable {
+    let data: ComicData
+    
+    init(data: ComicData) {
+        self.data = data
     }
 }

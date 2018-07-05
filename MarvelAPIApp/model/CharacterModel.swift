@@ -7,17 +7,33 @@
 
 import Foundation
 
-class CharacterModel {
+class CharacterModel: Decodable {
     let id: Int
     let name: String
-    let imageURI: String?
+    let thumbnail: ThumbnailModel
     let description: String
     
-    init(id: Int, name: String, imageURI: String?, description: String) {
+    init(id: Int, name: String, imageURI: ThumbnailModel, description: String) {
         self.id = id
         self.name = name
-        self.imageURI = imageURI
+        self.thumbnail = imageURI
         self.description = description
+    }
+}
+
+class CharacterData: Decodable {
+    let results: [CharacterModel]
+    
+    init(results: [CharacterModel]) {
+        self.results = results
+    }
+}
+
+class CharacterResponse: Decodable {
+    let data: CharacterData
+    
+    init(data: CharacterData) {
+        self.data = data
     }
 }
 
@@ -25,7 +41,7 @@ extension CharacterModel: Equatable {
     static func == (lhs: CharacterModel, rhs: CharacterModel) -> Bool {
         return lhs.id == rhs.id &&
                lhs.name == rhs.name &&
-               lhs.imageURI == rhs.imageURI &&
+               lhs.thumbnail == rhs.thumbnail &&
                lhs.description == rhs.description
     }
 }

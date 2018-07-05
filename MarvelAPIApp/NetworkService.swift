@@ -70,22 +70,16 @@ class NetworkService {
         url: String,
         method: HTTPMethod = .get,
         parameters: Parameters? = nil,
-        complete: @escaping ( Result<[[String: Any]]?> ) -> Void )
+        complete: @escaping ( Result<String?> ) -> Void )
     {
         let request = manager.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default)
-        request.responseJSON { [weak self] response in
+        request.responseString { [weak self] response in
             self?.verbosePrint("url=\(response.request?.url?.description ?? "")")
             let statusCode = response.response?.statusCode ?? -1
             self?.verbosePrint("status code=\(statusCode)")
             if response.result.isSuccess {
-                if let fullDict = response.result.value as? [String: Any],
-                   let dataDict = fullDict["data"] as? [String: Any],
-                   let resultsDict = dataDict["results"] as? [[String: Any]]
-                {
-                    return complete(.Success(resultsDict, statusCode))
-                } else {
-                    return complete(.Success(nil, statusCode))
-                }
+                return complete(.Success(response.result.value, statusCode))
+
             } else {
                 request.responseString(completionHandler: { (strResponse) in
                     return complete(.Error(self?.treatError(url: url, response: strResponse) ?? "", response.response?.statusCode))
@@ -93,5 +87,4 @@ class NetworkService {
             }
         }
     }
-    
 }
