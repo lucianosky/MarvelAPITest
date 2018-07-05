@@ -1,5 +1,5 @@
 //
-//  CharacterListVCTests.swift
+//  CharacterListVCTestsDelay.swift
 //  MarvelAPIAppTests
 //
 //  Created by Luciano Sclovsky on 29/06/2018.
@@ -43,7 +43,7 @@ class CharacterListVCTestsDelay: XCTestCase {
     }
     
     func testCell0() {
-        let promise = expectation(description: "testCell")
+        let promise = expectation(description: "testCell0")
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) { [weak self] in
             let indexPath = IndexPath(row: 0, section: 0)
             let cell = self?.characterListVC.collectionView.cellForItem(at: indexPath)

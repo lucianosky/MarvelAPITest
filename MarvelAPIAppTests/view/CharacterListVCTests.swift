@@ -1,5 +1,5 @@
 //
-//  CharacterListVCTests2.swift
+//  CharacterListVCTests.swift
 //  MarvelAPIAppTests
 //
 //  Created by Luciano Sclovsky on 04/07/2018.
@@ -35,7 +35,7 @@ class CharacterListVCTests: XCTestCase {
         self.rootWindow = nil
     }
     
-    func testTable() {
+    func testCollectionView() {
         XCTAssertNotNil(characterListVC.collectionView)
         XCTAssertNotNil(characterListVC.collectionView.delegate)
         XCTAssertNotNil(characterListVC.collectionView.dataSource)
@@ -47,9 +47,9 @@ class CharacterListVCTests: XCTestCase {
     }
     
     func testLoadPages() {
-        let pageSizeDouble = MockCharacterVM.pageSize * 2
+        let pageSizeDouble = MockCharacterVM.characterPageSize * 2
         XCTAssertFalse(characterListVC.isFirstLoading)
-        XCTAssertEqual(characterListVC.collectionView.numberOfItems(inSection: 0), MockCharacterVM.pageSize)
+        XCTAssertEqual(characterListVC.collectionView.numberOfItems(inSection: 0), MockCharacterVM.characterPageSize)
         XCTAssertEqual(characterListVC.page, 0)
         characterListVC.loadNextPage()
         XCTAssertEqual(characterListVC.collectionView.numberOfItems(inSection: 0), pageSizeDouble)
@@ -79,7 +79,7 @@ class CharacterListVCTests: XCTestCase {
     }
 
     func testCell19() {
-        let lastRow = MockCharacterVM.pageSize - 1
+        let lastRow = MockCharacterVM.characterPageSize - 1
         let promise = expectation(description: "testCell")
         characterListVC.collectionView.scrollToItem(at: IndexPath.init(row: lastRow, section: 0), at: UICollectionViewScrollPosition.bottom, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) { [weak self] in
@@ -94,7 +94,7 @@ class CharacterListVCTests: XCTestCase {
     }
     
     func testScrollToBottom() {
-        let lastRow = MockCharacterVM.pageSize - 1
+        let lastRow = MockCharacterVM.characterPageSize - 1
         XCTAssertEqual(self.characterListVC.page, 0)
         characterListVC.collectionView.scrollToItem(at: IndexPath.init(row: lastRow, section: 0), at: UICollectionViewScrollPosition.bottom, animated: false)
         XCTAssertEqual(self.characterListVC.page, 1)

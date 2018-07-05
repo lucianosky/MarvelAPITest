@@ -18,7 +18,8 @@ class MockCharacterVM: CharacterVMProtocol {
 
     // we need a delay to test the loadingCell, with its own delay on the test
     private let delaySeconds = 4
-    static let pageSize = 20
+    static let characterPageSize = 20
+    static let comicPageSize = 20
 
     init(delay: Bool) {
         self.delay = delay
@@ -46,9 +47,9 @@ class MockCharacterVM: CharacterVMProtocol {
     func getCharacters(page: Int, complete: @escaping (Result<[CharacterModel]?>) -> Void) {
         if page == 0 {
             privCharacterList.removeAll()
-            createCharacterPage(from: 0, pageSize: MockCharacterVM.pageSize)
+            createCharacterPage(from: 0, pageSize: MockCharacterVM.characterPageSize)
         } else if page == 1 {
-            createCharacterPage(from: MockCharacterVM.pageSize, pageSize: MockCharacterVM.pageSize)
+            createCharacterPage(from: MockCharacterVM.characterPageSize, pageSize: MockCharacterVM.characterPageSize)
         }
         if delay {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delaySeconds), execute: {
@@ -72,8 +73,35 @@ class MockCharacterVM: CharacterVMProtocol {
         page: Int,
         character: Int,
         complete: @escaping ( Result<[ComicModel]?> ) -> Void ) {
-        return complete(.Success([], 0))
+        if page == 0 {
+            privComicList.removeAll()
+            createComicPage(from: 0, pageSize: MockCharacterVM.comicPageSize)
+        } else if page == 1 {
+            createComicPage(from: MockCharacterVM.comicPageSize, pageSize: MockCharacterVM.comicPageSize)
+        }
+        if delay {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delaySeconds), execute: {
+                return complete(.Success(self.privComicList, 0))
+            })
+        } else {
+            return complete(.Success(self.privComicList, 0))
+        }
     }
+
+    private func createComic(id: Int) -> ComicModel {
+        return ComicModel(id: id,
+                          title: "Title\(id)",
+                          //imageURI: "http://i.annihil.us/u/prod/marvel/i/mg/c/60/58dbce634ea70.jpg")
+                          imageURI: nil)
+    }
+    
+    private func createComicPage(from: Int, pageSize: Int) {
+        let range = from..<from+pageSize
+        range.forEach({ (id) in
+            self.privComicList.append(createComic(id: id))
+        })
+    }
+    
 
 
 
