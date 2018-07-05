@@ -192,10 +192,8 @@
 		4E21877E20E1924A00A05621 /* MarvelAPIAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				4EB8749C20EE70C6000D2A6F /* view */,
 				4E9C34FB20EC0481007528DD /* MockCharacterVM.swift */,
-				4EB8749820ED5B86000D2A6F /* CharacterListVCTests.swift */,
-				4E6BD82F20E6654300D43EF3 /* CharacterListVCTestsDelay.swift */,
-				4EB8749A20ED6752000D2A6F /* CharacterListVCTestsNoVM.swift */,
 				4E6BD82920E5212700D43EF3 /* CharacterModelTests.swift */,
 				4E6BD83120E674E100D43EF3 /* CharacterVCTests.swift */,
 				4E6BD82D20E570F400D43EF3 /* CharacterVMTests.swift */,
@@ -247,6 +245,16 @@
 				4E6BD84820E7BDB200D43EF3 /* Loading.png */,
 			);
 			path = Screenshots;
+			sourceTree = "<group>";
+		};
+		4EB8749C20EE70C6000D2A6F /* view */ = {
+			isa = PBXGroup;
+			children = (
+				4EB8749820ED5B86000D2A6F /* CharacterListVCTests.swift */,
+				4E6BD82F20E6654300D43EF3 /* CharacterListVCTestsDelay.swift */,
+				4EB8749A20ED6752000D2A6F /* CharacterListVCTestsNoVM.swift */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		4ED343F220E293EA004F62A8 /* fonts */ = {

@@ -11,19 +11,21 @@ import Foundation
 
 class CharacterVM: CharacterVMProtocol {
     
-    //static let shared = CharacterVM()
-    
-    var privCurrentCharacter: CharacterModel
-    //private init() { // singleton
-    init() { // singleton
+    init() {
         privCurrentCharacter = CharacterModel(id: 0, name: "", imageURI: nil, description: "")
     }
     
     let pageSize = 20
-
-    var privCharacterList = [CharacterModel]()
-    func getCharacterList() -> [CharacterModel] {
-        return privCharacterList
+    
+    private var privCurrentCharacter: CharacterModel
+    var currentCharacter: CharacterModel {
+        get { return privCurrentCharacter }
+        set { privCurrentCharacter = newValue }
+    }
+    
+    private var privCharacterList = [CharacterModel]()
+    var characterList: [CharacterModel] {
+        get { return privCharacterList }
     }
 
     private var privComicList = [ComicModel]()

@@ -9,10 +9,19 @@
 
 protocol CharacterVMProtocol {
     
-    func getCharacterList() -> [CharacterModel]
-    
     func getCharacters(
         page: Int,
         complete: @escaping ( Result<[CharacterModel]?> ) -> Void )
+    
+    var characterList: [CharacterModel] { get }
+    
+    var currentCharacter: CharacterModel { get set }
+
+    func getCharacterComics(
+        page: Int,
+        character: Int,
+        complete: @escaping ( Result<[ComicModel]?> ) -> Void )
+
+    var comicList: [ComicModel] { get }
     
 }

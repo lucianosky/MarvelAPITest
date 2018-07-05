@@ -8,11 +8,7 @@
 import UIKit
 import Kingfisher
 
-protocol CharacterListProtocol {
-    func getCurrentCharacter() -> CharacterModel?
-}
-
-class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CharacterListProtocol {
+class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageView: UIView!
@@ -59,7 +55,7 @@ class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionV
         }
         page += 1
         loadingData = true
-        let previousCount = characterVM?.getCharacterList().count ?? 0
+        let previousCount = characterVM?.characterList.count ?? 0
         characterVM?.getCharacters(page: page) { [weak self] (result) in
             self?.isFirstLoading = false
             self?.isPullingUp = false
@@ -67,7 +63,7 @@ class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionV
             switch result {
             case .Success(_, _):
                 self?.collectionView.reloadData()
-                let count = self?.characterVM?.getCharacterList().count ?? 0
+                let count = self?.characterVM?.characterList.count ?? 0
                 if count == previousCount {
                     self?.noFurtherData = true
                 }
@@ -84,18 +80,18 @@ class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return isFirstLoading ? 1 : (characterVM?.getCharacterList().count ?? 0)
+        return isFirstLoading ? 1 : (characterVM?.characterList.count ?? 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if isFirstLoading {
             return collectionView.dequeueReusableCell(withReuseIdentifier: "loadingCell", for: indexPath)
         } else {
-            if (indexPath.row >= (characterVM?.getCharacterList().count ?? 0) - preloadCount) && !loadingData {
+            if (indexPath.row >= (characterVM?.characterList.count ?? 0) - preloadCount) && !loadingData {
                 loadNextPage()
             }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterListCell", for: indexPath) as! CharacterListCell
-            let characterModel = characterVM!.getCharacterList()[indexPath.row]
+            let characterModel = characterVM!.characterList[indexPath.row]
             cell.nameLabel.attributedText = NSAttributedString.fromString(string: characterModel.name, lineHeightMultiple: 0.7)
             cell.squareView.setBlackBorder()
             cell.nameView.setBlackBorder()
@@ -133,15 +129,17 @@ class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !isFirstLoading{
-            currentCharacter = characterVM!.getCharacterList()[indexPath.row]
-            self.performSegue(withIdentifier: "segueToCharacter", sender: self)
+            if let character = characterVM?.characterList[indexPath.row] {
+                characterVM?.currentCharacter = character
+                self.performSegue(withIdentifier: "segueToCharacter", sender: self)
+            }
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToCharacter" {
             if let characterVC = segue.destination as? CharacterVC {
-                characterVC.delegate = self
+                characterVC.characterVM = characterVM
             }
         }
     }
@@ -197,10 +195,4 @@ class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionV
         }
     }
     
-    // MARK: CharacterListProtocol
-    
-    func getCurrentCharacter() -> CharacterModel? {
-        return currentCharacter
-    }
-
 }
