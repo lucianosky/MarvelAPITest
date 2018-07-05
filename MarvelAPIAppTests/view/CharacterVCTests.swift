@@ -8,6 +8,7 @@
 import XCTest
 
 @testable import MarvelAPIApp
+@testable import Kingfisher
 
 class CharacterVCTests: XCTestCase {
     
