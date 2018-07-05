@@ -28,7 +28,7 @@ class CharacterVMTests: XCTestCase {
             switch result {
             case .Success(let characterList, let count):
                 XCTAssertEqual(count, 20)
-                XCTAssertEqual(count, self.characterVM.getCharacterList().count)
+                XCTAssertEqual(count, self.characterVM.characterList.count)
                 let t3dMan = characterList![0]
                 XCTAssertEqual(t3dMan.name, "3-D Man")
                 promise.fulfill()

@@ -70,7 +70,7 @@ class CharacterListVCTests: XCTestCase {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
             let indexPath = IndexPath(row: 0, section: 0)
             let cell = self?.characterListVC.collectionView.cellForItem(at: indexPath) as? CharacterListCell
-            let character = self?.characterListVC.characterVM?.getCharacterList()[0]
+            let character = self?.characterListVC.characterVM?.characterList[0]
             XCTAssertEqual(cell?.nameLabel.text, character?.name)
             XCTAssertEqual(character?.imageURI, "http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b.jpg")
             promise.fulfill()
@@ -85,7 +85,7 @@ class CharacterListVCTests: XCTestCase {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) { [weak self] in
             let indexPath = IndexPath(row: lastRow, section: 0)
             let cell = self?.characterListVC.collectionView.cellForItem(at: indexPath) as? CharacterListCell
-            let character = self?.characterListVC.characterVM?.getCharacterList()[lastRow]
+            let character = self?.characterListVC.characterVM?.characterList[lastRow]
             XCTAssertEqual(cell?.nameLabel.text, character?.name)
             XCTAssertEqual(character?.imageURI, "http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b.jpg")
             promise.fulfill()

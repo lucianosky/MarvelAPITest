@@ -11,15 +11,18 @@ import Foundation
 
 class MockCharacterVM: CharacterVMProtocol {
     
-    var privCharacterList = [CharacterModel]()
+    private var privCharacterList = [CharacterModel]()
+    private var privComicList = [ComicModel]()
     private var delay = true
-    
+    private var privCurrentCharacter: CharacterModel
+
     // we need a delay to test the loadingCell, with its own delay on the test
     private let delaySeconds = 4
     static let pageSize = 20
 
     init(delay: Bool) {
         self.delay = delay
+        privCurrentCharacter = CharacterModel(id: 0, name: "", imageURI: nil, description: "")
     }
 
     private func createCharacter(id: Int) -> CharacterModel {
@@ -36,8 +39,8 @@ class MockCharacterVM: CharacterVMProtocol {
         })
     }
     
-    func getCharacterList() -> [CharacterModel] {
-        return privCharacterList
+    var characterList: [CharacterModel] {
+        get { return privCharacterList }
     }
     
     func getCharacters(page: Int, complete: @escaping (Result<[CharacterModel]?>) -> Void) {
@@ -55,5 +58,23 @@ class MockCharacterVM: CharacterVMProtocol {
             return complete(.Success(self.privCharacterList, 0))
         }
     }
+    
+    var currentCharacter: CharacterModel {
+        get { return privCurrentCharacter }
+        set { privCurrentCharacter = newValue }
+    }
+    
+    var comicList: [ComicModel] {
+        get { return privComicList }
+    }
+    
+    func getCharacterComics(
+        page: Int,
+        character: Int,
+        complete: @escaping ( Result<[ComicModel]?> ) -> Void ) {
+        return complete(.Success([], 0))
+    }
+
+
 
 }
