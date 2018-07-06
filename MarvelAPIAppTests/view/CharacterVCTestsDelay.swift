@@ -24,7 +24,8 @@ class CharacterVCTestsDelay: XCTestCase {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         characterVC = storyboard.instantiateViewController(withIdentifier: "characterVC") as! CharacterVC
         mockCharacterVM = MockCharacterVM(delay: true)
-        let spiderMan = CharacterModel(id: spiderManId, name: "SpiderMan", imageURI: nil, description: "")
+        // TODO
+        let spiderMan = CharacterModel(id: spiderManId, name: "SpiderMan", thumbnail: ThumbnailModel(path: "", ext: ""), description: "")
         mockCharacterVM.currentCharacter = spiderMan
         characterVC.characterVM = mockCharacterVM
         rootWindow.rootViewController = characterVC

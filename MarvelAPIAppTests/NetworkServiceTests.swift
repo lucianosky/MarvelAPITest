@@ -15,7 +15,7 @@ class NetworkServiceTests: XCTestCase {
         let offset = 0
         let url = "\(NetworkService.shared.baseUrl)characters?\(NetworkService.shared.apiKeyTsHash)&offset=\(offset)&nameStartsWith=Spi"
         let promise = expectation(description: "Status code 200")
-        NetworkService.shared.request(url: url) { (result) in
+        NetworkService.shared.request(url: url, method: .get, parameters: nil) { (result) in
             switch result {
             case .Success(_, let statusCode):
                 if statusCode == 200 {
@@ -33,7 +33,7 @@ class NetworkServiceTests: XCTestCase {
     func testInvalidURL() {
         let url = "\\InvalidURL"
         let promise = expectation(description: "Failure")
-        NetworkService.shared.request(url: url) { (result) in
+        NetworkService.shared.request(url: url, method: .get, parameters: nil) { (result) in
             switch result {
             case .Success(_, let statusCode):
                 XCTFail("Status code: \(statusCode)")

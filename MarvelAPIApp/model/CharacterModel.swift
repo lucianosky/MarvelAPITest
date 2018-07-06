@@ -13,10 +13,10 @@ class CharacterModel: Decodable {
     let thumbnail: ThumbnailModel
     let description: String
     
-    init(id: Int, name: String, imageURI: ThumbnailModel, description: String) {
+    init(id: Int, name: String, thumbnail: ThumbnailModel, description: String) {
         self.id = id
         self.name = name
-        self.thumbnail = imageURI
+        self.thumbnail = thumbnail
         self.description = description
     }
 }

@@ -7,12 +7,12 @@
 
 import Foundation
 
-
-
 class CharacterVM: CharacterVMProtocol {
     
+    var networkService: NetworkServiceProtocol?
+
     init() {
-        privCurrentCharacter = CharacterModel(id: 0, name: "", imageURI: ThumbnailModel(path: "", ext: ""), description: "")
+        privCurrentCharacter = CharacterModel(id: 0, name: "", thumbnail: ThumbnailModel(path: "", ext: ""), description: "")
     }
     
     let pageSize = 20
@@ -35,14 +35,19 @@ class CharacterVM: CharacterVMProtocol {
 
     func getCharacters(
         page: Int,
-        complete: @escaping ( Result<[CharacterModel]?> ) -> Void )  {
+        complete: @escaping ( ServiceResult<[CharacterModel]?> ) -> Void )  {
         let offset = page * pageSize
-        let baseUrl = NetworkService.shared.baseUrl
-        let hash = NetworkService.shared.apiKeyTsHash
+        guard let networkService = networkService else {
+            return complete(.Error("Missing network service", 0))
+        }
+        let baseUrl = networkService.baseUrl
+        let hash = networkService.apiKeyTsHash
         let url = "\(baseUrl)characters?\(hash)&offset=\(offset)&nameStartsWith=Spi"
         // TODO: filter: &nameStartsWith=Spi
-        NetworkService.shared.request(
-            url: url
+        networkService.request(
+            url: url,
+            method: .get,
+            parameters: nil
         ) { [weak self] (result) in
             if page == 0 {
                 self?.privCharacterList.removeAll()
@@ -71,13 +76,18 @@ class CharacterVM: CharacterVMProtocol {
     func getCharacterComics(
         page: Int,
         character: Int,
-        complete: @escaping ( Result<[ComicModel]?> ) -> Void )  {
+        complete: @escaping ( ServiceResult<[ComicModel]?> ) -> Void )  {
         let offset = page * pageSize
-        let baseUrl = NetworkService.shared.baseUrl
-        let hash = NetworkService.shared.apiKeyTsHash
+        guard let networkService = networkService else {
+            return complete(.Error("Missing network service", 0))
+        }
+        let baseUrl = networkService.baseUrl
+        let hash = networkService.apiKeyTsHash
         let url = "\(baseUrl)characters/\(character)/comics?\(hash)&offset=\(offset)"
-        NetworkService.shared.request(
-            url: url
+        networkService.request(
+            url: url,
+            method: .get,
+            parameters: nil
         ) { [weak self] (result) in
             if page == 0 {
                 self?.privComicList.removeAll()

@@ -8,12 +8,7 @@
 import Foundation
 import Alamofire
 
-enum Result<T> {
-    case Success(T, Int)
-    case Error(String, Int?)
-}
-
-class NetworkService {
+class NetworkService: NetworkServiceProtocol {
     
     static let shared = NetworkService()
     private init() {} // singleton
@@ -68,10 +63,13 @@ class NetworkService {
     
     func request(
         url: String,
-        method: HTTPMethod = .get,
+        method: HTTPMethod,
         parameters: Parameters? = nil,
-        complete: @escaping ( Result<String?> ) -> Void )
+        complete: @escaping ( ServiceResult<String?> ) -> Void )
     {
+
+        print("oioi NetworkService REAL")
+
         let request = manager.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default)
         request.responseString { [weak self] response in
             self?.verbosePrint("url=\(response.request?.url?.description ?? "")")

@@ -11,7 +11,7 @@ protocol CharacterVMProtocol {
     
     func getCharacters(
         page: Int,
-        complete: @escaping ( Result<[CharacterModel]?> ) -> Void )
+        complete: @escaping ( ServiceResult<[CharacterModel]?> ) -> Void )
     
     var characterList: [CharacterModel] { get }
     
@@ -20,7 +20,7 @@ protocol CharacterVMProtocol {
     func getCharacterComics(
         page: Int,
         character: Int,
-        complete: @escaping ( Result<[ComicModel]?> ) -> Void )
+        complete: @escaping ( ServiceResult<[ComicModel]?> ) -> Void )
 
     var comicList: [ComicModel] { get }
     

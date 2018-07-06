@@ -2,8 +2,7 @@
 //  ImageURIModel.swift
 //  MarvelAPIApp
 //
-//  Created by SoftDesign on 05/07/2018.
-//  Copyright © 2018 SoftDesign. All rights reserved.
+//  Created by Luciano Sclovsky on 05/07/2018.
 //
 
 import Foundation

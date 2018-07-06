@@ -23,13 +23,14 @@ class MockCharacterVM: CharacterVMProtocol {
 
     init(delay: Bool) {
         self.delay = delay
-        privCurrentCharacter = CharacterModel(id: 0, name: "", imageURI: nil, description: "")
+        privCurrentCharacter = CharacterModel(id: 0, name: "", thumbnail: ThumbnailModel(path: "", ext: ""), description: "")
     }
 
     private func createCharacter(id: Int) -> CharacterModel {
         return CharacterModel(id: id,
                               name: "Spiderman\(id)",
-                              imageURI: "http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b.jpg",
+                              // TODO
+                              thumbnail: ThumbnailModel(path: "http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b", ext: "jpg"),
                               description: "Description \(id)")
     }
     
@@ -44,7 +45,7 @@ class MockCharacterVM: CharacterVMProtocol {
         get { return privCharacterList }
     }
     
-    func getCharacters(page: Int, complete: @escaping (Result<[CharacterModel]?>) -> Void) {
+    func getCharacters(page: Int, complete: @escaping (ServiceResult<[CharacterModel]?>) -> Void) {
         if page == 0 {
             privCharacterList.removeAll()
             createCharacterPage(from: 0, pageSize: MockCharacterVM.characterPageSize)
@@ -72,7 +73,7 @@ class MockCharacterVM: CharacterVMProtocol {
     func getCharacterComics(
         page: Int,
         character: Int,
-        complete: @escaping ( Result<[ComicModel]?> ) -> Void ) {
+        complete: @escaping ( ServiceResult<[ComicModel]?> ) -> Void ) {
         if page == 0 {
             privComicList.removeAll()
             createComicPage(from: 0, pageSize: MockCharacterVM.comicPageSize)
@@ -92,7 +93,8 @@ class MockCharacterVM: CharacterVMProtocol {
         return ComicModel(id: id,
                           title: "Title\(id)",
                           //imageURI: "http://i.annihil.us/u/prod/marvel/i/mg/c/60/58dbce634ea70.jpg")
-                          imageURI: nil)
+                          // TODO
+                          thumbnail: ThumbnailModel(path: "", ext: ""))
     }
     
     private func createComicPage(from: Int, pageSize: Int) {
