@@ -1,6 +1,7 @@
 platform :ios, '11.0'
 
 def common_pods
+    use_frameworks!
     pod 'Alamofire', '~> 4.4'
     pod 'Kingfisher', '~> 4.8'
 end

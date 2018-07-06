@@ -1,4 +1,4 @@
-module Pods_MarvelAPIApp {
+framework module Pods_MarvelAPIApp {
   umbrella header "Pods-MarvelAPIApp-umbrella.h"
 
   export *
