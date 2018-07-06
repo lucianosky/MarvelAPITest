@@ -99,7 +99,7 @@ class CharacterVCTests: XCTestCase {
             let cell = self?.characterVC.collectionView.cellForItem(at: indexPath) as? ComicCell
             let comic = self?.characterVC.characterVM?.comicList[0]
             XCTAssertEqual(cell?.titleLabel.text, comic?.title)
-            //XCTAssertEqual(comic?.imageURI, "http://i.annihil.us/u/prod/marvel/i/mg/c/60/58dbce634ea70.jpg")
+            XCTAssertEqual(comic?.thumbnail.fullName, "http://i.annihil.us/u/prod/marvel/i/mg/c/60/58dbce634ea70.jpg")
             promise.fulfill()
         }
         waitForExpectations(timeout: 2)

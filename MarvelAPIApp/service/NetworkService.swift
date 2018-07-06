@@ -67,9 +67,6 @@ class NetworkService: NetworkServiceProtocol {
         parameters: Parameters? = nil,
         complete: @escaping ( ServiceResult<String?> ) -> Void )
     {
-
-        print("oioi NetworkService REAL")
-
         let request = manager.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default)
         request.responseString { [weak self] response in
             self?.verbosePrint("url=\(response.request?.url?.description ?? "")")

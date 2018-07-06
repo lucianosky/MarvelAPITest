@@ -29,16 +29,8 @@ extension ComicModel: Equatable {
 
 class ComicData: Decodable {
     let results: [ComicModel]
-    
-    init(results: [ComicModel]) {
-        self.results = results
-    }
 }
 
 class ComicResponse: Decodable {
     let data: ComicData
-    
-    init(data: ComicData) {
-        self.data = data
-    }
 }

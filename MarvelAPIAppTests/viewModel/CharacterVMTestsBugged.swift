@@ -1,0 +1,128 @@
+//
+//  CharacterVMTestsNotJSON.swift
+//  MarvelAPIAppTests
+//
+//  Created by Luciano Sclovsky on 06/07/2018.
+//
+
+import XCTest
+
+@testable import MarvelAPIApp
+
+class CharacterVMTestsBugged: XCTestCase {
+    
+    private var characterVM: CharacterVM!
+    var mockNetworkServiceBugged: NetworkServiceProtocol!
+    
+    override func setUp() {
+        super.setUp()
+        mockNetworkServiceBugged = MockNetworkServiceBugged()
+        characterVM = CharacterVM()
+        characterVM.networkService = mockNetworkServiceBugged
+    }
+    
+    override func tearDown() {
+        super.tearDown()
+    }
+    
+    // Mark: response not JSON
+    
+    func testGetCharactersNotJSON() {
+        (mockNetworkServiceBugged as! MockNetworkServiceBugged).bugNotJSON = true
+        let promise = expectation(description: "testGetCharactersNotJSON")
+        characterVM.getCharacters(page: 0) { (result) in
+            switch result {
+            case .Success(_, _):
+                XCTFail("Expected failure")
+                promise.fulfill()
+            case .Error(let message, _):
+                XCTAssertEqual(message, "Error decoding JSON")
+                promise.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
+    func testGetCharacterComicsNotJSON() {
+        (mockNetworkServiceBugged as! MockNetworkServiceBugged).bugNotJSON = true
+        let promise = expectation(description: "testGetCharacterComicsNotJSON")
+        characterVM.getCharacterComics(page: 0, character: 0) { (result) in
+            switch result {
+            case .Success(_, _):
+                XCTFail("Expected failure")
+                promise.fulfill()
+            case .Error(let message, _):
+                XCTAssertEqual(message, "Error decoding JSON")
+                promise.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
+    // MARK: response with error
+    
+    func testGetCharactersError() {
+        let promise = expectation(description: "testGetCharactersError")
+        characterVM.getCharacters(page: 0) { (result) in
+            switch result {
+            case .Success(_, _):
+                XCTFail("Expected failure")
+                promise.fulfill()
+            case .Error(let message, _):
+                XCTAssertEqual(message, "Expected error")
+                promise.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testGetCharacterComicsError() {
+        let promise = expectation(description: "testGetCharacterComicsError")
+        characterVM.getCharacterComics(page: 0, character: 0) { (result) in
+            switch result {
+            case .Success(_, _):
+                XCTFail("Expected failure")
+                promise.fulfill()
+            case .Error(let message, _):
+                XCTAssertEqual(message, "Expected error")
+                promise.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    // MARK: no network service
+
+    func testGetCharactersNoService() {
+        characterVM.networkService = nil
+        let promise = expectation(description: "testGetCharactersNoService")
+        characterVM.getCharacters(page: 0) { (result) in
+            switch result {
+            case .Success(_, _):
+                XCTFail("Expected failure")
+                promise.fulfill()
+            case .Error(let message, _):
+                XCTAssertEqual(message, "Missing network service")
+                promise.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testGetCharacterComicsNoService() {
+        characterVM.networkService = nil
+        let promise = expectation(description: "testGetCharacterComicsNoService")
+        characterVM.getCharacterComics(page: 0, character: 0) { (result) in
+            switch result {
+            case .Success(_, _):
+                XCTFail("Expected failure")
+                promise.fulfill()
+            case .Error(let message, _):
+                XCTAssertEqual(message, "Missing network service")
+                promise.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+}

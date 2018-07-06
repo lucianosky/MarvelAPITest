@@ -61,11 +61,11 @@ class CharacterVM: CharacterVMProtocol {
                         self?.privCharacterList.append(contentsOf: characterResponse.data.results)
                         return complete(.Success(self?.privCharacterList, statusCode))
                     } else {
-                        return complete(.Error("Error parsing JSON", statusCode))
+                        return complete(.Error("Error parsing data", statusCode))
                     }
                 } catch {
                     print("error:\(error)")
-                    return complete(.Error(error.localizedDescription, statusCode))
+                    return complete(.Error("Error decoding JSON", statusCode))
                 }
             case .Error(let message, let statusCode):
                 return complete(.Error(message, statusCode))
@@ -101,11 +101,11 @@ class CharacterVM: CharacterVMProtocol {
                         self?.privComicList.append(contentsOf: comicResponse.data.results)
                         return complete(.Success(self?.privComicList, statusCode))
                     } else {
-                        return complete(.Error("Error parsing JSON", statusCode))
+                        return complete(.Error("Error parsing data", statusCode))
                     }
                 } catch {
                     print("error:\(error)")
-                    return complete(.Error(error.localizedDescription, statusCode))
+                    return complete(.Error("Error decoding JSON", statusCode))
                 }
             case .Error(let message, let statusCode):
                 return complete(.Error(message, statusCode))

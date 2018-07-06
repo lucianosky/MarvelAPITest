@@ -23,18 +23,10 @@ class CharacterModel: Decodable {
 
 class CharacterData: Decodable {
     let results: [CharacterModel]
-    
-    init(results: [CharacterModel]) {
-        self.results = results
-    }
 }
 
 class CharacterResponse: Decodable {
     let data: CharacterData
-    
-    init(data: CharacterData) {
-        self.data = data
-    }
 }
 
 extension CharacterModel: Equatable {

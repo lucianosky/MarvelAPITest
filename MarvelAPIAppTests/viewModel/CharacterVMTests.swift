@@ -26,7 +26,7 @@ class CharacterVMTests: XCTestCase {
     }
 
     func testGetCharacters() {
-        let promise = expectation(description: "...")
+        let promise = expectation(description: "testGetCharacters")
         characterVM.getCharacters(page: 0) { (result) in
             switch result {
             case .Success(let characterList, _):
@@ -40,25 +40,26 @@ class CharacterVMTests: XCTestCase {
                 promise.fulfill()
             }
         }
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 1, handler: nil)
     }
 
-//    func testGetCharacterComics() {
-//        let promise = expectation(description: "...")
-//        let spiderManId = 1009610
-//        characterVM.getCharacterComics(page: 0, character: spiderManId) { (result) in
-//            switch result {
-//            case .Success(let comicList, _):
-//                XCTAssertEqual(count, 20)
-//                XCTAssertEqual(count, self.characterVM.comicList.count)
-//                let firstComic = comicList![0]
-//                XCTAssertEqual(firstComic.title, "Marvel Age Spider-Man Vol. 2: Everyday Hero (Digest)")
-//                promise.fulfill()
-//            case .Error(let message, let statusCode):
-//                XCTFail("Error: statusCode=\(statusCode ?? -1) \(message)")
-//            }
-//        }
-//        waitForExpectations(timeout: 10, handler: nil)
-//    }
+    func testGetCharacterComics() {
+        let promise = expectation(description: "testGetCharacterComics")
+        let spiderManId = 1009610
+        characterVM.getCharacterComics(page: 0, character: spiderManId) { (result) in
+            switch result {
+            case .Success(let comicList, _):
+                XCTAssertEqual(comicList?.count, 20)
+                XCTAssertEqual(comicList?.count, self.characterVM.comicList.count)
+                let firstComic = comicList![0]
+                XCTAssertEqual(firstComic.title, "Peter Parker: Spider-Man (1999) #79")
+                promise.fulfill()
+            case .Error(let message, let statusCode):
+                XCTFail("Error: statusCode=\(statusCode ?? -1) \(message)")
+                promise.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 
 }

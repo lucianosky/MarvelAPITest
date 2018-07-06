@@ -27,10 +27,10 @@ class MockCharacterVM: CharacterVMProtocol {
     }
 
     private func createCharacter(id: Int) -> CharacterModel {
+        let thumbnail = ThumbnailModel(path: "http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b", ext: "jpg")
         return CharacterModel(id: id,
                               name: "Spiderman\(id)",
-                              // TODO
-                              thumbnail: ThumbnailModel(path: "http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b", ext: "jpg"),
+                              thumbnail: thumbnail,
                               description: "Description \(id)")
     }
     
@@ -90,11 +90,10 @@ class MockCharacterVM: CharacterVMProtocol {
     }
 
     private func createComic(id: Int) -> ComicModel {
+        let thumbnail = ThumbnailModel(path: "http://i.annihil.us/u/prod/marvel/i/mg/c/60/58dbce634ea70", ext: "jpg")
         return ComicModel(id: id,
-                          title: "Title\(id)",
-                          //imageURI: "http://i.annihil.us/u/prod/marvel/i/mg/c/60/58dbce634ea70.jpg")
-                          // TODO
-                          thumbnail: ThumbnailModel(path: "", ext: ""))
+                          title: "Title \(id)",
+                          thumbnail: thumbnail)
     }
     
     private func createComicPage(from: Int, pageSize: Int) {
