@@ -42,6 +42,7 @@
 		4EB874B020EFE2C9000D2A6F /* comics.json in Resources */ = {isa = PBXBuildFile; fileRef = 4EB874AF20EFE2C9000D2A6F /* comics.json */; };
 		4EB874B220F00BBB000D2A6F /* CharacterVMTestsBugged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB874B120F00BBB000D2A6F /* CharacterVMTestsBugged.swift */; };
 		4EB874B420F00C26000D2A6F /* MockNetworkServiceBugged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB874B320F00C26000D2A6F /* MockNetworkServiceBugged.swift */; };
+		4EB874B620F0191B000D2A6F /* AppDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB874B520F0191B000D2A6F /* AppDelegateTests.swift */; };
 		4ED343ED20E28BB2004F62A8 /* CharacterListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED343EC20E28BB2004F62A8 /* CharacterListVC.swift */; };
 		4ED343F020E293BF004F62A8 /* Comic Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4ED343EE20E293BE004F62A8 /* Comic Book.otf */; };
 		4ED343F120E293BF004F62A8 /* Comic Book Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4ED343EF20E293BF004F62A8 /* Comic Book Bold.otf */; };
@@ -123,6 +124,7 @@
 		4EB874AF20EFE2C9000D2A6F /* comics.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = comics.json; sourceTree = "<group>"; };
 		4EB874B120F00BBB000D2A6F /* CharacterVMTestsBugged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterVMTestsBugged.swift; sourceTree = "<group>"; };
 		4EB874B320F00C26000D2A6F /* MockNetworkServiceBugged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkServiceBugged.swift; sourceTree = "<group>"; };
+		4EB874B520F0191B000D2A6F /* AppDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateTests.swift; sourceTree = "<group>"; };
 		4ED343EC20E28BB2004F62A8 /* CharacterListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListVC.swift; sourceTree = "<group>"; };
 		4ED343EE20E293BE004F62A8 /* Comic Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Book.otf"; sourceTree = "<group>"; };
 		4ED343EF20E293BF004F62A8 /* Comic Book Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Book Bold.otf"; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				4EB874A020EE9B67000D2A6F /* model */,
 				4EB874AC20EFDE45000D2A6F /* service */,
 				4E21878120E1924A00A05621 /* Info.plist */,
+				4EB874B520F0191B000D2A6F /* AppDelegateTests.swift */,
 			);
 			path = MarvelAPIAppTests;
 			sourceTree = "<group>";
@@ -686,6 +689,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EB874B620F0191B000D2A6F /* AppDelegateTests.swift in Sources */,
 				4EB874AA20EEC5F0000D2A6F /* MockNetworkService.swift in Sources */,
 				4E6BD82E20E570F400D43EF3 /* CharacterVMTests.swift in Sources */,
 				4E6BD82C20E52BAF00D43EF3 /* NetworkServiceTests.swift in Sources */,
