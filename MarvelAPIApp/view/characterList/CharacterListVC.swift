@@ -125,7 +125,7 @@ class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionV
     // MARK: UICollectionViewDelegate
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if !isFirstLoading{
+        if !isFirstLoading {
             if let character = characterVM?.characterList[indexPath.row] {
                 characterVM?.currentCharacter = character
                 self.performSegue(withIdentifier: "segueToCharacter", sender: self)

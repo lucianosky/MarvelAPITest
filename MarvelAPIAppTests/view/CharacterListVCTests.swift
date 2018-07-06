@@ -99,6 +99,22 @@ class CharacterListVCTests: XCTestCase {
         characterListVC.collectionView.scrollToItem(at: IndexPath.init(row: lastRow, section: 0), at: UICollectionViewScrollPosition.bottom, animated: false)
         XCTAssertEqual(self.characterListVC.page, 1)
    }
+
+    // TODO
+    /*func testPullUp() {
+        let promise = expectation(description: "testPullUp")
+        XCTAssertFalse(characterListVC.isPullingUp)
+        let rect = CGRect(x: 0,
+                          y: characterListVC.collectionView.frame.size.height,
+                          width: characterListVC.collectionView.frame.width,
+                          height: 500)
+        characterListVC.collectionView.scrollRectToVisible(rect, animated: false)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) { [weak self] in
+            XCTAssertTrue(self?.characterListVC.isPullingUp ?? false)
+            promise.fulfill()
+        }
+        waitForExpectations(timeout: 4)
+    }*/
     
      func testDidSelectRowAt() {
         self.characterListVC.collectionView.delegate?.collectionView!(self.characterListVC.collectionView, didSelectItemAt: IndexPath.init(row: 0, section: 0))
