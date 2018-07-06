@@ -75,11 +75,10 @@ class NetworkService: NetworkServiceProtocol {
             if response.result.isSuccess {
                 return complete(.Success(response.result.value, statusCode))
 
-            } else {
-                request.responseString(completionHandler: { (strResponse) in
-                    return complete(.Error(self?.treatError(url: url, response: strResponse) ?? "", response.response?.statusCode))
-                })
             }
+            request.responseString(completionHandler: { (strResponse) in
+                return complete(.Error(self?.treatError(url: url, response: strResponse) ?? "", response.response?.statusCode))
+            })
         }
     }
 }

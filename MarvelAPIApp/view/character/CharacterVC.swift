@@ -91,9 +91,8 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
             return 3
-        } else {
-            return isFirstLoading ? 0 : (characterVM?.comicList.count ?? 0)
         }
+        return isFirstLoading ? 0 : (characterVM?.comicList.count ?? 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -171,9 +170,8 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
                 height = 33
             }
             return CGSize(width: size, height: height)
-        } else {
-            return CGSize(width: coverWidth, height: coverHeight)
         }
+        return CGSize(width: coverWidth, height: coverHeight)
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -197,9 +195,8 @@ class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
                         referenceSizeForFooterInSection section: Int) -> CGSize {
         if section == 0 {
             return CGSize(width: 0, height: 0)
-        } else {
-            return CGSize(width: characterCellSize, height: 10)
         }
+        return CGSize(width: characterCellSize, height: 10)
     }
     
     // MARK: - scrollView protocols

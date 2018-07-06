@@ -86,22 +86,21 @@ class CharacterListVC: UIViewController, UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if isFirstLoading {
             return collectionView.dequeueReusableCell(withReuseIdentifier: "loadingCell", for: indexPath)
-        } else {
-            if (indexPath.row >= (characterVM?.characterList.count ?? 0) - preloadCount) && !loadingData {
-                loadNextPage()
-            }
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterListCell", for: indexPath) as! CharacterListCell
-            let characterModel = characterVM!.characterList[indexPath.row]
-            cell.nameLabel.attributedText = NSAttributedString.fromString(string: characterModel.name, lineHeightMultiple: 0.7)
-            cell.squareView.setBlackBorder()
-            cell.nameView.setBlackBorder()
-            // this will create a diagonal grid with pink/blue background colors for character names
-            let remanderBy4 = indexPath.row % 4
-            cell.nameView.backgroundColor = remanderBy4 == 1 || remanderBy4 == 2 ? .comicPink : .comicBlue
-            let url = URL(string: characterModel.thumbnail.fullName)
-            cell.characterImageView.kf.setImage(with: url)
-            return cell
         }
+        if (indexPath.row >= (characterVM?.characterList.count ?? 0) - preloadCount) && !loadingData {
+            loadNextPage()
+        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterListCell", for: indexPath) as! CharacterListCell
+        let characterModel = characterVM!.characterList[indexPath.row]
+        cell.nameLabel.attributedText = NSAttributedString.fromString(string: characterModel.name, lineHeightMultiple: 0.7)
+        cell.squareView.setBlackBorder()
+        cell.nameView.setBlackBorder()
+        // this will create a diagonal grid with pink/blue background colors for character names
+        let remanderBy4 = indexPath.row % 4
+        cell.nameView.backgroundColor = remanderBy4 == 1 || remanderBy4 == 2 ? .comicPink : .comicBlue
+        let url = URL(string: characterModel.thumbnail.fullName)
+        cell.characterImageView.kf.setImage(with: url)
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

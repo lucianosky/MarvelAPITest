@@ -60,9 +60,8 @@ class CharacterVM: CharacterVMProtocol {
                         let characterResponse = try decoder.decode(CharacterResponse.self, from: data)
                         self?.privCharacterList.append(contentsOf: characterResponse.data.results)
                         return complete(.Success(self?.privCharacterList, statusCode))
-                    } else {
-                        return complete(.Error("Error parsing data", statusCode))
                     }
+                    return complete(.Error("Error parsing data", statusCode))
                 } catch {
                     print("error:\(error)")
                     return complete(.Error("Error decoding JSON", statusCode))
@@ -100,9 +99,8 @@ class CharacterVM: CharacterVMProtocol {
                         let comicResponse = try decoder.decode(ComicResponse.self, from: data)
                         self?.privComicList.append(contentsOf: comicResponse.data.results)
                         return complete(.Success(self?.privComicList, statusCode))
-                    } else {
-                        return complete(.Error("Error parsing data", statusCode))
                     }
+                    return complete(.Error("Error parsing data", statusCode))
                 } catch {
                     print("error:\(error)")
                     return complete(.Error("Error decoding JSON", statusCode))

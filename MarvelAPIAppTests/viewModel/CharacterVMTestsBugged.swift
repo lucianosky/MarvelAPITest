@@ -59,6 +59,40 @@ class CharacterVMTestsBugged: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
 
+    // Mark: response null
+    
+    func testGetCharactersNull() {
+        (mockNetworkServiceBugged as! MockNetworkServiceBugged).bugNull = true
+        let promise = expectation(description: "testGetCharactersNull")
+        characterVM.getCharacters(page: 0) { (result) in
+            switch result {
+            case .Success(_, _):
+                XCTFail("Expected failure")
+                promise.fulfill()
+            case .Error(let message, _):
+                XCTAssertEqual(message, "Error parsing data")
+                promise.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testGetCharacterComicsNull() {
+        (mockNetworkServiceBugged as! MockNetworkServiceBugged).bugNull = true
+        let promise = expectation(description: "testGetCharactersNull")
+        characterVM.getCharacterComics(page: 0, character: 0) { (result) in
+            switch result {
+            case .Success(_, _):
+                XCTFail("Expected failure")
+                promise.fulfill()
+            case .Error(let message, _):
+                XCTAssertEqual(message, "Error parsing data")
+                promise.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
     // MARK: response with error
     
     func testGetCharactersError() {

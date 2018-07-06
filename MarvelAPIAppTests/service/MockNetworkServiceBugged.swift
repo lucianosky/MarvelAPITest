@@ -18,6 +18,7 @@ class MockNetworkServiceBugged: NetworkServiceProtocol {
     var baseUrl: String { get { return "" } }
     
     var bugNotJSON = false
+    var bugNull = false
     
     func request(
         url: String,
@@ -27,6 +28,8 @@ class MockNetworkServiceBugged: NetworkServiceProtocol {
     {
         if bugNotJSON {
             return complete(.Success("Not JSON!", 200))
+        } else if bugNull {
+            return complete(.Success(nil, 200))
         } else {
             return complete(.Error("Expected error", 0))
         }

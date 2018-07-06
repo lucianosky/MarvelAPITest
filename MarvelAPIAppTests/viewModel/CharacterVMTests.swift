@@ -25,6 +25,14 @@ class CharacterVMTests: XCTestCase {
         super.tearDown()
     }
 
+    func testCurrentCharacter() {
+        let thumbnail = ThumbnailModel(path: "path", ext: "ext")
+        let currentCharacter = CharacterModel(id: 1, name: "name", thumbnail: thumbnail, description: "description")
+        characterVM.currentCharacter = currentCharacter
+        let currentCharacterCopy = characterVM.currentCharacter
+        XCTAssertEqual(currentCharacter, currentCharacterCopy)
+    }
+    
     func testGetCharacters() {
         let promise = expectation(description: "testGetCharacters")
         characterVM.getCharacters(page: 0) { (result) in
