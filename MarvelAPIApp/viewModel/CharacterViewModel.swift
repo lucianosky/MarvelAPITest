@@ -1,5 +1,5 @@
 //
-//  CharacterVM.swift
+//  CharacterViewModel.swift
 //  MarvelAPIApp
 //
 //  Created by Luciano Sclovsky on 27/06/2018.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CharacterVM: CharacterVMProtocol {
+class CharacterViewModel: CharacterViewModelProtocol {
     
     var networkService: NetworkServiceProtocol?
 

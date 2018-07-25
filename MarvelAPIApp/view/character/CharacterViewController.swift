@@ -13,7 +13,7 @@ class CharacterViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var pageView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var characterVM: CharacterVMProtocol?
+    var characterViewModel: CharacterViewModelProtocol?
 
     var isFirstLoading = true
     var isPullingUp = false
@@ -40,16 +40,16 @@ class CharacterViewController: UIViewController, UICollectionViewDelegate, UICol
         page += 1
         loadingData = true
         // TODO: create error treatment below (should never happen)
-        let id = characterVM?.currentCharacter.id ?? 0
-        let previousCount = characterVM?.comicList.count
-        characterVM?.getCharacterComics(page: page, character: id){ [weak self] (result) in
+        let id = characterViewModel?.currentCharacter.id ?? 0
+        let previousCount = characterViewModel?.comicList.count
+        characterViewModel?.getCharacterComics(page: page, character: id){ [weak self] (result) in
             self?.isFirstLoading = false
             self?.isPullingUp = false
             self?.loadingData = false
             switch result {
             case .Success(_, _):
                 self?.collectionView.reloadData()
-                let count = self?.characterVM?.comicList.count ?? 0
+                let count = self?.characterViewModel?.comicList.count ?? 0
                 if count == previousCount {
                     self?.noFurtherData = true
                 }
@@ -92,12 +92,12 @@ class CharacterViewController: UIViewController, UICollectionViewDelegate, UICol
         if section == 0 {
             return 3
         }
-        return isFirstLoading ? 0 : (characterVM?.comicList.count ?? 0)
+        return isFirstLoading ? 0 : (characterViewModel?.comicList.count ?? 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
-            guard let characterModel = characterVM?.currentCharacter else {
+            guard let characterModel = characterViewModel?.currentCharacter else {
                 print("error reading characterModel")
                 // TO DO: (this should never happen) - improve error treatment
                 return comicsTitleCell(withString: "error", at: indexPath)
@@ -108,11 +108,11 @@ class CharacterViewController: UIViewController, UICollectionViewDelegate, UICol
             default: return comicsTitleCell(withString: "comics", at: indexPath)
             }
         } else {
-            let count = characterVM?.comicList.count ?? 0
+            let count = characterViewModel?.comicList.count ?? 0
             if (indexPath.row >= count - preloadCount) && !loadingData {
                 loadNextPage()
             }
-            let comicModel = characterVM?.comicList[indexPath.row]
+            let comicModel = characterViewModel?.comicList[indexPath.row]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "comicCell", for: indexPath) as! ComicCell
             cell.titleLabel.text = comicModel?.title ?? ""
             cell.squareView.setBlackBorder()

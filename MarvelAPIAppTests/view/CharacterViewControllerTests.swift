@@ -1,5 +1,5 @@
 //
-//  CharacterVCTests.swift
+//  CharacterViewControllerTests.swift
 //  MarvelAPIAppTests
 //
 //  Created by Luciano Sclovsky on 29/06/2018.
@@ -14,7 +14,7 @@ class CharacterViewControllerTests: XCTestCase {
     
     private var rootWindow: UIWindow!
     private var characterViewController: CharacterViewController!
-    private var mockCharacterVM: CharacterVMProtocol!
+    private var mockCharacterViewModel: CharacterViewModelProtocol!
     let spiderManId = 1009610
 
     override func setUp() {
@@ -23,12 +23,12 @@ class CharacterViewControllerTests: XCTestCase {
         rootWindow.isHidden = false
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         characterViewController = storyboard.instantiateViewController(withIdentifier: "characterViewController") as! CharacterViewController
-        mockCharacterVM = MockCharacterVM(delay: false)
+        mockCharacterViewModel = MockCharacterViewModel(delay: false)
         // TODO
         let thumbnail = ThumbnailModel(path: "", ext: "")
         let spiderMan = CharacterModel(id: spiderManId, name: "SpiderMan", thumbnail: thumbnail, description: "")
-        mockCharacterVM.currentCharacter = spiderMan
-        characterViewController.characterVM = mockCharacterVM
+        mockCharacterViewModel.currentCharacter = spiderMan
+        characterViewController.characterViewModel = mockCharacterViewModel
         rootWindow.rootViewController = characterViewController
         _ = characterViewController.view
     }
@@ -36,7 +36,7 @@ class CharacterViewControllerTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
         characterViewController = nil
-        mockCharacterVM = nil
+        mockCharacterViewModel = nil
         rootWindow.rootViewController = nil
         rootWindow.isHidden = true
         rootWindow = nil
@@ -53,10 +53,10 @@ class CharacterViewControllerTests: XCTestCase {
     }
     
     func testLoadPages() {
-        let pageSizeDouble = MockCharacterVM.comicPageSize * 2
+        let pageSizeDouble = MockCharacterViewModel.comicPageSize * 2
         XCTAssertFalse(characterViewController.isFirstLoading)
         XCTAssertEqual(characterViewController.collectionView.numberOfItems(inSection: 0), 3)
-        XCTAssertEqual(characterViewController.collectionView.numberOfItems(inSection: 1), MockCharacterVM.comicPageSize)
+        XCTAssertEqual(characterViewController.collectionView.numberOfItems(inSection: 1), MockCharacterViewModel.comicPageSize)
         XCTAssertEqual(characterViewController.page, 0)
         characterViewController.loadNextPage()
         XCTAssertEqual(characterViewController.collectionView.numberOfItems(inSection: 1), pageSizeDouble)
@@ -75,7 +75,7 @@ class CharacterViewControllerTests: XCTestCase {
     func testSection0() {
         let promise = expectation(description: "testSection0")
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
-            let character = self?.characterViewController.characterVM?.currentCharacter
+            let character = self?.characterViewController.characterViewModel?.currentCharacter
             
             let characterCell = self?.characterViewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? CharacterCell
             XCTAssertEqual(characterCell?.reuseIdentifier, "characterCell")
@@ -99,7 +99,7 @@ class CharacterViewControllerTests: XCTestCase {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
             let indexPath = IndexPath(row: 0, section: 1)
             let cell = self?.characterViewController.collectionView.cellForItem(at: indexPath) as? ComicCell
-            let comic = self?.characterViewController.characterVM?.comicList[0]
+            let comic = self?.characterViewController.characterViewModel?.comicList[0]
             XCTAssertEqual(cell?.titleLabel.text, comic?.title)
             XCTAssertEqual(comic?.thumbnail.fullName, "http://i.annihil.us/u/prod/marvel/i/mg/c/60/58dbce634ea70.jpg")
             promise.fulfill()
@@ -109,13 +109,13 @@ class CharacterViewControllerTests: XCTestCase {
     
     // TODO: fix issue with delay to test imageURI
     func testSectionCell19() {
-        let row = MockCharacterVM.comicPageSize / 2 - 1
+        let row = MockCharacterViewModel.comicPageSize / 2 - 1
         let promise = expectation(description: "testSectionCell19")
         characterViewController.collectionView.scrollToItem(at: IndexPath.init(row: row, section: 1), at: UICollectionViewScrollPosition.bottom, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4)) { [weak self] in
             let indexPath = IndexPath(row: row, section: 1)
             let cell = self?.characterViewController.collectionView.cellForItem(at: indexPath) as? ComicCell
-            let comic = self?.characterViewController.characterVM?.comicList[row]
+            let comic = self?.characterViewController.characterViewModel?.comicList[row]
             XCTAssertEqual(cell?.titleLabel.text, comic?.title)
             XCTAssertEqual(comic?.thumbnail.fullName, "http://i.annihil.us/u/prod/marvel/i/mg/c/60/58dbce634ea70.jpg")
             promise.fulfill()
@@ -124,7 +124,7 @@ class CharacterViewControllerTests: XCTestCase {
     }
     
     func testScrollToBottom() {
-        let lastRow = MockCharacterVM.comicPageSize - 1
+        let lastRow = MockCharacterViewModel.comicPageSize - 1
         XCTAssertEqual(self.characterViewController.page, 0)
         characterViewController.collectionView.scrollToItem(at: IndexPath.init(row: lastRow, section: 1), at: UICollectionViewScrollPosition.bottom, animated: false)
         XCTAssertEqual(self.characterViewController.page, 1)

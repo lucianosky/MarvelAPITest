@@ -1,5 +1,5 @@
 //
-//  CharacterVCTestsDelay.swift
+//  CharacterViewControllerTestsDelay.swift
 //  MarvelAPIAppTests
 //
 //  Created by Luciano Sclovsky on 05/07/2018.
@@ -14,7 +14,7 @@ class CharacterViewControllerTestsDelay: XCTestCase {
     
     private var rootWindow: UIWindow!
     private var characterViewController: CharacterViewController!
-    private var mockCharacterVM: CharacterVMProtocol!
+    private var mockCharacterViewModel: CharacterViewModelProtocol!
     let spiderManId = 1009610
     
     override func setUp() {
@@ -23,11 +23,11 @@ class CharacterViewControllerTestsDelay: XCTestCase {
         rootWindow.isHidden = false
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         characterViewController = storyboard.instantiateViewController(withIdentifier: "characterViewController") as! CharacterViewController
-        mockCharacterVM = MockCharacterVM(delay: true)
+        mockCharacterViewModel = MockCharacterViewModel(delay: true)
         // TODO
         let spiderMan = CharacterModel(id: spiderManId, name: "SpiderMan", thumbnail: ThumbnailModel(path: "", ext: ""), description: "")
-        mockCharacterVM.currentCharacter = spiderMan
-        characterViewController.characterVM = mockCharacterVM
+        mockCharacterViewModel.currentCharacter = spiderMan
+        characterViewController.characterViewModel = mockCharacterViewModel
         rootWindow.rootViewController = characterViewController
         _ = characterViewController.view
     }

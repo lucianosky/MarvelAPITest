@@ -1,5 +1,5 @@
 //
-//  CharacterListVCTestsDelay.swift
+//  CharacterListViewControllerTestsDelay.swift
 //  MarvelAPIAppTests
 //
 //  Created by Luciano Sclovsky on 29/06/2018.
@@ -14,7 +14,7 @@ class CharacterListViewControllerTestsDelay: XCTestCase {
     
     private var rootWindow: UIWindow!
     private var characterListViewController: CharacterListViewController!
-    private var mockCharacterVM: CharacterVMProtocol!
+    private var mockCharacterViewModel: CharacterViewModelProtocol!
 
 
     override func setUp() {
@@ -23,8 +23,8 @@ class CharacterListViewControllerTestsDelay: XCTestCase {
         rootWindow.isHidden = false
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         characterListViewController = storyboard.instantiateViewController(withIdentifier: "characterListViewController") as! CharacterListViewController
-        mockCharacterVM = MockCharacterVM(delay: true)
-        characterListViewController.characterVM = mockCharacterVM
+        mockCharacterViewModel = MockCharacterViewModel(delay: true)
+        characterListViewController.characterViewModel = mockCharacterViewModel
         rootWindow.rootViewController = characterListViewController
         _ = characterListViewController.view
     }

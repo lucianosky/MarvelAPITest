@@ -13,7 +13,7 @@ class CharacterListViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageView: UIView!
     
-    var characterVM: CharacterVMProtocol?
+    var characterViewModel: CharacterViewModelProtocol?
     
     var isFirstLoading = true
     var isPullingUp = false
@@ -55,15 +55,15 @@ class CharacterListViewController: UIViewController, UICollectionViewDelegate, U
         }
         page += 1
         loadingData = true
-        let previousCount = characterVM?.characterList.count ?? 0
-        characterVM?.getCharacters(page: page) { [weak self] (result) in
+        let previousCount = characterViewModel?.characterList.count ?? 0
+        characterViewModel?.getCharacters(page: page) { [weak self] (result) in
             self?.isFirstLoading = false
             self?.isPullingUp = false
             self?.loadingData = false
             switch result {
             case .Success(_, _):
                 self?.collectionView.reloadData()
-                let count = self?.characterVM?.characterList.count ?? 0
+                let count = self?.characterViewModel?.characterList.count ?? 0
                 if count == previousCount {
                     self?.noFurtherData = true
                 }
@@ -80,18 +80,18 @@ class CharacterListViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return isFirstLoading ? 1 : (characterVM?.characterList.count ?? 0)
+        return isFirstLoading ? 1 : (characterViewModel?.characterList.count ?? 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if isFirstLoading {
             return collectionView.dequeueReusableCell(withReuseIdentifier: "loadingCell", for: indexPath)
         }
-        if (indexPath.row >= (characterVM?.characterList.count ?? 0) - preloadCount) && !loadingData {
+        if (indexPath.row >= (characterViewModel?.characterList.count ?? 0) - preloadCount) && !loadingData {
             loadNextPage()
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterListCell", for: indexPath) as! CharacterListCell
-        let characterModel = characterVM!.characterList[indexPath.row]
+        let characterModel = characterViewModel!.characterList[indexPath.row]
         cell.nameLabel.attributedText = NSAttributedString.fromString(string: characterModel.name, lineHeightMultiple: 0.7)
         cell.squareView.setBlackBorder()
         cell.nameView.setBlackBorder()
@@ -126,8 +126,8 @@ class CharacterListViewController: UIViewController, UICollectionViewDelegate, U
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !isFirstLoading {
-            if let character = characterVM?.characterList[indexPath.row] {
-                characterVM?.currentCharacter = character
+            if let character = characterViewModel?.characterList[indexPath.row] {
+                characterViewModel?.currentCharacter = character
                 self.performSegue(withIdentifier: "segueToCharacter", sender: self)
             }
         }
@@ -136,7 +136,7 @@ class CharacterListViewController: UIViewController, UICollectionViewDelegate, U
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToCharacter" {
             if let characterViewController = segue.destination as? CharacterViewController {
-                characterViewController.characterVM = characterVM
+                characterViewController.characterViewModel = characterViewModel
             }
         }
     }

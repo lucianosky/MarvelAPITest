@@ -1,5 +1,5 @@
 //
-//  CharacterVMTestsNotJSON.swift
+//  CharacterViewModelTestsBugged.swift
 //  MarvelAPIAppTests
 //
 //  Created by Luciano Sclovsky on 06/07/2018.
@@ -9,16 +9,16 @@ import XCTest
 
 @testable import MarvelAPIApp
 
-class CharacterVMTestsBugged: XCTestCase {
+class CharacterViewModelTestsBugged: XCTestCase {
     
-    private var characterVM: CharacterVM!
+    private var characterViewModel: CharacterViewModel!
     var mockNetworkServiceBugged: NetworkServiceProtocol!
     
     override func setUp() {
         super.setUp()
         mockNetworkServiceBugged = MockNetworkServiceBugged()
-        characterVM = CharacterVM()
-        characterVM.networkService = mockNetworkServiceBugged
+        characterViewModel = CharacterViewModel()
+        characterViewModel.networkService = mockNetworkServiceBugged
     }
     
     override func tearDown() {
@@ -30,7 +30,7 @@ class CharacterVMTestsBugged: XCTestCase {
     func testGetCharactersNotJSON() {
         (mockNetworkServiceBugged as! MockNetworkServiceBugged).bugNotJSON = true
         let promise = expectation(description: "testGetCharactersNotJSON")
-        characterVM.getCharacters(page: 0) { (result) in
+        characterViewModel.getCharacters(page: 0) { (result) in
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
@@ -46,7 +46,7 @@ class CharacterVMTestsBugged: XCTestCase {
     func testGetCharacterComicsNotJSON() {
         (mockNetworkServiceBugged as! MockNetworkServiceBugged).bugNotJSON = true
         let promise = expectation(description: "testGetCharacterComicsNotJSON")
-        characterVM.getCharacterComics(page: 0, character: 0) { (result) in
+        characterViewModel.getCharacterComics(page: 0, character: 0) { (result) in
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
@@ -64,7 +64,7 @@ class CharacterVMTestsBugged: XCTestCase {
     func testGetCharactersNull() {
         (mockNetworkServiceBugged as! MockNetworkServiceBugged).bugNull = true
         let promise = expectation(description: "testGetCharactersNull")
-        characterVM.getCharacters(page: 0) { (result) in
+        characterViewModel.getCharacters(page: 0) { (result) in
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
@@ -80,7 +80,7 @@ class CharacterVMTestsBugged: XCTestCase {
     func testGetCharacterComicsNull() {
         (mockNetworkServiceBugged as! MockNetworkServiceBugged).bugNull = true
         let promise = expectation(description: "testGetCharactersNull")
-        characterVM.getCharacterComics(page: 0, character: 0) { (result) in
+        characterViewModel.getCharacterComics(page: 0, character: 0) { (result) in
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
@@ -97,7 +97,7 @@ class CharacterVMTestsBugged: XCTestCase {
     
     func testGetCharactersError() {
         let promise = expectation(description: "testGetCharactersError")
-        characterVM.getCharacters(page: 0) { (result) in
+        characterViewModel.getCharacters(page: 0) { (result) in
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
@@ -112,7 +112,7 @@ class CharacterVMTestsBugged: XCTestCase {
     
     func testGetCharacterComicsError() {
         let promise = expectation(description: "testGetCharacterComicsError")
-        characterVM.getCharacterComics(page: 0, character: 0) { (result) in
+        characterViewModel.getCharacterComics(page: 0, character: 0) { (result) in
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
@@ -128,9 +128,9 @@ class CharacterVMTestsBugged: XCTestCase {
     // MARK: no network service
 
     func testGetCharactersNoService() {
-        characterVM.networkService = nil
+        characterViewModel.networkService = nil
         let promise = expectation(description: "testGetCharactersNoService")
-        characterVM.getCharacters(page: 0) { (result) in
+        characterViewModel.getCharacters(page: 0) { (result) in
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
@@ -144,9 +144,9 @@ class CharacterVMTestsBugged: XCTestCase {
     }
     
     func testGetCharacterComicsNoService() {
-        characterVM.networkService = nil
+        characterViewModel.networkService = nil
         let promise = expectation(description: "testGetCharacterComicsNoService")
-        characterVM.getCharacterComics(page: 0, character: 0) { (result) in
+        characterViewModel.getCharacterComics(page: 0, character: 0) { (result) in
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")

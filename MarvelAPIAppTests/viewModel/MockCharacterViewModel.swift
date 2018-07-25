@@ -1,5 +1,5 @@
 //
-//  MockCharacterVM.swift
+//  MockCharacterViewModel.swift
 //  MarvelAPIAppTests
 //
 //  Created by Luciano Sclovsky on 03/07/2018.
@@ -9,7 +9,7 @@ import Foundation
 
 @testable import MarvelAPIApp
 
-class MockCharacterVM: CharacterVMProtocol {
+class MockCharacterViewModel: CharacterViewModelProtocol {
     
     private var privCharacterList = [CharacterModel]()
     private var privComicList = [ComicModel]()
@@ -48,9 +48,9 @@ class MockCharacterVM: CharacterVMProtocol {
     func getCharacters(page: Int, complete: @escaping (ServiceResult<[CharacterModel]?>) -> Void) {
         if page == 0 {
             privCharacterList.removeAll()
-            createCharacterPage(from: 0, pageSize: MockCharacterVM.characterPageSize)
+            createCharacterPage(from: 0, pageSize: MockCharacterViewModel.characterPageSize)
         } else if page == 1 {
-            createCharacterPage(from: MockCharacterVM.characterPageSize, pageSize: MockCharacterVM.characterPageSize)
+            createCharacterPage(from: MockCharacterViewModel.characterPageSize, pageSize: MockCharacterViewModel.characterPageSize)
         }
         if delay {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delaySeconds), execute: {
@@ -76,9 +76,9 @@ class MockCharacterVM: CharacterVMProtocol {
         complete: @escaping ( ServiceResult<[ComicModel]?> ) -> Void ) {
         if page == 0 {
             privComicList.removeAll()
-            createComicPage(from: 0, pageSize: MockCharacterVM.comicPageSize)
+            createComicPage(from: 0, pageSize: MockCharacterViewModel.comicPageSize)
         } else if page == 1 {
-            createComicPage(from: MockCharacterVM.comicPageSize, pageSize: MockCharacterVM.comicPageSize)
+            createComicPage(from: MockCharacterViewModel.comicPageSize, pageSize: MockCharacterViewModel.comicPageSize)
         }
         if delay {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delaySeconds), execute: {

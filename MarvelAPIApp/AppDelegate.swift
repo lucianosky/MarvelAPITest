@@ -17,9 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let characterListViewController = storyboard.instantiateViewController(withIdentifier: "characterListViewController") as! CharacterListViewController
-        let characterVM = CharacterVM()
-        characterVM.networkService = NetworkService.shared
-        characterListViewController.characterVM = characterVM
+        let characterViewModel = CharacterViewModel()
+        characterViewModel.networkService = NetworkService.shared
+        characterListViewController.characterViewModel = characterViewModel
         self.window?.rootViewController = characterListViewController
         self.window?.makeKeyAndVisible()
         return true

@@ -1,5 +1,5 @@
 //
-//  CharacterVMTests.swift
+//  CharacterViewModelTests.swift
 //  MarvelAPIAppTests
 //
 //  Created by Luciano Sclovsky on 28/06/2018.
@@ -9,16 +9,16 @@ import XCTest
 
 @testable import MarvelAPIApp
 
-class CharacterVMTests: XCTestCase {
+class CharacterViewModelTests: XCTestCase {
     
-    private var characterVM: CharacterVM!
+    private var characterViewModel: CharacterViewModel!
     var mockNetworkService: NetworkServiceProtocol!
 
     override func setUp() {
         super.setUp()
         mockNetworkService  = MockNetworkService()
-        characterVM = CharacterVM()
-        characterVM.networkService = mockNetworkService
+        characterViewModel = CharacterViewModel()
+        characterViewModel.networkService = mockNetworkService
     }
     
     override func tearDown() {
@@ -28,18 +28,18 @@ class CharacterVMTests: XCTestCase {
     func testCurrentCharacter() {
         let thumbnail = ThumbnailModel(path: "path", ext: "ext")
         let currentCharacter = CharacterModel(id: 1, name: "name", thumbnail: thumbnail, description: "description")
-        characterVM.currentCharacter = currentCharacter
-        let currentCharacterCopy = characterVM.currentCharacter
+        characterViewModel.currentCharacter = currentCharacter
+        let currentCharacterCopy = characterViewModel.currentCharacter
         XCTAssertEqual(currentCharacter, currentCharacterCopy)
     }
     
     func testGetCharacters() {
         let promise = expectation(description: "testGetCharacters")
-        characterVM.getCharacters(page: 0) { (result) in
+        characterViewModel.getCharacters(page: 0) { (result) in
             switch result {
             case .Success(let characterList, _):
                 XCTAssertEqual(characterList?.count, 20)
-                XCTAssertEqual(characterList?.count, self.characterVM.characterList.count)
+                XCTAssertEqual(characterList?.count, self.characterViewModel.characterList.count)
                 let t3dMan = characterList![0]
                 XCTAssertEqual(t3dMan.name, "Spider-dok")
                 promise.fulfill()
@@ -54,11 +54,11 @@ class CharacterVMTests: XCTestCase {
     func testGetCharacterComics() {
         let promise = expectation(description: "testGetCharacterComics")
         let spiderManId = 1009610
-        characterVM.getCharacterComics(page: 0, character: spiderManId) { (result) in
+        characterViewModel.getCharacterComics(page: 0, character: spiderManId) { (result) in
             switch result {
             case .Success(let comicList, _):
                 XCTAssertEqual(comicList?.count, 20)
-                XCTAssertEqual(comicList?.count, self.characterVM.comicList.count)
+                XCTAssertEqual(comicList?.count, self.characterViewModel.comicList.count)
                 let firstComic = comicList![0]
                 XCTAssertEqual(firstComic.title, "Peter Parker: Spider-Man (1999) #79")
                 promise.fulfill()

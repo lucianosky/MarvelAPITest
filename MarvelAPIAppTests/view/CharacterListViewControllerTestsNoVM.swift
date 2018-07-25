@@ -1,5 +1,5 @@
 //
-//  CharacterListVCTestsNoVM.swift
+//  CharacterListViewControllerTestsNoVM.swift
 //  MarvelAPIAppTests
 //
 //  Created by Luciano Sclovsky on 04/07/2018.

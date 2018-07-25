@@ -35,7 +35,7 @@ class MarvelAPIAppUITests: XCTestCase {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         XCUIApplication().collectionViews.children(matching: .cell).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.tap()
-        //let t3dMan = CharacterVM.shared.
+        //let t3dMan = CharacterViewModel.shared.
         //XCTAssert(<#T##expression: Bool##Bool#>)
     }
     

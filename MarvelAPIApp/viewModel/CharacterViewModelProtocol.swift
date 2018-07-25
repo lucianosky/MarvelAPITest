@@ -1,5 +1,5 @@
 //
-//  CharacterVMProtocol.swift
+//  CharacterViewModelProtocol.swift
 //  MarvelAPIApp
 //
 //  Created by Luciano Sclovsky on 03/07/2018.
@@ -7,7 +7,7 @@
 
 // import Foundation
 
-protocol CharacterVMProtocol {
+protocol CharacterViewModelProtocol {
     
     func getCharacters(
         page: Int,
