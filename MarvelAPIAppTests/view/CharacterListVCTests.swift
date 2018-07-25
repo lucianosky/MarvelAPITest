@@ -30,9 +30,11 @@ class CharacterListVCTests: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
+        characterListVC = nil
+        mockCharacterVM = nil
         rootWindow.rootViewController = nil
         rootWindow.isHidden = true
-        self.rootWindow = nil
+        rootWindow = nil
     }
     
     func testCollectionView() {

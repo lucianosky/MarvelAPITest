@@ -35,9 +35,11 @@ class CharacterVCTests: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
+        characterVC = nil
+        mockCharacterVM = nil
         rootWindow.rootViewController = nil
         rootWindow.isHidden = true
-        self.rootWindow = nil
+        rootWindow = nil
     }
     
     func testCollectionView() {
