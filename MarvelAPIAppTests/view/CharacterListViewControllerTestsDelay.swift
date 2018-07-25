@@ -10,10 +10,10 @@ import XCTest
 @testable import MarvelAPIApp
 @testable import Kingfisher
 
-class CharacterListVCTestsDelay: XCTestCase {
+class CharacterListViewControllerTestsDelay: XCTestCase {
     
     private var rootWindow: UIWindow!
-    private var characterListVC: CharacterListVC!
+    private var characterListViewController: CharacterListViewController!
     private var mockCharacterVM: CharacterVMProtocol!
 
 
@@ -22,11 +22,11 @@ class CharacterListVCTestsDelay: XCTestCase {
         rootWindow = UIWindow(frame: UIScreen.main.bounds)
         rootWindow.isHidden = false
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        characterListVC = storyboard.instantiateViewController(withIdentifier: "characterListVC") as! CharacterListVC
+        characterListViewController = storyboard.instantiateViewController(withIdentifier: "characterListViewController") as! CharacterListViewController
         mockCharacterVM = MockCharacterVM(delay: true)
-        characterListVC.characterVM = mockCharacterVM
-        rootWindow.rootViewController = characterListVC
-        _ = characterListVC.view
+        characterListViewController.characterVM = mockCharacterVM
+        rootWindow.rootViewController = characterListViewController
+        _ = characterListViewController.view
     }
     
     override func tearDown() {
@@ -37,16 +37,16 @@ class CharacterListVCTestsDelay: XCTestCase {
     }
     
     func testLoadData() {
-        XCTAssert(characterListVC.isFirstLoading)
-        XCTAssertEqual(characterListVC.collectionView.numberOfItems(inSection: 0), 1)
-        XCTAssertEqual(characterListVC.page, 0)
+        XCTAssert(characterListViewController.isFirstLoading)
+        XCTAssertEqual(characterListViewController.collectionView.numberOfItems(inSection: 0), 1)
+        XCTAssertEqual(characterListViewController.page, 0)
     }
     
     func testCell0() {
         let promise = expectation(description: "testCell0")
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) { [weak self] in
             let indexPath = IndexPath(row: 0, section: 0)
-            let cell = self?.characterListVC.collectionView.cellForItem(at: indexPath)
+            let cell = self?.characterListViewController.collectionView.cellForItem(at: indexPath)
             XCTAssertEqual(cell?.reuseIdentifier, "loadingCell")
             promise.fulfill()
         }

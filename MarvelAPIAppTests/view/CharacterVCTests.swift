@@ -109,18 +109,18 @@ class CharacterVCTests: XCTestCase {
     
     // TODO: fix issue with delay to test imageURI
     func testSectionCell19() {
-        let lastRow = MockCharacterVM.comicPageSize - 1
-        let promise = expectation(description: "testSection1Cell0")
-        characterVC.collectionView.scrollToItem(at: IndexPath.init(row: lastRow, section: 1), at: UICollectionViewScrollPosition.bottom, animated: true)
+        let row = MockCharacterVM.comicPageSize / 2 - 1
+        let promise = expectation(description: "testSectionCell19")
+        characterVC.collectionView.scrollToItem(at: IndexPath.init(row: row, section: 1), at: UICollectionViewScrollPosition.bottom, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4)) { [weak self] in
-            let indexPath = IndexPath(row: lastRow, section: 1)
+            let indexPath = IndexPath(row: row, section: 1)
             let cell = self?.characterVC.collectionView.cellForItem(at: indexPath) as? ComicCell
-            let comic = self?.characterVC.characterVM?.comicList[lastRow]
+            let comic = self?.characterVC.characterVM?.comicList[row]
             XCTAssertEqual(cell?.titleLabel.text, comic?.title)
-            //XCTAssertEqual(comic?.imageURI, "http://i.annihil.us/u/prod/marvel/i/mg/c/60/58dbce634ea70.jpg")
+            XCTAssertEqual(comic?.thumbnail.fullName, "http://i.annihil.us/u/prod/marvel/i/mg/c/60/58dbce634ea70.jpg")
             promise.fulfill()
         }
-        waitForExpectations(timeout: 6)
+        waitForExpectations(timeout: 12)
     }
     
     func testScrollToBottom() {

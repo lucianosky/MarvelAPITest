@@ -9,19 +9,19 @@ import XCTest
 
 @testable import MarvelAPIApp
 
-class CharacterListVCTestsNoVM: XCTestCase {
+class CharacterListViewControllerTestsNoVM: XCTestCase {
     
     private var rootWindow: UIWindow!
-    private var characterListVC: CharacterListVC!
+    private var characterListViewController: CharacterListViewController!
     
     override func setUp() {
         super.setUp()
         rootWindow = UIWindow(frame: UIScreen.main.bounds)
         rootWindow.isHidden = false
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        characterListVC = storyboard.instantiateViewController(withIdentifier: "characterListVC") as! CharacterListVC
-        rootWindow.rootViewController = characterListVC
-        _ = characterListVC.view
+        characterListViewController = storyboard.instantiateViewController(withIdentifier: "characterListViewController") as! CharacterListViewController
+        rootWindow.rootViewController = characterListViewController
+        _ = characterListViewController.view
     }
     
     override func tearDown() {
@@ -32,9 +32,9 @@ class CharacterListVCTestsNoVM: XCTestCase {
     }
     
     func testLoadPages() {
-        XCTAssert(characterListVC.isFirstLoading)
-        XCTAssertEqual(characterListVC.collectionView.numberOfItems(inSection: 0), 1)
-        XCTAssertEqual(characterListVC.page, 0)
+        XCTAssert(characterListViewController.isFirstLoading)
+        XCTAssertEqual(characterListViewController.collectionView.numberOfItems(inSection: 0), 1)
+        XCTAssertEqual(characterListViewController.page, 0)
     }
     
 }

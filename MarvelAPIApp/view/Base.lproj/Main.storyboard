@@ -17,10 +17,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Character ListVC-->
+        <!--Character List View Controller-->
         <scene sceneID="ikT-Xe-mrR">
             <objects>
-                <viewController storyboardIdentifier="characterListVC" id="w0p-F6-QpK" customClass="CharacterListVC" customModule="MarvelAPIApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="characterListViewController" id="w0p-F6-QpK" customClass="CharacterListViewController" customModule="MarvelAPIApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nNX-Z9-rn8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,7 +142,7 @@
                                                             <rect key="frame" x="10" y="0.0" width="335" height="50"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHARACTERS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6k-SA-F74">
-                                                                    <rect key="frame" x="110" y="13.5" width="115.5" height="23.5"/>
+                                                                    <rect key="frame" x="110.5" y="14" width="115.5" height="23.5"/>
                                                                     <fontDescription key="fontDescription" name="ComicBook-Bold" family="Comic Book" pointSize="18"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
