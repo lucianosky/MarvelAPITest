@@ -1,5 +1,5 @@
 //
-//  CharacterVC.swift
+//  CharacterListViewController.swift
 //  MarvelAPIApp
 //
 //  Created by Luciano Sclovsky on 26/06/2018.
@@ -135,8 +135,8 @@ class CharacterListViewController: UIViewController, UICollectionViewDelegate, U
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToCharacter" {
-            if let characterVC = segue.destination as? CharacterVC {
-                characterVC.characterVM = characterVM
+            if let characterViewController = segue.destination as? CharacterViewController {
+                characterViewController.characterVM = characterVM
             }
         }
     }

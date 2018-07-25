@@ -120,7 +120,7 @@ class CharacterListViewControllerTests: XCTestCase {
     
      func testDidSelectRowAt() {
         self.characterListViewController.collectionView.delegate?.collectionView!(self.characterListViewController.collectionView, didSelectItemAt: IndexPath.init(row: 0, section: 0))
-        XCTAssertTrue(self.rootWindow.rootViewController?.presentedViewController is CharacterVC)
+        XCTAssertTrue(self.rootWindow.rootViewController?.presentedViewController is CharacterViewController)
     }
     
 }

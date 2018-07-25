@@ -1,5 +1,5 @@
 //
-//  CharacterVC.swift
+//  CharacterViewController.swift
 //  MarvelAPIApp
 //
 //  Created by Luciano Sclovsky on 27/06/2018.
@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class CharacterVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class CharacterViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var pageView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
