@@ -12,7 +12,7 @@ import XCTest
 class CharacterViewModelTestsBugged: XCTestCase {
     
     private var characterViewModel: CharacterViewModel!
-    var mockNetworkServiceBugged: NetworkServiceProtocol!
+    private var mockNetworkServiceBugged: NetworkServiceProtocol!
     
     override func setUp() {
         super.setUp()

@@ -15,7 +15,7 @@ class CharacterViewControllerTestsDelay: XCTestCase {
     private var rootWindow: UIWindow!
     private var characterViewController: CharacterViewController!
     private var mockCharacterViewModel: CharacterViewModelProtocol!
-    let spiderManId = 1009610
+    private let spiderManId = 1009610
     
     override func setUp() {
         super.setUp()

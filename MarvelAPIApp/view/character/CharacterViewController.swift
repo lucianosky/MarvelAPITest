@@ -15,16 +15,22 @@ class CharacterViewController: UIViewController, UICollectionViewDelegate, UICol
     
     var characterViewModel: CharacterViewModelProtocol?
 
-    var isFirstLoading = true
-    var isPullingUp = false
-    var loadingData = false
-    var noFurtherData = false
-    var page = -1
-    let preloadCount = 10
-    var screenWidth: CGFloat = 0
-    var coverWidth: CGFloat = 0
-    var coverHeight: CGFloat = 0
-    var characterCellSize: CGFloat = 0
+    private var _isFirstLoading = true
+    private var _noFurtherData = false
+    private var _page = -1
+
+    // used on tests (read only)
+    var isFirstLoading: Bool { get { return _isFirstLoading } }
+    var noFurtherData: Bool { get { return _noFurtherData } }
+    var page: Int { get { return _page } }
+    
+    private var isPullingUp = false
+    private var loadingData = false
+    private let preloadCount = 10
+    private var screenWidth: CGFloat = 0
+    private var coverWidth: CGFloat = 0
+    private var coverHeight: CGFloat = 0
+    private var characterCellSize: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,16 +40,16 @@ class CharacterViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     func loadNextPage() {
-        if loadingData || noFurtherData {
+        if loadingData || _noFurtherData {
             return
         }
-        page += 1
+        _page += 1
         loadingData = true
         // TODO: create error treatment below (should never happen)
         let id = characterViewModel?.currentCharacter.id ?? 0
         let previousCount = characterViewModel?.comicList.count
-        characterViewModel?.getCharacterComics(page: page, character: id){ [weak self] (result) in
-            self?.isFirstLoading = false
+        characterViewModel?.getCharacterComics(page: _page, character: id){ [weak self] (result) in
+            self?._isFirstLoading = false
             self?.isPullingUp = false
             self?.loadingData = false
             switch result {
@@ -51,7 +57,7 @@ class CharacterViewController: UIViewController, UICollectionViewDelegate, UICol
                 self?.collectionView.reloadData()
                 let count = self?.characterViewModel?.comicList.count ?? 0
                 if count == previousCount {
-                    self?.noFurtherData = true
+                    self?._noFurtherData = true
                 }
             case .Error(let message, let statusCode):
                 print("Error \(message) \(statusCode ?? 0)")
@@ -92,7 +98,7 @@ class CharacterViewController: UIViewController, UICollectionViewDelegate, UICol
         if section == 0 {
             return 3
         }
-        return isFirstLoading ? 0 : (characterViewModel?.comicList.count ?? 0)
+        return _isFirstLoading ? 0 : (characterViewModel?.comicList.count ?? 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

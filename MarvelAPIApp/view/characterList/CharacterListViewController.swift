@@ -15,16 +15,22 @@ class CharacterListViewController: UIViewController, UICollectionViewDelegate, U
     
     var characterViewModel: CharacterViewModelProtocol?
     
-    var isFirstLoading = true
-    var isPullingUp = false
-    var loadingData = false
-    var noFurtherData = false
-    var page = -1
-    let preloadCount = 10
-    var screenWidth: CGFloat = 0
-    var characterCellSize: CGFloat = 0
-    var loadingCellSize: CGFloat = 0
-    var currentCharacter: CharacterModel?
+    private var _isFirstLoading = true
+    private var _noFurtherData = false
+    private var _page = -1
+
+    // used on tests (read only)
+    var isFirstLoading: Bool { get { return _isFirstLoading } }
+    var noFurtherData: Bool { get { return _noFurtherData } }
+    var page: Int { get { return _page } }
+
+    private var isPullingUp = false
+    private var loadingData = false
+    private let preloadCount = 10
+    private var screenWidth: CGFloat = 0
+    private var characterCellSize: CGFloat = 0
+    private var loadingCellSize: CGFloat = 0
+    private var currentCharacter: CharacterModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,14 +56,14 @@ class CharacterListViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     func loadNextPage() {
-        if loadingData || noFurtherData {
+        if loadingData || _noFurtherData {
             return
         }
-        page += 1
+        _page += 1
         loadingData = true
         let previousCount = characterViewModel?.characterList.count ?? 0
-        characterViewModel?.getCharacters(page: page) { [weak self] (result) in
-            self?.isFirstLoading = false
+        characterViewModel?.getCharacters(page: _page) { [weak self] (result) in
+            self?._isFirstLoading = false
             self?.isPullingUp = false
             self?.loadingData = false
             switch result {
@@ -65,7 +71,7 @@ class CharacterListViewController: UIViewController, UICollectionViewDelegate, U
                 self?.collectionView.reloadData()
                 let count = self?.characterViewModel?.characterList.count ?? 0
                 if count == previousCount {
-                    self?.noFurtherData = true
+                    self?._noFurtherData = true
                 }
             case .Error(let message, let statusCode):
                 print("Error \(message) \(statusCode ?? 0)")
@@ -80,11 +86,11 @@ class CharacterListViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return isFirstLoading ? 1 : (characterViewModel?.characterList.count ?? 0)
+        return _isFirstLoading ? 1 : (characterViewModel?.characterList.count ?? 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if isFirstLoading {
+        if _isFirstLoading {
             return collectionView.dequeueReusableCell(withReuseIdentifier: "loadingCell", for: indexPath)
         }
         if (indexPath.row >= (characterViewModel?.characterList.count ?? 0) - preloadCount) && !loadingData {
@@ -125,7 +131,7 @@ class CharacterListViewController: UIViewController, UICollectionViewDelegate, U
     // MARK: UICollectionViewDelegate
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if !isFirstLoading {
+        if !_isFirstLoading {
             if let character = characterViewModel?.characterList[indexPath.row] {
                 characterViewModel?.currentCharacter = character
                 self.performSegue(withIdentifier: "segueToCharacter", sender: self)
@@ -146,7 +152,7 @@ class CharacterListViewController: UIViewController, UICollectionViewDelegate, U
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = isFirstLoading ? loadingCellSize : characterCellSize
+        let size = _isFirstLoading ? loadingCellSize : characterCellSize
         return CGSize(width: size, height: size)
     }
     

@@ -15,7 +15,7 @@ class CharacterViewModel: CharacterViewModelProtocol {
         privCurrentCharacter = CharacterModel(id: 0, name: "", thumbnail: ThumbnailModel(path: "", ext: ""), description: "")
     }
     
-    let pageSize = 20
+    private let pageSize = 20
     
     private var privCurrentCharacter: CharacterModel
     var currentCharacter: CharacterModel {
