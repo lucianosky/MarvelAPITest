@@ -38,6 +38,7 @@ class CharacterListViewControllerTests: XCTestCase {
     }
     
     func testCollectionView() {
+        XCTAssertNotNil(characterListViewController.view)
         XCTAssertNotNil(characterListViewController.collectionView)
         XCTAssertNotNil(characterListViewController.collectionView.delegate)
         XCTAssertNotNil(characterListViewController.collectionView.dataSource)
@@ -68,31 +69,12 @@ class CharacterListViewControllerTests: XCTestCase {
     }
 
     func testCell0() {
-        let promise = expectation(description: "testCell0")
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
-            let indexPath = IndexPath(row: 0, section: 0)
-            let cell = self?.characterListViewController.collectionView.cellForItem(at: indexPath) as? CharacterListCell
-            let character = self?.characterListViewController.characterViewModel?.characterList[0]
-            XCTAssertEqual(cell?.nameLabel.text, character?.name)
-            XCTAssertEqual(character?.thumbnail.fullName, "http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b.jpg")
-            promise.fulfill()
-        }
-        waitForExpectations(timeout: 2)
-    }
-
-    func testCell19() {
-        let row = MockCharacterViewModel.comicPageSize / 2 - 1
-        let promise = expectation(description: "testCell19")
-        characterListViewController.collectionView.scrollToItem(at: IndexPath.init(row: row, section: 0), at: UICollectionViewScrollPosition.bottom, animated: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4)) { [weak self] in
-            let indexPath = IndexPath(row: row, section: 0)
-            let cell = self?.characterListViewController.collectionView.cellForItem(at: indexPath) as? CharacterListCell
-            let character = self?.characterListViewController.characterViewModel?.characterList[row]
-            XCTAssertEqual(cell?.nameLabel.text, character?.name)
-            XCTAssertEqual(character?.thumbnail.fullName, "http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b.jpg")
-            promise.fulfill()
-        }
-        waitForExpectations(timeout: 8)
+        characterListViewController.collectionView.reloadData()
+        let indexPath = IndexPath(row: 0, section: 0)
+        RunLoop.main.run(until: Date(timeIntervalSinceNow: 0.5))
+        let cell = characterListViewController.collectionView.cellForItem(at: indexPath) as? CharacterListCell
+        let character = characterListViewController.characterViewModel?.characterList[0]
+        XCTAssertEqual(cell?.nameLabel.text, character?.name)
     }
     
     func testScrollToBottom() {

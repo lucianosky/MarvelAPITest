@@ -27,7 +27,7 @@ class MockCharacterViewModel: CharacterViewModelProtocol {
     }
 
     private func createCharacter(id: Int) -> CharacterModel {
-        let thumbnail = ThumbnailModel(path: "http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b", ext: "jpg")
+        let thumbnail = ThumbnailModel(path: "", ext: "")
         return CharacterModel(id: id,
                               name: "Spiderman\(id)",
                               thumbnail: thumbnail,
@@ -90,7 +90,7 @@ class MockCharacterViewModel: CharacterViewModelProtocol {
     }
 
     private func createComic(id: Int) -> ComicModel {
-        let thumbnail = ThumbnailModel(path: "http://i.annihil.us/u/prod/marvel/i/mg/c/60/58dbce634ea70", ext: "jpg")
+        let thumbnail = ThumbnailModel(path: "", ext: "")
         return ComicModel(id: id,
                           title: "Title \(id)",
                           thumbnail: thumbnail)

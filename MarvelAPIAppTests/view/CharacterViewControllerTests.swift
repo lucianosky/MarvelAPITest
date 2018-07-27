@@ -15,6 +15,7 @@ class CharacterViewControllerTests: XCTestCase {
     private var rootWindow: UIWindow!
     private var characterViewController: CharacterViewController!
     private var mockCharacterViewModel: CharacterViewModelProtocol!
+    
     private let spiderManId = 1009610
 
     override func setUp() {
@@ -24,7 +25,6 @@ class CharacterViewControllerTests: XCTestCase {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         characterViewController = storyboard.instantiateViewController(withIdentifier: "characterViewController") as! CharacterViewController
         mockCharacterViewModel = MockCharacterViewModel(delay: false)
-        // TODO
         let thumbnail = ThumbnailModel(path: "", ext: "")
         let spiderMan = CharacterModel(id: spiderManId, name: "SpiderMan", thumbnail: thumbnail, description: "")
         mockCharacterViewModel.currentCharacter = spiderMan
@@ -73,55 +73,33 @@ class CharacterViewControllerTests: XCTestCase {
     }
     
     func testSection0() {
-        let promise = expectation(description: "testSection0")
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
-            let character = self?.characterViewController.characterViewModel?.currentCharacter
-            
-            let characterCell = self?.characterViewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? CharacterCell
-            XCTAssertEqual(characterCell?.reuseIdentifier, "characterCell")
-            XCTAssertEqual(characterCell?.nameLabel.text, character?.name)
+        let character = characterViewController.characterViewModel?.currentCharacter
+        characterViewController.collectionView.reloadData()
+        RunLoop.main.run(until: Date(timeIntervalSinceNow: 0.5))
 
-            let descriptionCell = self?.characterViewController.collectionView.cellForItem(at: IndexPath(row: 1, section: 0)) as? DescriptionCell
-            XCTAssertEqual(descriptionCell?.reuseIdentifier, "descriptionCell")
-            XCTAssertEqual(descriptionCell?.descriptionLabel.text, character?.description)
-
-            let comicsTitleCell = self?.characterViewController.collectionView.cellForItem(at: IndexPath(row: 2, section: 0)) as? ComicsTitleCell
-            XCTAssertEqual(comicsTitleCell?.reuseIdentifier, "comicsTitleCell")
-            XCTAssertEqual(comicsTitleCell?.comicsLabel.text, "comics")
-
-            promise.fulfill()
-        }
-        waitForExpectations(timeout: 2)
+        let characterCell = characterViewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? CharacterCell
+        XCTAssertEqual(characterCell?.reuseIdentifier, "characterCell")
+        XCTAssertEqual(characterCell?.nameLabel.text, character?.name)
+        
+        let descriptionCell = characterViewController.collectionView.cellForItem(at: IndexPath(row: 1, section: 0)) as? DescriptionCell
+        XCTAssertEqual(descriptionCell?.reuseIdentifier, "descriptionCell")
+        XCTAssertEqual(descriptionCell?.descriptionLabel.text, character?.description)
+        
+        let comicsTitleCell = characterViewController.collectionView.cellForItem(at: IndexPath(row: 2, section: 0)) as? ComicsTitleCell
+        XCTAssertEqual(comicsTitleCell?.reuseIdentifier, "comicsTitleCell")
+        XCTAssertEqual(comicsTitleCell?.comicsLabel.text, "comics")
+        
     }
     
     func testSection1Cell0() {
-        let promise = expectation(description: "testSection1Cell0")
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
-            let indexPath = IndexPath(row: 0, section: 1)
-            let cell = self?.characterViewController.collectionView.cellForItem(at: indexPath) as? ComicCell
-            let comic = self?.characterViewController.characterViewModel?.comicList[0]
-            XCTAssertEqual(cell?.titleLabel.text, comic?.title)
-            XCTAssertEqual(comic?.thumbnail.fullName, "http://i.annihil.us/u/prod/marvel/i/mg/c/60/58dbce634ea70.jpg")
-            promise.fulfill()
-        }
-        waitForExpectations(timeout: 2)
+        characterViewController.collectionView.reloadData()
+        let indexPath = IndexPath(row: 0, section: 1)
+        RunLoop.main.run(until: Date(timeIntervalSinceNow: 0.5))
+        let cell = characterViewController.collectionView.cellForItem(at: indexPath) as? ComicCell
+        let comic = characterViewController.characterViewModel?.comicList[0]
+        XCTAssertEqual(cell?.titleLabel.text, comic?.title)
     }
     
-    // TODO: fix issue with delay to test imageURI
-    func testSectionCell19() {
-        let row = MockCharacterViewModel.comicPageSize / 2 - 1
-        let promise = expectation(description: "testSectionCell19")
-        characterViewController.collectionView.scrollToItem(at: IndexPath.init(row: row, section: 1), at: UICollectionViewScrollPosition.bottom, animated: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4)) { [weak self] in
-            let indexPath = IndexPath(row: row, section: 1)
-            let cell = self?.characterViewController.collectionView.cellForItem(at: indexPath) as? ComicCell
-            let comic = self?.characterViewController.characterViewModel?.comicList[row]
-            XCTAssertEqual(cell?.titleLabel.text, comic?.title)
-            XCTAssertEqual(comic?.thumbnail.fullName, "http://i.annihil.us/u/prod/marvel/i/mg/c/60/58dbce634ea70.jpg")
-            promise.fulfill()
-        }
-        waitForExpectations(timeout: 12)
-    }
     
     func testScrollToBottom() {
         let lastRow = MockCharacterViewModel.comicPageSize - 1
