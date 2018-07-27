@@ -24,13 +24,13 @@ class CharacterViewControllerTests: XCTestCase {
         rootWindow.isHidden = false
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         characterViewController = storyboard.instantiateViewController(withIdentifier: "characterViewController") as! CharacterViewController
-        mockCharacterViewModel = MockCharacterViewModel(delay: false)
+        mockCharacterViewModel = MockCharacterViewModel()
         let thumbnail = ThumbnailModel(path: "", ext: "")
         let spiderMan = CharacterModel(id: spiderManId, name: "SpiderMan", thumbnail: thumbnail, description: "")
         mockCharacterViewModel.currentCharacter = spiderMan
         characterViewController.characterViewModel = mockCharacterViewModel
         rootWindow.rootViewController = characterViewController
-        _ = characterViewController.view
+        XCTAssertNotNil(characterViewController.collectionView)
     }
     
     override func tearDown() {
@@ -43,7 +43,6 @@ class CharacterViewControllerTests: XCTestCase {
     }
     
     func testCollectionView() {
-        XCTAssertNotNil(characterViewController.collectionView)
         XCTAssertNotNil(characterViewController.collectionView.delegate)
         XCTAssertNotNil(characterViewController.collectionView.dataSource)
         XCTAssertTrue(characterViewController.conforms(to: UICollectionViewDelegate.self))

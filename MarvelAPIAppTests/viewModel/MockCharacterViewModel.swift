@@ -13,16 +13,12 @@ class MockCharacterViewModel: CharacterViewModelProtocol {
     
     private var privCharacterList = [CharacterModel]()
     private var privComicList = [ComicModel]()
-    private var delay = true
     private var privCurrentCharacter: CharacterModel
 
-    // we need a delay to test the loadingCell, with its own delay on the test
-    private let delaySeconds = 4
     static let characterPageSize = 20
     static let comicPageSize = 20
 
-    init(delay: Bool) {
-        self.delay = delay
+    init() {
         privCurrentCharacter = CharacterModel(id: 0, name: "", thumbnail: ThumbnailModel(path: "", ext: ""), description: "")
     }
 
@@ -52,13 +48,7 @@ class MockCharacterViewModel: CharacterViewModelProtocol {
         } else if page == 1 {
             createCharacterPage(from: MockCharacterViewModel.characterPageSize, pageSize: MockCharacterViewModel.characterPageSize)
         }
-        if delay {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delaySeconds), execute: {
-                return complete(.Success(self.privCharacterList, 0))
-            })
-        } else {
-            return complete(.Success(self.privCharacterList, 0))
-        }
+        return complete(.Success(self.privCharacterList, 0))
     }
     
     var currentCharacter: CharacterModel {
@@ -80,13 +70,7 @@ class MockCharacterViewModel: CharacterViewModelProtocol {
         } else if page == 1 {
             createComicPage(from: MockCharacterViewModel.comicPageSize, pageSize: MockCharacterViewModel.comicPageSize)
         }
-        if delay {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delaySeconds), execute: {
-                return complete(.Success(self.privComicList, 0))
-            })
-        } else {
-            return complete(.Success(self.privComicList, 0))
-        }
+        return complete(.Success(self.privComicList, 0))
     }
 
     private func createComic(id: Int) -> ComicModel {

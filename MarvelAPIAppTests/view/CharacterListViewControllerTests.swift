@@ -22,10 +22,10 @@ class CharacterListViewControllerTests: XCTestCase {
         rootWindow.isHidden = false
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         characterListViewController = storyboard.instantiateViewController(withIdentifier: "characterListViewController") as! CharacterListViewController
-        mockCharacterViewModel = MockCharacterViewModel(delay: false)
+        mockCharacterViewModel = MockCharacterViewModel()
         characterListViewController.characterViewModel = mockCharacterViewModel
         rootWindow.rootViewController = characterListViewController
-        _ = characterListViewController.view
+        XCTAssertNotNil(characterListViewController.view)
     }
     
     override func tearDown() {
@@ -38,7 +38,6 @@ class CharacterListViewControllerTests: XCTestCase {
     }
     
     func testCollectionView() {
-        XCTAssertNotNil(characterListViewController.view)
         XCTAssertNotNil(characterListViewController.collectionView)
         XCTAssertNotNil(characterListViewController.collectionView.delegate)
         XCTAssertNotNil(characterListViewController.collectionView.dataSource)
