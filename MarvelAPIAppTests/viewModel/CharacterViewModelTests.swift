@@ -45,7 +45,6 @@ class CharacterViewModelTests: XCTestCase {
                 promise.fulfill()
             case .Error(let message, let statusCode):
                 XCTFail("Error: statusCode=\(statusCode ?? -1) \(message)")
-                promise.fulfill()
             }
         }
         waitForExpectations(timeout: 1, handler: nil)
@@ -64,7 +63,6 @@ class CharacterViewModelTests: XCTestCase {
                 promise.fulfill()
             case .Error(let message, let statusCode):
                 XCTFail("Error: statusCode=\(statusCode ?? -1) \(message)")
-                promise.fulfill()
             }
         }
         waitForExpectations(timeout: 1, handler: nil)

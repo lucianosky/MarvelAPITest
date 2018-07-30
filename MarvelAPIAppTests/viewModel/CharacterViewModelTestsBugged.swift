@@ -34,7 +34,6 @@ class CharacterViewModelTestsBugged: XCTestCase {
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
-                promise.fulfill()
             case .Error(let message, _):
                 XCTAssertEqual(message, "Error decoding JSON")
                 promise.fulfill()
@@ -50,7 +49,6 @@ class CharacterViewModelTestsBugged: XCTestCase {
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
-                promise.fulfill()
             case .Error(let message, _):
                 XCTAssertEqual(message, "Error decoding JSON")
                 promise.fulfill()
@@ -68,7 +66,6 @@ class CharacterViewModelTestsBugged: XCTestCase {
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
-                promise.fulfill()
             case .Error(let message, _):
                 XCTAssertEqual(message, "Error parsing data")
                 promise.fulfill()
@@ -84,7 +81,6 @@ class CharacterViewModelTestsBugged: XCTestCase {
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
-                promise.fulfill()
             case .Error(let message, _):
                 XCTAssertEqual(message, "Error parsing data")
                 promise.fulfill()
@@ -101,7 +97,6 @@ class CharacterViewModelTestsBugged: XCTestCase {
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
-                promise.fulfill()
             case .Error(let message, _):
                 XCTAssertEqual(message, "Expected error")
                 promise.fulfill()
@@ -116,7 +111,6 @@ class CharacterViewModelTestsBugged: XCTestCase {
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
-                promise.fulfill()
             case .Error(let message, _):
                 XCTAssertEqual(message, "Expected error")
                 promise.fulfill()
@@ -134,7 +128,6 @@ class CharacterViewModelTestsBugged: XCTestCase {
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
-                promise.fulfill()
             case .Error(let message, _):
                 XCTAssertEqual(message, "Missing network service")
                 promise.fulfill()
@@ -150,7 +143,6 @@ class CharacterViewModelTestsBugged: XCTestCase {
             switch result {
             case .Success(_, _):
                 XCTFail("Expected failure")
-                promise.fulfill()
             case .Error(let message, _):
                 XCTAssertEqual(message, "Missing network service")
                 promise.fulfill()
