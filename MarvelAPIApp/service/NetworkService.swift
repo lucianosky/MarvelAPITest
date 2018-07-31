@@ -11,7 +11,11 @@ import Alamofire
 class NetworkService: NetworkServiceProtocol {
     
     static let shared = NetworkService()
-    private init() {} // singleton
+
+    // singleton
+    private init() {}
+    
+    var alamofireWrapper: AlamofireProtocol?
 
     private let verbose = true
 
@@ -21,21 +25,6 @@ class NetworkService: NetworkServiceProtocol {
         }
     }
     
-    private var manager: Alamofire.SessionManager = {
-        // Create the server trust policies
-        let serverTrustPolicies: [String: ServerTrustPolicy] = [
-            "gateway.marvel.com": .disableEvaluation
-        ]
-        // Create custom manager
-        let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
-        let manager = Alamofire.SessionManager(
-            configuration: URLSessionConfiguration.default,
-            serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
-        )
-        return manager
-    }()
-
     var apiKeyTsHash: String {
         get {
             let apikey = "cdb9b66985f6523d88b3b820037f895f"
@@ -67,18 +56,21 @@ class NetworkService: NetworkServiceProtocol {
         parameters: Parameters? = nil,
         complete: @escaping ( ServiceResult<String?> ) -> Void )
     {
-        let request = manager.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default)
-        request.responseString { [weak self] response in
+        guard let wrapper = alamofireWrapper else {
+            return complete(.Error("Error creating request", 0))
+        }
+
+        wrapper.responseString(url, method: method, parameters: parameters, encoding: JSONEncoding.default)
+        { [weak self] response in
             self?.verbosePrint("url=\(response.request?.url?.description ?? "")")
             let statusCode = response.response?.statusCode ?? -1
             self?.verbosePrint("status code=\(statusCode)")
             if response.result.isSuccess {
                 return complete(.Success(response.result.value, statusCode))
-
+                
             }
-            request.responseString(completionHandler: { (strResponse) in
-                return complete(.Error(self?.treatError(url: url, response: strResponse) ?? "", response.response?.statusCode))
-            })
+            return complete(.Error(self?.treatError(url: url, response: response) ?? "", response.response?.statusCode))
         }
+
     }
 }

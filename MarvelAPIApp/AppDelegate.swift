@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let characterListViewController = storyboard.instantiateViewController(withIdentifier: "characterListViewController") as! CharacterListViewController
         let characterViewModel = CharacterViewModel()
+        NetworkService.shared.alamofireWrapper = AlamofireWrapper()
         characterViewModel.networkService = NetworkService.shared
         characterListViewController.characterViewModel = characterViewModel
         self.window?.rootViewController = characterListViewController
