@@ -10,9 +10,14 @@ import Foundation
 import Alamofire
 @testable import MarvelAPIApp
 
+enum ErrorEnum: Int, Error {
+    case notFound = 404
+}
+
 class MockAlamofire: AlamofireProtocol {
     
-    var resultString: String = "the test"
+    var resultString = "the test"
+    var isSuccess = true
     
     func responseString(
         _ url: String,
@@ -21,10 +26,20 @@ class MockAlamofire: AlamofireProtocol {
         encoding: ParameterEncoding,
         completionHandler: @escaping (DataResponse<String>) -> Void)
     {
-        let httpResponse = HTTPURLResponse(url: NSURL(string: "myurl")! as URL, statusCode: 200, httpVersion: "HTTP/1.1", headerFields: nil)
-        let result = Result<String>.success(resultString)
-        let dataResponse = DataResponse(request: NSURLRequest() as URLRequest, response: httpResponse, data: NSData() as Data, result: result)
-        completionHandler(dataResponse)
+        let httpResponse = HTTPURLResponse(
+            url: URL(string: "myurl")!,
+            statusCode: 200,
+            httpVersion: "HTTP/1.1",
+            headerFields: nil)
+        if isSuccess {
+            let result = Result<String>.success(resultString)
+            let dataResponse = DataResponse(request: NSURLRequest() as URLRequest, response: httpResponse, data: NSData() as Data, result: result)
+            completionHandler(dataResponse)
+        } else {
+            let result = Result<String>.failure(ErrorEnum.notFound)
+            let dataResponse = DataResponse(request: NSURLRequest() as URLRequest, response: httpResponse, data: NSData() as Data, result: result)
+            completionHandler(dataResponse)
+        }
     }
     
 }

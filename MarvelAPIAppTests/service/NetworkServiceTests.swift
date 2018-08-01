@@ -26,10 +26,8 @@ class NetworkServiceTests: XCTestCase {
     func testRequest() {
         let expected = "expected"
         mockAlamofire.resultString = expected
-        let offset = 0
-        let url = "\(NetworkService.shared.baseUrl)characters?\(NetworkService.shared.apiKeyTsHash)&offset=\(offset)&nameStartsWith=Spi"
-        let promise = expectation(description: "Status code 200")
-        NetworkService.shared.request(url: url, method: .get, parameters: nil) { (result) in
+        let promise = expectation(description: "testRequest")
+        NetworkService.shared.request(url: "url", method: .get, parameters: nil) { (result) in
             switch result {
             case .Success(let str, let statusCode):
                 if statusCode == 200 {
@@ -40,6 +38,35 @@ class NetworkServiceTests: XCTestCase {
                 }
             case .Error(let message, let statusCode):
                 XCTFail("Error: statusCode=\(statusCode ?? -1) \(message)")
+            }
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testNoAlamofireWrapper() {
+        mockAlamofire = nil
+        NetworkService.shared.alamofireWrapper = nil
+        let promise = expectation(description: "testNoAlamofireWrapper")
+        NetworkService.shared.request(url: "url", method: .get, parameters: nil) { (result) in
+            switch result {
+            case .Success(let str, let statusCode):
+                XCTFail("Error: statusCode=\(statusCode) \(str ?? "")")
+            case .Error(_, _):
+                promise.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testResponseError() {
+        let promise = expectation(description: "testResponseError")
+        mockAlamofire.isSuccess = false
+        NetworkService.shared.request(url: "url", method: .get, parameters: nil) { (result) in
+            switch result {
+            case .Success(let str, let statusCode):
+                XCTFail("Error: statusCode=\(statusCode) \(str ?? "")")
+            case .Error(_, _):
+                promise.fulfill()
             }
         }
         waitForExpectations(timeout: 1, handler: nil)
